@@ -31,19 +31,20 @@ import Chart from "./chart";
 
 const Header = (props) => {
   const config = "/react/template";
-  //Aos
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1200,
-      once: true,
-    });
-  }, []);
+// Initialize AOS animations
+useEffect(() => {
+  AOS.init({
+    duration: 1200, // Animation duration
+    once: true, // Animation runs only once
+  });
+}, []); // Empty dependency array ensures this runs only once after initial render
 
-  //mobile menu
-  const [isSideMenu, setSideMenu] = useState("");
-  const [isSideMenuone, setSideMenuone] = useState("");
-  const [isSideMenutwo, setSideMenutwo] = useState("");
+
+  // State for managing the sidebar menu
+  const [isSideMenu, setSideMenu] = useState(""); // Top-level menu
+  const [isSideMenuone, setSideMenuone] = useState(""); // Second-level menu
+  const [isSideMenutwo, setSideMenutwo] = useState(""); // Third-level menu
   const toggleSidebar = (value) => {
     setSideMenu(value);
   };
@@ -54,23 +55,28 @@ const Header = (props) => {
     setSideMenutwo(value);
   };
 
+  // Get the current path
   let pathnames = window.location.pathname;
 
-  // const [active, setActive] = useState(false);
+  // Extract the URL path without the last segment
   const url = pathnames.split("/").slice(0, -1).join("/");
 
+  // Function to handle mobile menu opening
   const onHandleMobileMenu = () => {
     var root = document.getElementsByTagName("html")[0];
     root.classList.add("menu-opened");
   };
 
+  // Function to handle mobile menu closing
   const onhandleCloseMenu = () => {
     var root = document.getElementsByTagName("html")[0];
     root.classList.remove("menu-opened");
   };
 
+
   return (
     <>
+     {/* Conditionally render header top based on pathname */}
       {pathnames.includes("homeslider1") && (
         <div className="header-top">
           <div className="left-top ">
@@ -107,6 +113,7 @@ const Header = (props) => {
           </div>
         </div>
       )}
+       {/* Render header based on exclusion of specific pathnames */}
       {!pathnames.includes("home1") &&
         !pathnames.includes("home4") &&
         !pathnames.includes("home6") &&
@@ -177,7 +184,7 @@ const Header = (props) => {
                                       to="/index"
                                       className="inner-demo-img"
                                     >
-                                      General Home
+                                      General Homyissss
                                     </Link>
                                   </div>
                                 </div>

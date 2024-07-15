@@ -17,12 +17,12 @@ import {
 import SpecialtiesHome6 from "./EyeCareHome/Specialities";
 import CenterSectionHome6 from "./EyeCareHome/CenterSectionHome6";
 import CounterSectionHome6 from "./EyeCareHome/CounterSectionHome6";
-import ClinicSectionHome6 from "./EyeCareHome/ClinicSectionHome6";
-import StoreSectionHome6 from "./EyeCareHome/StoreSectionHome6";
+// import ClinicSectionHome6 from "./EyeCareHome/ClinicSectionHome6";
+// import StoreSectionHome6 from "./EyeCareHome/StoreSectionHome6";
 import FacilitiesSectionHome6 from "./EyeCareHome/FacilitiesSectionHome6";
 import BlogSectionHome6 from "./EyeCareHome/BlogSectionHome6";
-import TestimonialsHome6 from "./EyeCareHome/TestimonialsHome6";
-import AppointmentHome6 from "./EyeCareHome/AppointmentHome6";
+// import TestimonialsHome6 from "./EyeCareHome/TestimonialsHome6";
+// import AppointmentHome6 from "./EyeCareHome/AppointmentHome6";
 import FooterHome6 from "./EyeCareHome/FooterHome6";
 
 import AOS from "aos";
@@ -30,7 +30,7 @@ import "aos/dist/aos.css";
 import Header from "../header";
 import ProgressCircle from "./paediatric/scrolltotop";
 import FaqHome6 from "./EyeCareHome/FaqHome6";
-import UserOffer from "./EyeCareHome/UserOffer";
+// import UserOffer from "./EyeCareHome/UserOffer";
 
 const Home6 = (props) => {
   useEffect(() => {
@@ -46,10 +46,10 @@ const Home6 = (props) => {
           <div className="row align-items-center">
             <div className="col-lg-6 aos" data-aos="fade-up">
               <div className="banner-header">
-                <p>Take Eye Care Solution from Experts</p>
-                <h1>Eye Care &amp; Holistics The exeperts</h1>
+                <p>Explore and Nurture your Talents</p>
+                <h1>Become the best version of yourself</h1>
                 <Link to="/patient/booking1" className="btn btn-light-blue">
-                  Make an Appointment
+                  Temukan Bakatmu
                 </Link>
               </div>
               <div className="banner-users">
@@ -93,13 +93,13 @@ const Home6 = (props) => {
       <SpecialtiesHome6 />
       <CenterSectionHome6 />
       <CounterSectionHome6 />
-      <ClinicSectionHome6 />
-      <StoreSectionHome6 />
-      <UserOffer />
+      {/* <ClinicSectionHome6 /> */}
+      {/* <StoreSectionHome6 /> */}
+      {/* <UserOffer /> */}
       <FacilitiesSectionHome6 />
       <BlogSectionHome6 />
-      <TestimonialsHome6 />
-      <AppointmentHome6 />
+      {/* <TestimonialsHome6 /> */}
+      {/* <AppointmentHome6 /> */}
       <FaqHome6 />
       <FooterHome6 />
       <ProgressCircle />

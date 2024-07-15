@@ -1,6 +1,7 @@
-// src/client/components/example/QuizTypeOne.jsx
+// src/client/components/quiz-type-one/quiz-type-one.jsx
 
 import React, { useState } from "react";
+import "./quiz-type-one.css"; // Import the CSS file
 
 const questions = [
   "I can tell when music is off-key.",
@@ -8,26 +9,27 @@ const questions = [
   "I enjoy camping, hiking, walking and climbing.",
   "I love to meet new people and make friends.",
   "I feel alive when I come in contact with nature.",
-  "I prefer books with a lot of pictures in them."
 ];
 
 const QuizTypeOne = () => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
+const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-  const handleAnswerClick = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setProgress(((currentQuestionIndex + 1) / questions.length) * 100);
-    } else {
-      alert("Quiz completed!");
-    }
-  };
+const handleAnswerClick = () => {
+  if (currentQuestionIndex < questions.length - 1) {
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+  } else {
+    alert("Quiz completed!");
+  }
+};
+
+const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
     <div className="quiz-container">
-      <div className="progress-bar" style={{ width: `${progress}%` }}>
-        {progress.toFixed(0)}%
+      <div className="progress-bar">
+        <div style={{ width: `${progress}%` }}>
+          {progress.toFixed(0)}%
+        </div>
       </div>
       <div className="question-container">
         <h3>{questions[currentQuestionIndex]}</h3>

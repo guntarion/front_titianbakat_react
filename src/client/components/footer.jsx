@@ -55,38 +55,10 @@ const Footer = (props) => {
                     </div>
                   </div>
                   <div className="col-lg-2 col-md-4">
-                    <div className="footer-widget footer-menu">
-                      <h2 className="footer-title">For Patients</h2>
-                      <ul>
-                        <li>
-                          <Link to="/patient/search-doctor1">
-                            Search for Doctors
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="/login">Login</Link>
-                        </li>
-                        <li>
-                          <Link to="/register">Register</Link>
-                        </li>
-                      </ul>
-                    </div>
+                    
                   </div>
                   <div className="col-lg-2 col-md-4">
-                    <div className="footer-widget footer-menu">
-                      <h2 className="footer-title">For Doctors</h2>
-                      <ul>
-                        <li>
-                          <Link to="/doctor/appointments">Appointments</Link>
-                        </li>
-                        <li>
-                          <Link to="/doctor/chat-doctor">Chat</Link>
-                        </li>
-                        <li>
-                          <Link to="/login">Login</Link>
-                        </li>
-                      </ul>
-                    </div>
+                    
                   </div>
                   <div className="col-lg-2 col-md-5">
                     <div className="footer-widget footer-contact">
