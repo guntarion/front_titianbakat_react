@@ -131,15 +131,17 @@ import Maintenance from "./client/components/pages/maintanence/index.jsx";
 import PricingPlan from "./client/components/pages/pricing plan/index.jsx";
 import Error404 from "./client/components/pages/error/Error404.jsx";
 import Error500 from "./client/components/pages/error/Error500.jsx";
+import LoginTitianBakat from "./client/components/pages/authentication/login-titianbakat.jsx";
 import LoginEmail from "./client/components/pages/authentication/login-email.jsx";
 import LoginPhone from "./client/components/pages/authentication/login-phone.jsx";
 import LoginEmailOtp from "./client/components/pages/authentication/login-email-otp.jsx";
 import LoginPhoneOtp from "./client/components/pages/authentication/login-phone-otp.jsx";
+import Loginemail from "./client/components/home/loginemail.jsx";
 import ForgotPassword2 from "./client/components/pages/authentication/forgot-password2.jsx";
-import PatientSignup from "./client/components/pages/authentication/patient-signup.jsx";
+import UserSignup from "./client/components/pages/authentication/user-signup.jsx";
+import KonselorSignup from "./client/components/pages/authentication/konselor-signup.jsx";
 import Signup from "./client/components/pages/authentication/signup.jsx";
 import SuccessSignup from "./client/components/pages/authentication/success-signup.jsx";
-import DoctorSignup from "./client/components/pages/authentication/doctor-signup.jsx";
 import Home4 from "./client/components/home/home4.jsx";
 import Faq from "./client/components/pages/faq/index.jsx";
 import EmailOtp from "./client/components/pages/authentication/email-otp.jsx";
@@ -155,7 +157,6 @@ import Consultation from "./client/components/home/consultation.jsx";
 import Payment from "./client/components/home/payment.jsx";
 import Bookingsuccess from "./client/components/home/bookingsuccess.jsx";
 import Patientdetails from "./client/components/home/patientdetails.jsx";
-import Loginemail from "./client/components/home/loginemail.jsx";
 import HomecareHome from "./client/components/home/HomecareHome/index.jsx";
 import HomeTwelve from "./client/components/home/home12/hometwelve.jsx";
 const AppContainer = function (props) {
@@ -265,14 +266,14 @@ const AppContainer = function (props) {
               <Route path="/pages/eotp" exact component={EmailOtp} />
               <Route path="/pages/motp" exact component={MobileOtp} />
 
-              <Route path="/pages/patient-signup" exact component={PatientSignup} />
-              <Route path="/pages/doctor-signup" exact component={DoctorSignup} />
+              <Route path="/user-signup" exact component={UserSignup} />
+              <Route path="/konselor-signup" exact component={KonselorSignup} />
               <Route path="/success-signup" exact component={SuccessSignup} />
               <Route path="/signup" exact component={Signup} />
 
               {/* home */}
               <Route path="/index-2" exact component={Home} />
-              <Route path="/index" exact component={Generalhome} />
+              <Route path="/index-20" exact component={Generalhome} />
               <Route path="/homeslider1" exact component={HomeSlider1} />
               <Route path="/index-2" exact component={Home2} />
               <Route path="/index-3" exact component={Home3} />
@@ -405,6 +406,7 @@ const AppContainer = function (props) {
               <Route path="/bookingsuccess" exact component={Bookingsuccess} />
               <Route path="/patientdetails" exact component={Patientdetails} />
               <Route path="/loginemail" exact component={Loginemail} />
+              <Route path="/login-titian-bakat" exact component={LoginTitianBakat} />
               <Route path="/index-13" exact component={HomecareHome} />
             </Switch>
           </div>

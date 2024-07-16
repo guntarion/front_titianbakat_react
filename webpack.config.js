@@ -21,7 +21,7 @@ module.exports = {
     port: 3001,
     historyApiFallback: true,
     onAfterSetupMiddleware() {
-      opn(`http://localhost:${this.port}/react/template/index`);
+      opn(`http://localhost:${this.port}/index`);
     },
   },
   // devServer: {
@@ -61,7 +61,7 @@ module.exports = {
     config: JSON.stringify({
       apiUrl: "",
       // publicPath : '/'   ,
-      publicPath: "/react/template/",
+      publicPath: "/",
     }),
   },
   output: {

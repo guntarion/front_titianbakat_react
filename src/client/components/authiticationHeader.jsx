@@ -1,9 +1,5 @@
 import React from "react";
 import {
-  flag01,
-  flag02,
-  flag03,
-  flag05,
   home_01,
   home_02,
   home_03,
@@ -461,10 +457,10 @@ const AuthenticationHeader = () => {
                         <Link to="/pages/login-phone">Login Phone</Link>
                       </li>
                       <li>
-                        <Link to="/pages/doctor-signup">Doctor Signup</Link>
+                        <Link to="/konselor-signup">Konselor Signup</Link>
                       </li>
                       <li className="active">
-                        <Link to="/pages/patient-signup">Patient Signup</Link>
+                        <Link to="/user-signup">User Signup</Link>
                       </li>
                       <li>
                         <Link to="/pages/forgot-password">
@@ -554,66 +550,10 @@ const AuthenticationHeader = () => {
                   </li>
                 </ul>
               </li>
-              <li className="flag-dropdown-hide">
-                <div className="flag-dropdown">
-                  <Link
-                    className="dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    to="#"
-                    role="button"
-                    aria-expanded="false"
-                  >
-                    <img src={flag01} alt="" height={20} className="flag-img" />{" "}
-                    <span>English</span>
-                  </Link>
-                  <div className="dropdown-menu">
-                    <Link to="#" className="dropdown-item">
-                      <img src={flag01} alt="" height={16} /> English
-                    </Link>
-                    <Link to="#" className="dropdown-item">
-                      <img src={flag02} alt="" height={16} /> French
-                    </Link>
-                    <Link to="#" className="dropdown-item">
-                      <img src={flag03} alt="" height={16} /> Spanish
-                    </Link>
-                    <Link to="#" className="dropdown-item">
-                      <img src={flag05} alt="" height={16} /> German
-                    </Link>
-                  </div>
-                </div>
-              </li>
+
             </ul>
           </div>
-          <ul className="nav header-navbar-rht">
-            <li className="nav-item dropdown">
-              <div className="flag-dropdown">
-                <Link
-                  className="dropdown-toggle nav-link"
-                  data-bs-toggle="dropdown"
-                  to="#"
-                  role="button"
-                  aria-expanded="false"
-                >
-                  <img src={flag01} alt="" height={20} className="flag-img" />{" "}
-                  <span>English</span>
-                </Link>
-                <div className="dropdown-menu">
-                  <Link to="#" className="dropdown-item">
-                    <img src={flag01} alt="" height={16} /> English
-                  </Link>
-                  <Link to="#" className="dropdown-item">
-                    <img src={flag02} alt="" height={16} /> French
-                  </Link>
-                  <Link to="#" className="dropdown-item">
-                    <img src={flag03} alt="" height={16} /> Spanish
-                  </Link>
-                  <Link to="#" className="dropdown-item">
-                    <img src={flag05} alt="" height={16} /> German
-                  </Link>
-                </div>
-              </div>
-            </li>
-          </ul>
+
         </nav>
       </header>
       {/* /Header */}

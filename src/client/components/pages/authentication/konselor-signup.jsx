@@ -7,7 +7,7 @@ import AuthenticationHeader from "../../authiticationHeader";
 import { signupUnlock, signupUsers } from "../../imagepath";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-const DoctorSignup = () => {
+const KonselorSignup = () => {
   const [tab, setTab] = useState(true);
   const config = "/react/template";
   return (
@@ -38,12 +38,12 @@ const DoctorSignup = () => {
                           className={`${tab === true ? "d-block" : "d-none"}`}
                         >
                           <div className="login-back">
-                            <Link to="/index-2">
+                            <Link to="/index-6">
                               <i className="fa-solid fa-arrow-left-long" /> Back
                             </Link>
                           </div>
                           <div className="login-title">
-                            <h3>Doctor Signup</h3>
+                            <h3>Konselor Signup</h3>
                             <p className="mb-0">
                               Welcome back! Please enter your details.
                             </p>
@@ -58,8 +58,8 @@ const DoctorSignup = () => {
                                     </span>
                                   </div>
                                   <div className="step-content">
-                                    <p>Step 1</p>
-                                    <h4>Create Account</h4>
+                                    <p>Langkah 1</p>
+                                    <h4>Buat Akun</h4>
                                   </div>
                                 </div>
                               </li>
@@ -71,8 +71,8 @@ const DoctorSignup = () => {
                                     </span>
                                   </div>
                                   <div className="step-content">
-                                    <p>Step 2</p>
-                                    <h4>Verify Account</h4>
+                                    <p>Langkah 2</p>
+                                    <h4>Verifikasi Akun</h4>
                                   </div>
                                 </div>
                               </li>
@@ -80,11 +80,19 @@ const DoctorSignup = () => {
                           </div>
                           <form action="#">
                             <div className="form-group">
-                              <label>Name</label>
+                              <label>Nama Lengkap</label>
                               <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Enter Your Name"
+                                placeholder="Nama Lengkap Anda"
+                              />
+                            </div>
+                            <div className="form-group">
+                              <label>Nama Panggilan</label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Nama Panggilan"
                               />
                             </div>
                             <div className="form-group">
@@ -92,14 +100,14 @@ const DoctorSignup = () => {
                               <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Enter Your Email"
+                                placeholder="Masukkan Email"
                               />
                             </div>
                             <div
                               className="form-group d-flex"
                               style={{ flexDirection: "column" }}
                             >
-                              <label>Phone Number</label>
+                              <label>Nomor WhatsApp</label>
 
                               <PhoneInput
                                 containerClassName="intl-tel-input"
@@ -162,8 +170,8 @@ const DoctorSignup = () => {
                                     </span>
                                   </div>
                                   <div className="step-content">
-                                    <p>Step 1</p>
-                                    <h4>Create Account</h4>
+                                    <p>Langkah 1</p>
+                                    <h4>Buat Akun</h4>
                                   </div>
                                 </div>
                               </li>
@@ -175,8 +183,8 @@ const DoctorSignup = () => {
                                     </span>
                                   </div>
                                   <div className="step-content">
-                                    <p>Step 2</p>
-                                    <h4>Verify Account</h4>
+                                    <p>Langkah 2</p>
+                                    <h4>Verifikasi Akun</h4>
                                   </div>
                                 </div>
                               </li>
@@ -188,7 +196,7 @@ const DoctorSignup = () => {
                           >
                             <div className="form-group">
                               <div className="form-group-flex">
-                                <label>Phone Number Verfication Code</label>
+                                <label>Verifikasi Nomer WA</label>
                                 <Link to="#" className="forgot-link">
                                   Get Code
                                 </Link>
@@ -207,7 +215,7 @@ const DoctorSignup = () => {
                             </div>
                             <div className="form-group">
                               <div className="form-group-flex">
-                                <label>Email Verfication Code</label>
+                                <label>Verifikasi Kode Email</label>
                                 <Link to="#" className="forgot-link">
                                   Get Code
                                 </Link>
@@ -248,4 +256,4 @@ const DoctorSignup = () => {
   );
 };
 
-export default DoctorSignup;
+export default KonselorSignup;

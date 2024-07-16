@@ -47,34 +47,7 @@ const Signup = (props) => {
               <li>
                 <Link to="/login-email">Login</Link>
               </li>
-              <li className="flag-dropdown-hide">
-                <div className="flag-dropdown">
-                  <Link
-                    className="dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    to="#"
-                    role="button"
-                    aria-expanded="false"
-                  >
-                    <img src={flag01} alt="" height={20} className="flag-img" />{" "}
-                    <span>English</span>
-                  </Link>
-                  <div className="dropdown-menu">
-                    <Link to="#" className="dropdown-item">
-                      <img src={flag01} alt="" height={16} /> English
-                    </Link>
-                    <Link to="#" className="dropdown-item">
-                      <img src={flag02} alt="" height={16} /> French
-                    </Link>
-                    <Link to="#" className="dropdown-item">
-                      <img src={flag03} alt="" height={16} /> Spanish
-                    </Link>
-                    <Link to="#" className="dropdown-item">
-                      <img src={flag05} alt="" height={16} /> German
-                    </Link>
-                  </div>
-                </div>
-              </li>
+
             </ul>
           </div>
           <ul className="nav header-navbar-rht">
@@ -136,14 +109,14 @@ const Signup = (props) => {
                     <h3>Signup</h3>
                   </div>
                   <div className="signup-option-btns">
-                    <Link to="/pages/doctor-signup" className="signup-btn-info">
+                    <Link to="/konselor-signup" className="signup-btn-info">
                       <div className="signup-info">
                         <div className="signup-icon">
                           <img src={doctorIcon} alt="" />
                         </div>
                         <div className="signup-content">
-                          <h4>Doctor</h4>
-                          <p>Lorem ipsum amet, consectetur</p>
+                          <h4>Konselor</h4>
+                          <p>Konselor Bakat - Guru Bimbingan dan Konseling</p>
                         </div>
                       </div>
                       <div className="signup-arrow">
@@ -151,7 +124,7 @@ const Signup = (props) => {
                       </div>
                     </Link>
                     <Link
-                      to="/pages/patient-signup"
+                      to="/user-signup"
                       className="signup-btn-info"
                     >
                       <div className="signup-info">
@@ -159,8 +132,8 @@ const Signup = (props) => {
                           <img src={patientIcon} alt="" />
                         </div>
                         <div className="signup-content">
-                          <h4>Patient</h4>
-                          <p>Lorem ipsum amet, consectetur</p>
+                          <h4>User</h4>
+                          <p>Anda para peniti bakat</p>
                         </div>
                       </div>
                       <div className="signup-arrow">

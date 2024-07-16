@@ -7,7 +7,7 @@ import AuthenticationHeader from "../../authiticationHeader";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
-const PatientSignup = () => {
+const UserSignup = () => {
   const config = "/react/template";
   return (
     <>
@@ -115,4 +115,4 @@ const PatientSignup = () => {
   );
 };
 
-export default PatientSignup;
+export default UserSignup;

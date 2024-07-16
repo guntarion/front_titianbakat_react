@@ -226,6 +226,12 @@ const Header = () => {
                         <li className={pathnames.includes("pharmacy-search") ? "active" : ""}>
                           <Link to="/Pharmacy/pharmacy-search">Pharmacy Search</Link>
                         </li> */}
+                        <li className={pathnames.includes("login") ? "active" : ""}>
+                          <Link to="/signup">Signup TitianBakat</Link>
+                        </li>
+                        <li className={pathnames.includes("login") ? "active" : ""}>
+                          <Link to="/login-titian-bakat">Login TitianBakat</Link>
+                        </li>
                         <li className={pathnames.includes("product-asesmen") ? "active" : ""}>
                           <Link to="/page-anda/page-asesmen-one">Product Asesmen 1</Link>
                         </li>
@@ -353,7 +359,7 @@ const Header = () => {
               {pathnames.includes("/index-6") ? (
                 <ul className="nav header-navbar-rht">
                   <li className="nav-item">
-                    <Link className="nav-link header-login" to="/login">
+                    <Link className="nav-link header-login" to="/signup">
                       <i className="me-2">
                         <FeatherIcon icon="lock" />
                       </i>
@@ -361,7 +367,7 @@ const Header = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link header-login btn-light-blue" to="/login">
+                    <Link className="nav-link header-login btn-light-blue" to="/login-titian-bakat">
                       <i className="me-2">
                         <FeatherIcon icon="user" />
                       </i>
