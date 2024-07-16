@@ -100,65 +100,27 @@ const Header = () => {
                     {isSideMenu === "doctors" && (
                       <ul className="submenu">
                         <li className={pathnames.includes("doctor-dashboard") ? "active" : ""}>
-                          <Link to="/doctor/doctor-dashboard" onClick={() => onhandleCloseMenu()}>
+                          <Link to="/konselor/doctor-dashboard" onClick={() => onhandleCloseMenu()}>
                             Doctor Dashboard
                           </Link>
                         </li>
-                        {/* <li className={pathnames.includes("appointments") ? "active" : ""}>
-                          <Link to="/doctor/appointments" onClick={() => onhandleCloseMenu()}>
-                            Appointments
-                          </Link>
-                        </li>
-                        <li className={pathnames.includes("schedule-timing") ? "active" : ""}>
-                          <Link to="/doctor/schedule-timing" onClick={() => onhandleCloseMenu()}>
-                            Schedule Timing
-                          </Link>
-                        </li> */}
+                        
                         <li className={pathnames.includes("my-patients") ? "active" : ""}>
-                          <Link to="/doctor/my-patients" onClick={() => onhandleCloseMenu()}>
-                            Patients List
+                          <Link to="/konselor/my-patients" onClick={() => onhandleCloseMenu()}>
+                            User List
                           </Link>
                         </li>
                         <li className={pathnames.includes("patient-profile") ? "active" : ""}>
-                          <Link to="/doctor/patient-profile" onClick={() => onhandleCloseMenu()}>
-                            Patients Profile
+                          <Link to="/konselor/patient-profile" onClick={() => onhandleCloseMenu()}>
+                            User Profile
                           </Link>
                         </li>
-                        {/* <li className={pathnames.includes("chat-doctor") ? "active" : ""}>
-                          <Link to="/doctor/chat-doctor" onClick={() => onhandleCloseMenu()}>
-                            Chat
-                          </Link>
-                        </li>
-                        <li className={pathnames.includes("invoice") ? "active" : ""}>
-                          <Link to="/doctor/invoice" onClick={() => onhandleCloseMenu()}>
-                            Invoices
-                          </Link>
-                        </li> */}
                         <li className={pathnames.includes("profile-setting") ? "active" : ""}>
-                          <Link to="/doctor/profile-setting" onClick={() => onhandleCloseMenu()}>
+                          <Link to="/konselor/profile-setting" onClick={() => onhandleCloseMenu()}>
                             Profile Settings
                           </Link>
                         </li>
-                        <li className={pathnames.includes("review") ? "active" : ""}>
-                          <Link to="/doctor/review" onClick={() => onhandleCloseMenu()}>
-                            Reviews
-                          </Link>
-                        </li>
-                        <li className={pathnames.includes("doctor-register") ? "active" : ""}>
-                          <Link to="/doctor/doctor-register" onClick={() => onhandleCloseMenu()}>
-                            Doctor Register
-                          </Link>
-                        </li>
-                        {/* <li className={`has-submenu ${pathnames.includes("doctor-blog") ? "active" : ""}`}>
-                          <Link to="/doctor-blog" onClick={() => onhandleCloseMenu()}>
-                            Blog
-                          </Link>
-                          <ul className="submenu">
-                            <li><Link to="/doctor-blog" onClick={() => onhandleCloseMenu()}>Blog</Link></li>
-                            <li><Link to="/blog/blog-details" onClick={() => onhandleCloseMenu()}>Blog view</Link></li>
-                            <li><Link to="/blog/doctor-add-blog" onClick={() => onhandleCloseMenu()}>Add Blog</Link></li>
-                          </ul>
-                        </li> */}
+                        
                       </ul>
                     )}
                   </li>
@@ -168,43 +130,18 @@ const Header = () => {
                     </Link>
                     {isSideMenu === "patients" && (
                       <ul className="submenu">
-                        {/* <li className={pathnames.includes("doctor-list") ? "active" : ""}>
-                          <Link to="/patient/doctor-list" onClick={() => onhandleCloseMenu()}>
-                            Map List
-                          </Link>
-                        </li>
-                        <li className={pathnames.includes("doctor-profile") ? "active" : ""}>
-                          <Link to="/patient/doctor-profile" onClick={() => onhandleCloseMenu()}>
-                            Doctor Profile
-                          </Link>
-                        </li>
-                        <li className={pathnames.includes("booking1") ? "active" : ""}>
-                          <Link to="/patient/booking1" onClick={() => onhandleCloseMenu()}>
-                            Booking
-                          </Link>
-                        </li>
-                        <li className={pathnames.includes("checkout") ? "active" : ""}>
-                          <Link to="/patient/checkout" onClick={() => onhandleCloseMenu()}>
-                            Checkout
-                          </Link>
-                        </li>
-                        <li className={pathnames.includes("booking-success") ? "active" : ""}>
-                          <Link to="/patient/booking-success" onClick={() => onhandleCloseMenu()}>
-                            Booking Success
-                          </Link>
-                        </li> */}
                         <li className={pathnames.includes("dashboard") ? "active" : ""}>
-                          <Link to="/patient/dashboard" onClick={() => onhandleCloseMenu()}>
+                          <Link to="/user/dashboard" onClick={() => onhandleCloseMenu()}>
                             Patient Dashboard
                           </Link>
                         </li>
                         <li className={pathnames.includes("profile") ? "active" : ""}>
-                          <Link to="/patient/profile" onClick={() => onhandleCloseMenu()}>
+                          <Link to="/user/profile" onClick={() => onhandleCloseMenu()}>
                             Profile Settings
                           </Link>
                         </li>
                         <li className={pathnames.includes("change-password") ? "active" : ""}>
-                          <Link to="/patient/change-password" onClick={() => onhandleCloseMenu()}>
+                          <Link to="/user/change-password" onClick={() => onhandleCloseMenu()}>
                             Change Password
                           </Link>
                         </li>
@@ -217,15 +154,6 @@ const Header = () => {
                     </Link>
                     {isSideMenu === "pharmacy" && (
                       <ul className="submenu">
-                        {/* <li className={pathnames.includes("Pharmacy-index") ? "active" : ""}>
-                          <Link to="/Pharmacy/Pharmacy-index">Pharmacy</Link>
-                        </li>
-                        <li className={pathnames.includes("Pharmacy-details") ? "active" : ""}>
-                          <Link to="/Pharmacy/Pharmacy-details">Pharmacy Details</Link>
-                        </li>
-                        <li className={pathnames.includes("pharmacy-search") ? "active" : ""}>
-                          <Link to="/Pharmacy/pharmacy-search">Pharmacy Search</Link>
-                        </li> */}
                         <li className={pathnames.includes("login") ? "active" : ""}>
                           <Link to="/signup">Signup TitianBakat</Link>
                         </li>
@@ -236,23 +164,20 @@ const Header = () => {
                           <Link to="/page-anda/page-asesmen-one">Product Asesmen 1</Link>
                         </li>
                         <li className={pathnames.includes("product-all") ? "active" : ""}>
-                          <Link to="/Pharmacy/product-all">Product</Link>
+                          <Link to="/asesmen/product-all">Product</Link>
                         </li>
                         
                         <li className={pathnames.includes("product-description") ? "active" : ""}>
-                          <Link to="/Pharmacy/product-description">Product Description</Link>
+                          <Link to="/asesmen/product-description">Product Description</Link>
                         </li>
                         <li className={pathnames.includes("cart") ? "active" : ""}>
-                          <Link to="/Pharmacy/cart">Cart</Link>
+                          <Link to="/asesmen/cart">Cart</Link>
                         </li>
                         <li className={pathnames.includes("product-checkout") ? "active" : ""}>
-                          <Link to="/Pharmacy/product-checkout">Product Checkout</Link>
+                          <Link to="/asesmen/product-checkout">Product Checkout</Link>
                         </li>
                         <li className={pathnames.includes("payment-success") ? "active" : ""}>
-                          <Link to="/Pharmacy/payment-success">Payment Success</Link>
-                        </li>
-                        <li className={pathnames.includes("pharmacy-register") ? "active" : ""}>
-                          <Link to="/Pharmacy/pharmacy-register">Pharmacy Register</Link>
+                          <Link to="/asesmen/payment-success">Payment Success</Link>
                         </li>
                       </ul>
                     )}
@@ -263,15 +188,6 @@ const Header = () => {
                     </Link>
                     {isSideMenu === "pages" && (
                       <ul className="submenu">
-                        {/* <li className={pathnames.includes("/voice-call") ? "active" : ""}>
-                          <Link to="/pages/voice-call" onClick={() => onhandleCloseMenu()}>Voice Call</Link>
-                        </li>
-                        <li className={pathnames.includes("/video-call") ? "active" : ""}>
-                          <Link to="/pages/video-call" onClick={() => onhandleCloseMenu()}>Video Call</Link>
-                        </li>
-                        <li className={pathnames.includes("/calendar") ? "active" : ""}>
-                          <Link to="/pages/calendar" onClick={() => onhandleCloseMenu()}>Calendar</Link>
-                        </li> */}
                         <li className={pathnames.includes("/onboarding-email") ? "active" : ""}>
                           <Link to="/pages/onboarding-email" onClick={() => onhandleCloseMenu()}>Doctor Onboarding</Link>
                         </li>

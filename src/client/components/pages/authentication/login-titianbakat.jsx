@@ -1,23 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-// import Header from "../../header";
+import { Link, useHistory } from "react-router-dom";
 import { googleicon, shape01, shape02 } from "./img";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import AuthenticationHeader from "../../authiticationHeader";
+import { auth } from "../../../../firebase.js"; 
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
 const LoginEmail = () => {
-  // let inputRef = useRef();
-  const config = "/react/template";
-  // const showIcon = () => (
-  //   <i aria-hidden="true">
-  //     <FeatherIcon icon="eye" style={{ width: "16px" }} />
-  //   </i>
-  // );
-  // const hideIcon = () => (
-  //   <i className="feather feather-eye-slash" aria-hidden="true">
-  //     <FeatherIcon icon="eye-off" style={{ width: "16px" }} />
-  //   </i>
-  // );
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const history = useHistory();
   const inputRef = React.createRef();
 
   const togglePasswordVisibility = () => {
@@ -25,14 +19,31 @@ const LoginEmail = () => {
     inputRef.current.type = showPassword ? "password" : "text";
   };
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      history.push("/index-6"); // Redirect to home or another page after successful login
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      history.push("/index-6"); // Redirect to home or another page after successful login
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <>
-      {/* <Header {...props} /> */}
       <AuthenticationHeader />
-      {/* Page Content */}
       <div className="login-content-info">
         <div className="container">
-          {/* Login Email */}
           <div className="row justify-content-center">
             <div className="col-lg-4 col-md-6">
               <div className="account-content">
@@ -54,23 +65,24 @@ const LoginEmail = () => {
                     <h3>Sign in</h3>
                     <p>Well send a confirmation code to your email.</p>
                   </div>
-                  <form action={`${config}/pages/email-otp`}>
+                  {error && <p className="error-message">{error}</p>}
+                  <form onSubmit={handleLogin}>
                     <div className="form-group">
                       <label>E-mail</label>
                       <input
-                        type="text"
+                        type="email"
                         className="form-control"
                         placeholder="example@email.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
                       />
                     </div>
                     <div className="form-group">
                       <div className="form-group-flex">
                         <label>Password</label>
-                        <Link
-                          to="/pages/forgot-password"
-                          className="forgot-link"
-                        >
-                          Lupa password?
+                        <Link to="/pages/forgot-password" className="forgot-link">
+                          Forgot password?
                         </Link>
                       </div>
                       <div className="pass-group">
@@ -79,6 +91,9 @@ const LoginEmail = () => {
                           className="form-control pass-input"
                           type="password"
                           placeholder="*************"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
                         />
                         <button
                           onClick={togglePasswordVisibility}
@@ -86,10 +101,7 @@ const LoginEmail = () => {
                           className="password-toggle-btn"
                         >
                           {showPassword ? (
-                            <FeatherIcon
-                              icon="eye-off"
-                              style={{ width: "16px" }}
-                            />
+                            <FeatherIcon icon="eye-off" style={{ width: "16px" }} />
                           ) : (
                             <FeatherIcon icon="eye" style={{ width: "16px" }} />
                           )}
@@ -99,8 +111,7 @@ const LoginEmail = () => {
                     <div className="form-group form-check-box">
                       <div className="form-group-flex">
                         <label className="custom_check d-inline-flex">
-                          {" "}
-                          Ingat Saya
+                          Remember Me
                           <input type="checkbox" name="login" />
                           <span className="checkmark" />
                         </label>
@@ -116,13 +127,13 @@ const LoginEmail = () => {
                       <span className="span-or">or</span>
                     </div>
                     <div className="social-login -btn">
-                      <Link to="#" className="btn btn-block">
-                        <img src={googleicon} alt="" /> Log in dengan Google
-                      </Link>
+                      <button type="button" className="btn btn-block" onClick={handleGoogleLogin}>
+                        <img src={googleicon} alt="" /> Log in with Google
+                      </button>
                     </div>
                     <div className="account-signup">
                       <p>
-                        Belum punya akun ? <Link to="/signup">Sign up</Link>
+                        Dont have an account? <Link to="/signup">Sign up</Link>
                       </p>
                     </div>
                   </form>
@@ -130,10 +141,8 @@ const LoginEmail = () => {
               </div>
             </div>
           </div>
-          {/* /Login Email */}
         </div>
       </div>
-      {/* /Page Content */}
     </>
   );
 };

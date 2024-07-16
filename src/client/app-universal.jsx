@@ -62,13 +62,13 @@ const ClientAppUniversal = function (props) {
         <Route path="/sider-menu" exact component={SideMenu} />
         <Route render={(props) => <Header {...props} />} />
         <Switch>
-          <Route path="/patient/doctor-grid" exact component={DoctorGrid} />
-          <Route path="/patient/doctor-list" exact component={DoctorList} />
+          <Route path="/user/doctor-grid" exact component={DoctorGrid} />
+          <Route path="/user/doctor-list" exact component={DoctorList} />
           <Route path="/pages/video-call" exact component={VideoCall} />
           <Route path="/pages/component" exact component={Components} />
           <Route path="/pages/blank-page" exact component={BlankPage} />
           <Route path="/pages/voice-call" exact component={VoiceCall} />
-          <Route path="/doctor/chat-doctor" exact component={DoctorChat} />
+          <Route path="/konselor/chat-doctor" exact component={DoctorChat} />
 
           <Route path="/login" exact component={LoginContainer} />
           <Route path="/register" exact component={Register} />
@@ -81,39 +81,39 @@ const ClientAppUniversal = function (props) {
           {/* pages */}
           {/* <Route path="/video-call" exact component={VideoCall} />
 					<Route path="/voice-call" exact component={VoiceCall} /> */}
-          <Route path="/patient/search-doctor" exact component={SearchDoctor} />
+          <Route path="/user/search-doctor" exact component={SearchDoctor} />
           <Route path="/pages/calendar" exact component={Calendar} />
           <Route path="/pages/invoice" exact component={Invoice} />
-          <Route path="/doctor/invoice-view" exact component={InvoiceView} />
+          <Route path="/konselor/invoice-view" exact component={InvoiceView} />
 
           <Route
-            path="/patient/doctor-profile"
+            path="/user/doctor-profile"
             exact
             component={DoctorProfile}
           />
-          <Route path="/doctor/my-patients" exact component={MyPatient} />
-          <Route path="/patient/booking/booking1" exact component={Booking} />
-          <Route path="/patient/booking/booking2" exact component={Booking2} />
+          <Route path="/konselor/my-patients" exact component={MyPatient} />
+          <Route path="/user/booking/booking1" exact component={Booking} />
+          <Route path="/user/booking/booking2" exact component={Booking2} />
 
-          <Route path="/patient/patient-chat" exact component={PatientChat} />
-          <Route path="/patient/checkout" exact component={Checkout} />
+          <Route path="/user/patient-chat" exact component={PatientChat} />
+          <Route path="/user/checkout" exact component={Checkout} />
           <Route
-            path="/patient/booking-success"
+            path="/user/booking-success"
             exact
             component={BookingSuccess}
           />
-          <Route path="/patient/dashboard" exact component={Dashboard} />
-          <Route path="/patient/favourites" exact component={Favourties} />
-          <Route path="/patient/profile" exact component={Profile} />
-          <Route path="/patient/change-password" exact component={Password} />
+          <Route path="/user/dashboard" exact component={Dashboard} />
+          <Route path="/user/favourites" exact component={Favourties} />
+          <Route path="/user/profile" exact component={Profile} />
+          <Route path="/user/change-password" exact component={Password} />
           <Route
-            path="/doctor/doctor-dashboard"
+            path="/konselor/doctor-dashboard"
             exact
             component={DoctorDashboard}
           />
           <Route path="/social-media" exact component={SocialMedia} />
           <Route
-            path="/doctor/schedule-timing"
+            path="/konselor/schedule-timing"
             exact
             component={ScheduleTiming}
           />
@@ -123,22 +123,22 @@ const ClientAppUniversal = function (props) {
             component={DoctorPassword}
           />
           {/* <Route path="/chat-doctor" exact component={DoctorChat} /> */}
-          <Route path="/doctor/appointments" exact component={Appointments} />
+          <Route path="/konselor/appointments" exact component={Appointments} />
           <Route
-            path="/doctor/patient-profile"
+            path="/konselor/patient-profile"
             exact
             component={PatientProfile}
           />
           <Route path="/add-prescription" exact component={AddPescription} />
           <Route path="/add-billing" exact component={AddBilling} />
           <Route
-            path="/doctor/profile-setting"
+            path="/konselor/profile-setting"
             exact
             component={ProfileSetting}
           />
-          <Route path="/doctor/review" exact component={Review} />
+          <Route path="/konselor/review" exact component={Review} />
           <Route
-            path="/doctor/doctor-register"
+            path="/konselor/doctor-register"
             exact
             component={DoctorRegister}
           />
