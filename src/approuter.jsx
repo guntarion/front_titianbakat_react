@@ -1,28 +1,29 @@
-import React, { createContext, useState } from "react";
-import AppContainer from "./appcontainer.jsx"; 
-import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom"; 
-import config from 'config';
+// src/approuter.jsx
 
-// Create a context to share the authentication state across the component tree
-export const Appcontext = createContext();
+import React, { useContext } from "react";
+import AppContainer from "./appcontainer.jsx";
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
+import config from 'config';
+import { AuthContext } from "./AuthContext";
+
+import RoutesForAdmin from "./hooks/routes-for-admin.jsx";
+import RoutesForKonselor from "./hooks/routes-for-konselor.jsx";
+import RoutesForUser from "./hooks/routes-for-user.jsx";
+import ProtectedRoute from "./ProtectedRoute"; // Import ProtectedRoute
 
 const AppRouter = () => {
-  // useState hook to manage the authentication state; initially set to "user"
-  const [isAuth, setIsAuth] = useState("user");
-  // The config object is imported to access configuration settings such as publicPath
+  // eslint-disable-next-line no-unused-vars
+  const { role } = useContext(AuthContext); // Use role from context
+
   return (
-    // Router component to handle routing in the application
     <Router basename={`${config.publicPath}`}>
-      {/* Context Provider to pass down isAuth and setIsAuth to the entire component tree */}
-      <Appcontext.Provider value={{ isAuth, setIsAuth }}>
-        {/* Switch component to group Route components; renders the first matching route */}
-        <Switch>
-          {/* Route component to render AppContainer when the path is "/index-6" */}
-          <Route exact path="/index-6" render={(props) => <AppContainer {...props} />} />
-          {/* Redirect component to redirect from the root path "/" to "/index-6" */}
-          <Redirect from="/" to="/index-6" />
-        </Switch>
-      </Appcontext.Provider>
+      <Switch>
+        <Route exact path="/index-6" render={(props) => <AppContainer {...props} />} />
+        <ProtectedRoute path="/admin" component={RoutesForAdmin} role="admin" />
+        <ProtectedRoute path="/konselor" component={RoutesForKonselor} role="konselor" />
+        <ProtectedRoute path="/user" component={RoutesForUser} role="user" />
+        <Redirect from="/" to="/index-6" />
+      </Switch>
     </Router>
   );
 };

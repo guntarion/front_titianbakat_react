@@ -2,15 +2,20 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { googleicon, shape01, shape02 } from "./img";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
-import AuthenticationHeader from "../../authiticationHeader";
+// import Header from "../../header";
+// import AuthenticationHeader from "../../authiticationHeader";
 import { auth } from "../../../../firebase.js"; 
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from "../../../../AuthContext";
 
 const LoginEmail = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { setUser } = useAuth();
   const history = useHistory();
   const inputRef = React.createRef();
 
@@ -22,26 +27,31 @@ const LoginEmail = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      setUser(userCredential.user); // Store user info in context
+      toast.success("Login successful!");
       history.push("/index-6"); // Redirect to home or another page after successful login
     } catch (err) {
       setError(err.message);
+      toast.error(err.message);
     }
   };
 
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
+      const userCredential = await signInWithPopup(auth, provider);
+      setUser(userCredential.user); // Store user info in context
+      toast.success("Login successful!");
       history.push("/index-6"); // Redirect to home or another page after successful login
     } catch (err) {
       setError(err.message);
+      toast.error(err.message);
     }
   };
 
   return (
     <>
-      <AuthenticationHeader />
       <div className="login-content-info">
         <div className="container">
           <div className="row justify-content-center">
@@ -57,13 +67,13 @@ const LoginEmail = () => {
                 </div>
                 <div className="account-info">
                   <div className="login-back">
-                    <Link to="/index-2">
+                    <Link to="/index-6">
                       <i className="fas fa-arrow-left-long" /> Back
                     </Link>
                   </div>
                   <div className="login-title">
                     <h3>Sign in</h3>
-                    <p>Well send a confirmation code to your email.</p>
+                    <p>Bismillah.</p>
                   </div>
                   {error && <p className="error-message">{error}</p>}
                   <form onSubmit={handleLogin}>
@@ -143,6 +153,7 @@ const LoginEmail = () => {
           </div>
         </div>
       </div>
+      <ToastContainer /> {/* Toast container to display notifications */}
     </>
   );
 };

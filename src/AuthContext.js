@@ -1,5 +1,7 @@
+// src/AuthContext.js
+
 import React, { createContext, useState, useContext } from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from 'prop-types';
 
 // Create the context
 const AuthContext = createContext();
@@ -11,16 +13,19 @@ export const useAuth = () => {
 
 // Create a provider component
 export const AuthProvider = ({ children }) => {
-  const [isAuth, setIsAuth] = useState("user"); // default value for isAuth, it could be "admin" or "user"
-  const [role, setRole] = useState(""); // add role state
+  const [isAuth, setIsAuth] = useState("user");
+  const [role, setRole] = useState("user");
+  const [user, setUser] = useState(null); // Add user state
 
   return (
-    <AuthContext.Provider value={{ isAuth, setIsAuth, role, setRole }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ isAuth, setIsAuth, role, setRole, user, setUser }}>
+        {children}
+      </AuthContext.Provider>
   );
 };
 
 AuthProvider.propTypes = {
-  children: PropTypes.node // Add prop types validation for the children prop
+  children: PropTypes.node.isRequired,
 };
+
+export { AuthContext };
