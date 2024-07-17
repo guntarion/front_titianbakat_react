@@ -1,3 +1,5 @@
+
+
 import React, { useEffect } from "react";
 // import { useHistory } from "react-router-dom";
 import loginBanner from "../../assets/images/login-banner.png";
@@ -88,7 +90,7 @@ const LoginContainer = (props) => {
                           </div>
                         </div>
                         <div className="text-center dont-have">
-                          Don’t have an account?{" "}
+                          Belum punya akun?{" "}
                           <Link to="/register">Register</Link>
                         </div>
                       </form>

@@ -36,8 +36,7 @@ const ForgotPassword2 = () => {
                   <div className="login-title">
                     <h3>Password Recovery</h3>
                     <p className="mb-0">
-                      Enter your email and we will send you a link to reset your
-                      password.
+                      Infokan email Anda, kami akan kirimkan link untuk reset password Anda.
                     </p>
                   </div>
                   <form action={`${config}/pages/login-email`}>
