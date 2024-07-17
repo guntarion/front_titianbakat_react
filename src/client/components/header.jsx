@@ -6,6 +6,7 @@ import { auth, db } from "../../firebase.js";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import AuthContext from "../../AuthContext"; // Import AuthContext
 import { doc, getDoc } from "firebase/firestore";
+import "./header.css"; // Import the CSS file
 
 import logo from "../assets/images/logo.png";
 import FeatherIcon from "feather-icons-react";
@@ -165,7 +166,12 @@ const handleLogout = async () => {
                   )}
                   {(role === "user" || role === "admin") && (
                     <>
-                      <li className={`has-submenu ${pathnames.includes("/useranda") ? "active" : ""}`}>
+                      
+                      <li>
+                        <Link to="/user/dashboard">Profil Anda</Link>
+                      </li>
+
+                      {/* <li className={`has-submenu ${pathnames.includes("/useranda") ? "active" : ""}`}>
                         <Link to="#" className={isSideMenu === "useranda" ? "subdrop" : ""} onClick={() => toggleSidebar(isSideMenu === "useranda" ? "" : "useranda")}>
                           Anda <i className="fas fa-chevron-down" />
                         </Link>
@@ -188,7 +194,7 @@ const handleLogout = async () => {
                             </li>
                           </ul>
                         )}
-                      </li>
+                      </li> */}
                       <li className={`has-submenu ${pathnames.includes("/asesmen") ? "active" : ""}`}>
                         <Link to="#" className={isSideMenu === "asesmen" ? "subdrop" : ""} onClick={() => toggleSidebar(isSideMenu === "asesmen" ? "" : "asesmen")}>
                           Asesmen <i className="fas fa-chevron-down" />
@@ -303,7 +309,7 @@ const handleLogout = async () => {
               {user ? (
                 <>
                   <div className="user-info">
-                    <span style={{ color: "white" }}>{user.email}</span>
+                    <span className="email" style={{ color: "white" }}>{user.email}</span>
                     <button onClick={handleLogout} className="btn btn-danger ms-3">
                       Logout
                     </button>

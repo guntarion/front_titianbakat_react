@@ -153,12 +153,12 @@ const Footer = (props) => {
                       <div className="copyright-text">
                         <p className="mb-0">
                           {" "}
-                          Copyright © 2023{" "}
+                          Copyright © 2024{" "}
                           <Link
-                            to="https://themeforest.net/user/dreamguys/portfolio"
+                            to="https://www.titianbakat.com/"
                             target="_blank"
                           >
-                            Dreamguys.
+                            Titian Bakat
                           </Link>{" "}
                           All Rights Reserved
                         </p>
