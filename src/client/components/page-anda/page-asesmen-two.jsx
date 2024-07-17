@@ -1,12 +1,10 @@
-// src/client/components/page-anda/page-asesmen-one.jsx
-
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../header";
 import Footer from "../footer";
-import QuizTypeOne from "../Quiz/quiz-type-one";
+import QuizTypeTwo from "../Quiz/quiz-type-two";
 
-const PageAsesmenOne = (props) => {
+const PageAsesmenTwo = (props) => {
   return (
     <div>
       <Header {...props} />
@@ -23,7 +21,7 @@ const PageAsesmenOne = (props) => {
                       <Link to="/index-6">Home</Link>
                     </li>
                     <li className="breadcrumb-item" aria-current="page">
-                      Asesmen Type One
+                      Asesmen Type Two
                     </li>
                   </ol>
                 </nav>
@@ -38,9 +36,7 @@ const PageAsesmenOne = (props) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-12">
-              <h5>Asesmen</h5>
-              Bagian Isi KOnten Baru
-              <QuizTypeOne />
+              <QuizTypeTwo quizId="quiz_1" /> {/* Pass quizId as prop */}
             </div>
           </div>
         </div>
@@ -50,4 +46,4 @@ const PageAsesmenOne = (props) => {
   );
 };
 
-export default PageAsesmenOne;
+export default PageAsesmenTwo;

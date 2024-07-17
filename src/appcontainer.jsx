@@ -86,6 +86,7 @@ import Patientregisterstepfive from "./client/components/register/patientregiste
 import BlankPage from "./client/components/pages/starter page/index.jsx";
 import NewPage from './client/components/pages/newpage/NewPage.jsx';
 import PageAsesmenOne from './client/components/page-anda/page-asesmen-one';
+import PageAsesmenTwo from './client/components/page-anda/page-asesmen-two';
 import Pharmacy from "./client/components/Pharmacy/pharmacy";
 import pharmacydetail from "./client/components/Pharmacy/pharmactdetail";
 import PharmacySearch from "./client/components/Pharmacy/pharmacysearch";
@@ -387,6 +388,7 @@ const AppContainer = function (props) {
               
               <Route path="/user/map-list" exact component={MapList} />
               <Route path="/page-anda/page-asesmen-one" exact component={PageAsesmenOne} />
+              <Route path="/page-anda/page-asesmen-two" exact component={PageAsesmenTwo} />
               <Route path="/asesmen/Pharmacy-index" exact component={Pharmacy} />
               <Route path="/asesmen/Pharmacy-details" exact component={pharmacydetail} />
               <Route path="/asesmen/pharmacy-search" exact component={PharmacySearch} />

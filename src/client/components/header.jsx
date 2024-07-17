@@ -177,14 +177,11 @@ const handleLogout = async () => {
                         </Link>
                         {isSideMenu === "asesmen" && (
                           <ul className="submenu">
-                            <li className={pathnames.includes("login") ? "active" : ""}>
-                              <Link to="/signup">Signup TitianBakat</Link>
-                            </li>
-                            <li className={pathnames.includes("login") ? "active" : ""}>
-                              <Link to="/login-titian-bakat">Login TitianBakat</Link>
+                            <li className={pathnames.includes("product-asesmen") ? "active" : ""}>
+                              <Link to="/page-anda/page-asesmen-one">Asesmen 1</Link>
                             </li>
                             <li className={pathnames.includes("product-asesmen") ? "active" : ""}>
-                              <Link to="/page-anda/page-asesmen-one">Product Asesmen 1</Link>
+                              <Link to="/page-anda/page-asesmen-two">Asesmen 2</Link>
                             </li>
                             <li className={pathnames.includes("product-all") ? "active" : ""}>
                               <Link to="/asesmen/product-all">Product</Link>
