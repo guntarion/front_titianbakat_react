@@ -171,30 +171,6 @@ const handleLogout = async () => {
                         <Link to="/user/dashboard">Profil Anda</Link>
                       </li>
 
-                      {/* <li className={`has-submenu ${pathnames.includes("/useranda") ? "active" : ""}`}>
-                        <Link to="#" className={isSideMenu === "useranda" ? "subdrop" : ""} onClick={() => toggleSidebar(isSideMenu === "useranda" ? "" : "useranda")}>
-                          Anda <i className="fas fa-chevron-down" />
-                        </Link>
-                        {isSideMenu === "useranda" && (
-                          <ul className="submenu">
-                            <li className={pathnames.includes("dashboard") ? "active" : ""}>
-                              <Link to="/user/dashboard" onClick={() => onhandleCloseMenu()}>
-                                Dashboard User
-                              </Link>
-                            </li>
-                            <li className={pathnames.includes("profile") ? "active" : ""}>
-                              <Link to="/user/profile" onClick={() => onhandleCloseMenu()}>
-                                Pengaturan Profil
-                              </Link>
-                            </li>
-                            <li className={pathnames.includes("change-password") ? "active" : ""}>
-                              <Link to="/user/change-password" onClick={() => onhandleCloseMenu()}>
-                                Ganti Password
-                              </Link>
-                            </li>
-                          </ul>
-                        )}
-                      </li> */}
                       <li className={`has-submenu ${pathnames.includes("/asesmen") ? "active" : ""}`}>
                         <Link to="#" className={isSideMenu === "asesmen" ? "subdrop" : ""} onClick={() => toggleSidebar(isSideMenu === "asesmen" ? "" : "asesmen")}>
                           Asesmen <i className="fas fa-chevron-down" />

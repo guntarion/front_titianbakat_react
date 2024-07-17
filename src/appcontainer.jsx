@@ -51,7 +51,7 @@ import Orders from "./client/components/patients/orders";
 import MedicalRecords from "./client/components/patients/medicalrecords";
 import MedicalDetails from "./client/components/patients/medicaldetails";
 import Favourties from "./client/components/patients/dashboard/favourties";
-import Profile from "./client/components/patients/dashboard/profile";
+import UserProfile from "./client/components/patients/dashboard/profile";
 import ChangeUserPassword from "./client/components/patients/dashboard/password";
 
 import DoctorChat from "./client/components/doctors/chat";
@@ -353,7 +353,7 @@ const AppContainer = function (props) {
               <Route path="/user/medicalrecords" exact component={MedicalRecords} />
               <Route path="/user/medicaldetails" exact component={MedicalDetails} />
               <Route path="/user/favourites" exact component={Favourties} />
-              <Route path="/user/profile" exact component={Profile} />
+              <Route path="/user/profile" exact component={UserProfile} />
               <Route path="/user/change-password" exact component={ChangeUserPassword} />
 
               

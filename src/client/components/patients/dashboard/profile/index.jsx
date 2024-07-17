@@ -1,12 +1,99 @@
-import React from "react";
+// src/client/components/patients/dashboard/profile/index.jsx
+import React, { useState, useEffect } from "react";
 import DashboardSidebar from "../sidebar/sidebar.jsx";
 import IMG01 from "../../../../assets/images/patient.jpg";
 import StickyBox from "react-sticky-box";
 import { Link } from "react-router-dom";
 import Footer from "../../../footer.jsx";
 import Header from "../../../header.jsx";
+import { provincesAndCities } from "./provincesAndCities"; // Import the provincesAndCities object
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { useAuth } from "../../../../../AuthContext"; // Assuming you have a useAuth hook
+import axios from "axios";
 
-const Profile = (props) => {
+const UserProfile = (props) => {
+  const { user } = useAuth(); // Get the current user
+  const [selectedProvince, setSelectedProvince] = useState("");
+  const [cities, setCities] = useState([]);
+  const [userPhoto, setUserPhoto] = useState(null);
+  const [namaLengkap, setNamaLengkap] = useState("");
+  const [namaPanggilan, setNamaPanggilan] = useState("");
+  const [tanggalLahir, setTanggalLahir] = useState("");
+  const [gender, setGender] = useState("");
+  const [alamatEmail, setAlamatEmail] = useState("");
+  const [nomerWhatsapp, setNomerWhatsapp] = useState("");
+  const [pendidikanTerakhir, setPendidikanTerakhir] = useState("");
+  const [alamatProvinsi, setAlamatProvinsi] = useState("");
+  const [alamatKota, setAlamatKota] = useState("");
+  const [role, setRole] = useState("");
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const db = getFirestore();
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setNamaLengkap(data.namaLengkap || "");
+        setNamaPanggilan(data.namaPanggilan || "");
+        setTanggalLahir(data.tanggalLahir || "");
+        setGender(data.gender || "");
+        setAlamatEmail(data.email || "");
+        setNomerWhatsapp(data.nomorWhatsApp || "");
+        setPendidikanTerakhir(data.pendidikanTerakhir || "");
+        setAlamatProvinsi(data.alamatProvinsi || "");
+        setAlamatKota(data.alamatKota || "");
+        setRole(data.role || "");
+
+        if (data.alamatProvinsi) {
+          setSelectedProvince(data.alamatProvinsi);
+          setCities(provincesAndCities[data.alamatProvinsi]);
+        }
+      }
+    };
+
+    if (user) {
+      fetchUserData();
+    }
+  }, [user]);
+
+  const handleProvinceChange = (e) => {
+    setSelectedProvince(e.target.value);
+    setAlamatProvinsi(e.target.value);
+  };
+
+  useEffect(() => {
+    if (selectedProvince) {
+      setCities(provincesAndCities[selectedProvince]);
+    } else {
+      setCities([]);
+    }
+  }, [selectedProvince]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const userData = {
+      userPhoto,
+      namaLengkap,
+      namaPanggilan,
+      tanggalLahir,
+      gender,
+      alamatEmail,
+      nomerWhatsapp,
+      pendidikanTerakhir,
+      alamatProvinsi,
+      alamatKota,
+      role
+    };
+    try {
+      const response = await axios.post('http://localhost:8000/api/users/', userData);
+      console.log("User data saved:", response.data);
+    } catch (error) {
+      console.error("Error saving user data:", error);
+    }
+  };
+
   return (
     <div>
       <Header {...props} />
@@ -41,20 +128,20 @@ const Profile = (props) => {
             <div className="col-md-7 col-lg-8 col-xl-9">
               <div className="card">
                 <div className="card-body">
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className="row form-row">
                       <div className="col-12 col-md-12">
                         <div className="form-group">
                           <div className="change-avatar">
                             <div className="profile-img">
-                              <img src={IMG01} alt="User" />
+                              <img src={userPhoto ? URL.createObjectURL(userPhoto) : IMG01} alt="User" />
                             </div>
                             <div className="upload-img">
                               <div className="change-photo-btn">
                                 <span>
                                   <i className="fa fa-upload"></i> Upload Photo
                                 </span>
-                                <input type="file" className="upload" />
+                                <input type="file" className="upload" onChange={(e) => setUserPhoto(e.target.files[0])} />
                               </div>
                               <small className="form-text text-muted">
                                 Allowed JPG, GIF or PNG. Max size of 2MB
@@ -65,118 +152,139 @@ const Profile = (props) => {
                       </div>
                       <div className="col-12 col-md-6">
                         <div className="form-group">
-                          <label>First Name</label>
+                          <label>Alamat Email</label>
                           <input
                             type="text"
                             className="form-control"
-                            defaultValue="Richard"
+                            value={alamatEmail}
+                            onChange={(e) => setAlamatEmail(e.target.value)}
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div className="col-12 col-md-6"></div>
+                      <div className="col-12 col-md-6">
+                        <div className="form-group">
+                          <label>Nama Lengkap</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={namaLengkap}
+                            onChange={(e) => setNamaLengkap(e.target.value)}
                           />
                         </div>
                       </div>
                       <div className="col-12 col-md-6">
                         <div className="form-group">
-                          <label>Last Name</label>
+                          <label>Nama Panggilan</label>
                           <input
                             type="text"
                             className="form-control"
-                            defaultValue="Wilson"
+                            value={namaPanggilan}
+                            onChange={(e) => setNamaPanggilan(e.target.value)}
                           />
                         </div>
                       </div>
                       <div className="col-12 col-md-6">
                         <div className="form-group">
-                          <label>Date of Birth</label>
+                          <label>Tanggal Lahir</label>
                           <div className="cal-icon">
                             <input
                               type="text"
                               className="form-control datetimepicker"
-                              defaultValue="24-07-1983"
+                              value={tanggalLahir}
+                              onChange={(e) => setTanggalLahir(e.target.value)}
                             />
                           </div>
                         </div>
                       </div>
                       <div className="col-12 col-md-6">
                         <div className="form-group">
-                          <label>Blood Group</label>
-                          <select className="form-select form-control">
-                            <option>A-</option>
-                            <option>A+</option>
-                            <option>B-</option>
-                            <option>B+</option>
-                            <option>AB-</option>
-                            <option>AB+</option>
-                            <option>O-</option>
-                            <option>O+</option>
+                          <label>Nomer WhatsApp</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={nomerWhatsapp}
+                            onChange={(e) => setNomerWhatsapp(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-12 col-md-6">
+                        <div className="form-group">
+                          <label>Gender</label>
+                          <select
+                            className="form-select form-control"
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}
+                          >
+                            <option value="">Select Gender</option>
+                            <option value="Lelaki">Lelaki</option>
+                            <option value="Perempuan">Perempuan</option>
                           </select>
                         </div>
                       </div>
                       <div className="col-12 col-md-6">
                         <div className="form-group">
-                          <label>Email ID</label>
-                          <input
-                            type="email"
-                            className="form-control"
-                            defaultValue="richard@example.com"
-                          />
+                          <label>Pendidikan Terakhir/Saat Ini</label>
+                          <select
+                            className="form-select form-control"
+                            value={pendidikanTerakhir}
+                            onChange={(e) => setPendidikanTerakhir(e.target.value)}
+                          >
+                            <option value="">Select Education</option>
+                            <option value="Tidak Bersekolah">Tidak Bersekolah</option>
+                            <option value="Sekolah Dasar">Sekolah Dasar</option>
+                            <option value="SMP atau Sederajat">SMP atau Sederajat</option>
+                            <option value="SMA/SMK atau Sederajat">SMA/SMK atau Sederajat</option>
+                            <option value="Sarjana S1">Sarjana S1</option>
+                            <option value="Master S2">Master S2</option>
+                            <option value="Doktoral S3">Doktoral S3</option>
+                          </select>
                         </div>
                       </div>
                       <div className="col-12 col-md-6">
                         <div className="form-group">
-                          <label>Mobile</label>
-                          <input
-                            type="text"
-                            defaultValue="+1 202-555-0125"
+                          <label>Provinsi</label>
+                          <select
                             className="form-control"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-12">
-                        <div className="form-group">
-                          <label>Address</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            defaultValue="806 Twin Willow Lane"
-                          />
+                            value={selectedProvince}
+                            onChange={handleProvinceChange}
+                          >
+                            <option value="">Select Province</option>
+                            {Object.keys(provincesAndCities).map((province) => (
+                              <option key={province} value={province}>
+                                {province}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                       </div>
                       <div className="col-12 col-md-6">
                         <div className="form-group">
-                          <label>City</label>
-                          <input
-                            type="text"
+                          <label>Kota</label>
+                          <select
                             className="form-control"
-                            defaultValue="Old Forge"
-                          />
+                            value={alamatKota}
+                            onChange={(e) => setAlamatKota(e.target.value)}
+                          >
+                            <option value="">Select City</option>
+                            {cities.map((city) => (
+                              <option key={city} value={city}>
+                                {city}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                       </div>
                       <div className="col-12 col-md-6">
                         <div className="form-group">
-                          <label>State</label>
+                          <label>Role</label>
                           <input
                             type="text"
                             className="form-control"
-                            defaultValue="Newyork"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-12 col-md-6">
-                        <div className="form-group">
-                          <label>Zip Code</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            defaultValue="13420"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-12 col-md-6">
-                        <div className="form-group">
-                          <label>Country</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            defaultValue="United States"
+                            value={role}
+                            onChange={(e) => setRole(e.target.value)}
+                            disabled
                           />
                         </div>
                       </div>
@@ -201,4 +309,4 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+export default UserProfile;

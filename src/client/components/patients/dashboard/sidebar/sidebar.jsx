@@ -51,6 +51,12 @@ const DashboardSidebar = () => {
                 <span>Dashboard</span>
               </Link>
             </li>
+            <li className={pathname.includes("/profile") ? "active" : ""}>
+              <Link to="/user/profile">
+                <i className="fas fa-user-cog"></i>
+                <span>Profile Settings</span>
+              </Link>
+            </li>
             <li className={pathname.includes("/accounts") ? "active" : ""}>
               <Link to="/user/accounts">
                 <i className="fas fa-file-invoice-dollar"></i>
@@ -80,12 +86,7 @@ const DashboardSidebar = () => {
                 <span>Medical Details</span>
               </Link>
             </li>
-            <li className={pathname.includes("/profile") ? "active" : ""}>
-              <Link to="/user/profile">
-                <i className="fas fa-user-cog"></i>
-                <span>Profile Settings</span>
-              </Link>
-            </li>
+            
             <li
               className={pathname.includes("/change-password") ? "active" : ""}
             >
