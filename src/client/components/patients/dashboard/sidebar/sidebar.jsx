@@ -1,9 +1,27 @@
+// src/client/components/patients/dashboard/sidebar/sidebar.jsx
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import IMG01 from "../../../../assets/images/patient.jpg";
+import { auth } from "../../../../../firebase.js";
+import { signOut } from "firebase/auth";
+import { useAuth } from "../../../../../AuthContext";
 
-export const DashboardSidebar = () => {
+const DashboardSidebar = () => {
   const pathname = window.location.pathname;
+  const history = useHistory();
+  const { setUser, setRole } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+      setRole(null);
+      history.push("/login"); // Redirect to login page after logout
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+
   return (
     <div className="profile-sidebar">
       <div className="widget-profile pro-widget-content">
@@ -28,38 +46,19 @@ export const DashboardSidebar = () => {
         <nav className="dashboard-menu">
           <ul>
             <li className={pathname.includes("/dashboard") ? "active" : ""}>
-              <Link to="/patient/dashboard">
+              <Link to="/user/dashboard">
                 <i className="fas fa-columns"></i>
                 <span>Dashboard</span>
               </Link>
             </li>
-            <li className={pathname.includes("/favourites") ? "active" : ""}>
-              <Link to="/patient/favourites">
-                <i className="fas fa-bookmark"></i>
-                <span>Favourites</span>
-              </Link>
-            </li>
-            <li className={pathname.includes("/dependent") ? "active" : ""}>
-              <Link to="/patient/dependent">
-                <i className="fas fa-users"></i>
-                <span>Dependent</span>
-              </Link>
-            </li>
-            <li className={pathname.includes("/chat-doctor") ? "active" : ""}>
-              <Link to="/patient/patient-chat">
-                <i className="fas fa-comments"></i>
-                <span>Message</span>
-                <small className="unread-msg">23</small>
-              </Link>
-            </li>
             <li className={pathname.includes("/accounts") ? "active" : ""}>
-              <Link to="/patient/accounts">
+              <Link to="/user/accounts">
                 <i className="fas fa-file-invoice-dollar"></i>
                 <span>Accounts</span>
               </Link>
             </li>
             <li className={pathname.includes("/orders") ? "active" : ""}>
-              <Link to="/patient/orders">
+              <Link to="/user/orders">
                 <i className="fas fa-list-alt"></i>
                 <span>Orders</span>
                 <small className="unread-msg">7</small>
@@ -68,7 +67,7 @@ export const DashboardSidebar = () => {
             <li
               className={pathname.includes("/medicalrecords") ? "active" : ""}
             >
-              <Link to="/patient/medicalrecords">
+              <Link to="/user/medicalrecords">
                 <i className="fas fa-clipboard"></i>
                 <span>Add Medical Records</span>
               </Link>
@@ -76,13 +75,13 @@ export const DashboardSidebar = () => {
             <li
               className={pathname.includes("/medicaldetails") ? "active" : ""}
             >
-              <Link to="/patient/medicaldetails">
+              <Link to="/user/medicaldetails">
                 <i className="fas fa-file-medical-alt"></i>
                 <span>Medical Details</span>
               </Link>
             </li>
             <li className={pathname.includes("/profile") ? "active" : ""}>
-              <Link to="/patient/profile">
+              <Link to="/user/profile">
                 <i className="fas fa-user-cog"></i>
                 <span>Profile Settings</span>
               </Link>
@@ -90,16 +89,16 @@ export const DashboardSidebar = () => {
             <li
               className={pathname.includes("/change-password") ? "active" : ""}
             >
-              <Link to="/patient/change-password">
+              <Link to="/user/change-password">
                 <i className="fas fa-lock"></i>
                 <span>Change Password</span>
               </Link>
             </li>
             <li>
-              <Link to="/index">
+              <a href="#0" onClick={handleLogout}>
                 <i className="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
-              </Link>
+              </a>
             </li>
           </ul>
         </nav>
@@ -107,4 +106,5 @@ export const DashboardSidebar = () => {
     </div>
   );
 };
+
 export default DashboardSidebar;

@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars";
 // import FeatherIcon from "feather-icons-react";
-import { AuthContext } from "../../../AuthContext";
+import AuthContext from "../../../AuthContext";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 const SidebarNav = () => {

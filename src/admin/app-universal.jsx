@@ -40,7 +40,7 @@ import DataTables from "./components/datatables";
 import BasicTables from "./components/basictables";
 import ProductCategories from "./components/productlist/ProductCategories";
 
-import { AuthContext } from "../AuthContext"; // Import AuthContext
+import AuthContext from "../AuthContext"; // Import AuthContext
 import InvoiceReportList from "./components/Reports/InvoiceReport/InvoiceReportList";
 
 const AppUniversal = function (props) {

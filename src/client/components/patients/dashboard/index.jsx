@@ -1,7 +1,8 @@
+// src/client/components/patients/dashboard/index.jsx
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { DashboardSidebar } from "./sidebar/sidebar.jsx";
+import DashboardSidebar from "./sidebar/sidebar.jsx";
 // import { Tab, Tabs } from "react-bootstrap";
 import StickyBox from "react-sticky-box";
 import {

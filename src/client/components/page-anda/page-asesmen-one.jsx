@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../header";
 import Footer from "../footer";
-import QuizTypeOne from "../quiz-type-one/quiz-type-one";
+import QuizTypeOne from "../Quiz/quiz-type-one";
 
 const NewPage = (props) => {
   return (

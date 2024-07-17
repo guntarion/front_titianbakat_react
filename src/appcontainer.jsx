@@ -52,7 +52,7 @@ import MedicalRecords from "./client/components/patients/medicalrecords";
 import MedicalDetails from "./client/components/patients/medicaldetails";
 import Favourties from "./client/components/patients/dashboard/favourties";
 import Profile from "./client/components/patients/dashboard/profile";
-import Password from "./client/components/patients/dashboard/password";
+import ChangeUserPassword from "./client/components/patients/dashboard/password";
 
 import DoctorChat from "./client/components/doctors/chat";
 import MyPatient from "./client/components/doctors/mypatient";
@@ -263,6 +263,9 @@ const AppContainer = function (props) {
               <Route path="/user/doctor-list" exact component={DoctorList} />
               <Route path="/pages/video-call" exact component={VideoCall} />
               <Route path="/pages/voice-call" exact component={VoiceCall} />
+
+              <Route path="/loginemail" exact component={Loginemail} />
+              <Route path="/login-titian-bakat" exact component={LoginTitianBakat} />
               
 
               <Route path="/login" exact component={LoginContainer} />
@@ -351,7 +354,7 @@ const AppContainer = function (props) {
               <Route path="/user/medicaldetails" exact component={MedicalDetails} />
               <Route path="/user/favourites" exact component={Favourties} />
               <Route path="/user/profile" exact component={Profile} />
-              <Route path="/user/change-password" exact component={Password} />
+              <Route path="/user/change-password" exact component={ChangeUserPassword} />
 
               
               <Route path="/konselor/doctor-dashboard" exact component={DoctorDashboard} />
@@ -424,8 +427,7 @@ const AppContainer = function (props) {
               <Route path="/payment" exact component={Payment} />
               <Route path="/bookingsuccess" exact component={Bookingsuccess} />
               <Route path="/patientdetails" exact component={Patientdetails} />
-              <Route path="/loginemail" exact component={Loginemail} />
-              <Route path="/login-titian-bakat" exact component={LoginTitianBakat} />
+              
               <Route path="/index-13" exact component={HomecareHome} />
             </Switch>
           </div>

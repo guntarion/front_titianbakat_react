@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { auth, db } from "../../firebase.js"; 
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { AuthContext } from "../../AuthContext"; // Import AuthContext
+import AuthContext from "../../AuthContext"; // Import AuthContext
 import { doc, getDoc } from "firebase/firestore";
 
 import logo from "../assets/images/logo.png";
@@ -51,15 +51,17 @@ const Header = () => {
   }, [setUser, setRole]);
 
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      setUser(null);
-      setRole(null);
-    } catch (error) {
-      console.error("Error logging out:", error);
-    }
-  };
+const handleLogout = async () => {
+  try {
+    await signOut(auth);
+    setUser(null);
+    setRole(null);
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
+  } catch (error) {
+    console.error("Error logging out:", error);
+  }
+};
 
   const onHandleMobileMenu = () => {
     document.getElementsByTagName("html")[0].classList.add("menu-opened");
@@ -290,6 +292,9 @@ const Header = () => {
                         <li className={pathnames.includes("blog-details") ? "active" : ""}>
                           <Link to="/blog/blog-details" onClick={() => onhandleCloseMenu()}>Blog Details</Link>
                         </li>
+                        <li className={pathnames.includes("login-titian-bakat") ? "active" : ""}>
+                          <Link to="/login-titian-bakat" onClick={() => onhandleCloseMenu()}>Login</Link>
+                        </li>
                       </ul>
                     )}
                   </li>
@@ -298,7 +303,7 @@ const Header = () => {
               {user ? (
                 <>
                   <div className="user-info">
-                    <span>{user.email}</span>
+                    <span style={{ color: "white" }}>{user.email}</span>
                     <button onClick={handleLogout} className="btn btn-danger ms-3">
                       Logout
                     </button>
