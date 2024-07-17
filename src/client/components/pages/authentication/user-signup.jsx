@@ -7,6 +7,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import axios from "axios"; // Import axios
 import { auth } from "../../../../firebase.js";
 
 const UserSignup = () => {
@@ -29,15 +30,25 @@ const UserSignup = () => {
     }
 
     try {
+      // Check MongoDB for existing user
+      const response = await axios.post("http://localhost:8000/api/users/", {
+        namaLengkap: fullName,
+        namaPanggilan: nickName,
+        alamatEmail: email,
+        nomerWhatsapp: phone,
+        role: "user"
+      });
+
+      const mongoUserId = response.data.id;
+
+      // If user is successfully created in MongoDB, proceed to Firebase
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
       const db = getFirestore();
       await setDoc(doc(db, "users", user.uid), {
         email,
-        namaLengkap: fullName,
-        namaPanggilan: nickName,
-        nomerWhatsApp: phone,
+        mongoUserId, // Store MongoDB ID in Firestore
         role: "user"
       });
 
@@ -174,3 +185,4 @@ const UserSignup = () => {
 };
 
 export default UserSignup;
+

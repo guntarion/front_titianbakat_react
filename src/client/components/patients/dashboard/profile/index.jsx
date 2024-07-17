@@ -1,4 +1,3 @@
-// src/client/components/patients/dashboard/profile/index.jsx
 import React, { useState, useEffect } from "react";
 import DashboardSidebar from "../sidebar/sidebar.jsx";
 import IMG01 from "../../../../assets/images/patient.jpg";
@@ -26,6 +25,7 @@ const UserProfile = (props) => {
   const [alamatProvinsi, setAlamatProvinsi] = useState("");
   const [alamatKota, setAlamatKota] = useState("");
   const [role, setRole] = useState("");
+  const [mongoUserId, setMongoUserId] = useState(""); // Add state for mongoUserId
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -35,20 +35,31 @@ const UserProfile = (props) => {
 
       if (docSnap.exists()) {
         const data = docSnap.data();
-        setNamaLengkap(data.namaLengkap || "");
-        setNamaPanggilan(data.namaPanggilan || "");
-        setTanggalLahir(data.tanggalLahir || "");
-        setGender(data.gender || "");
         setAlamatEmail(data.email || "");
-        setNomerWhatsapp(data.nomorWhatsApp || "");
-        setPendidikanTerakhir(data.pendidikanTerakhir || "");
-        setAlamatProvinsi(data.alamatProvinsi || "");
-        setAlamatKota(data.alamatKota || "");
         setRole(data.role || "");
+        setMongoUserId(data.mongoUserId || ""); // Set MongoDB ID
 
-        if (data.alamatProvinsi) {
-          setSelectedProvince(data.alamatProvinsi);
-          setCities(provincesAndCities[data.alamatProvinsi]);
+        if (data.mongoUserId) {
+          // Fetch additional data from MongoDB
+          try {
+            const response = await axios.get(`http://localhost:8000/api/users/${data.mongoUserId}`);
+            const mongoData = response.data;
+            setNamaLengkap(mongoData.namaLengkap || "");
+            setNamaPanggilan(mongoData.namaPanggilan || "");
+            setTanggalLahir(mongoData.tanggalLahir || "");
+            setGender(mongoData.gender || "");
+            setNomerWhatsapp(mongoData.nomerWhatsapp || "");
+            setPendidikanTerakhir(mongoData.pendidikanTerakhir || "");
+            setAlamatProvinsi(mongoData.alamatProvinsi || "");
+            setAlamatKota(mongoData.alamatKota || "");
+
+            if (mongoData.alamatProvinsi) {
+              setSelectedProvince(mongoData.alamatProvinsi);
+              setCities(provincesAndCities[mongoData.alamatProvinsi]);
+            }
+          } catch (error) {
+            console.error("Error fetching user data from MongoDB:", error);
+          }
         }
       }
     };
@@ -87,8 +98,14 @@ const UserProfile = (props) => {
       role
     };
     try {
-      const response = await axios.post('http://localhost:8000/api/users/', userData);
-      console.log("User data saved:", response.data);
+      
+      if (mongoUserId) {
+        console.log("🚀 ~ handleSubmit ~ mongoUserId:", mongoUserId)
+        const response = await axios.put(`http://localhost:8000/api/users/${mongoUserId}`, userData);
+        console.log("User data updated:", response.data);
+      } else {
+        console.error("MongoDB ID is not set.");
+      }
     } catch (error) {
       console.error("Error saving user data:", error);
     }
@@ -162,7 +179,18 @@ const UserProfile = (props) => {
                           />
                         </div>
                       </div>
-                      <div className="col-12 col-md-6"></div>
+                      <div className="col-12 col-md-6">
+                        <div className="form-group">
+                          <label>Role</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={role}
+                            onChange={(e) => setRole(e.target.value)}
+                            disabled
+                          />
+                        </div>
+                      </div>
                       <div className="col-12 col-md-6">
                         <div className="form-group">
                           <label>Nama Lengkap</label>
@@ -276,18 +304,7 @@ const UserProfile = (props) => {
                           </select>
                         </div>
                       </div>
-                      <div className="col-12 col-md-6">
-                        <div className="form-group">
-                          <label>Role</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={role}
-                            onChange={(e) => setRole(e.target.value)}
-                            disabled
-                          />
-                        </div>
-                      </div>
+                     
                     </div>
                     <div className="submit-section">
                       <button
@@ -310,3 +327,4 @@ const UserProfile = (props) => {
 };
 
 export default UserProfile;
+
