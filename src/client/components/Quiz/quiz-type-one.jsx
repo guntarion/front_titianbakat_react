@@ -1,20 +1,22 @@
 // src/client/components/quiz-type-one/quiz-type-one.jsx
-// src/AuthContext.js
+import PropTypes from 'prop-types';
 
+// src/client/components/quiz-type-one/quiz-type-one.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./quiz-type-one.css";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { useAuth } from "../../../AuthContext"; 
+import { useAuth } from "../../../AuthContext";
 
-const QuizTypeOne = () => {
+const QuizTypeOne = ({ onQuizComplete }) => {
   const { user } = useAuth();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [noteText, setNoteText] = useState("");
   const [quizData, setQuizData] = useState(null);
   const [mongoUserId, setMongoUserId] = useState("");
   const [responses, setResponses] = useState({});
-  const [status, setStatus] = useState("in progress");
+  const [notes, setNotes] = useState({});
+  // const [status, setStatus] = useState("in progress");
   const quizId = "quiz_01_riasec"; // Set your quiz ID here
 
   useEffect(() => {
@@ -31,11 +33,25 @@ const QuizTypeOne = () => {
           try {
             const response = await axios.get(`http://localhost:8000/api/quizresponse/${data.mongoUserId}/${quizId}`);
             if (response.data) {
-              setResponses(response.data.responses || {});
-              setCurrentQuestionIndex(response.data.last_question_index || 0);
+              if (response.data.status === "finished") {
+                setResponses({});
+                setNotes({});
+                setCurrentQuestionIndex(0);
+                // Create a new document for a new quiz session
+                await createNewQuizResponse(data.mongoUserId, quizId);
+              } else {
+                setResponses(response.data.responses || {});
+                setNotes(response.data.notes || {});
+                setCurrentQuestionIndex(response.data.last_question_index || 0);
+              }
             }
           } catch (error) {
-            console.error("Error fetching quiz response:", error);
+            if (error.response && error.response.status === 404) {
+              console.log("Quiz response not found, starting a new one.");
+              await createNewQuizResponse(data.mongoUserId, quizId);
+            } else {
+              console.error("Error fetching quiz response:", error);
+            }
           }
         }
       }
@@ -45,6 +61,31 @@ const QuizTypeOne = () => {
       fetchUserData();
     }
   }, [user]);
+
+  const createNewQuizResponse = async (userId, quizId) => {
+    try {
+      await axios.post("http://localhost:8000/api/quizresponse/new", {
+        user_id: userId,
+        quiz_id: quizId,
+        responses: {},
+        notes: {},
+        status: "in progress",
+        last_question_index: 0,
+        total_scores: {
+          type_realistic: 0,
+          type_investigative: 0,
+          type_artistic: 0,
+          type_social: 0,
+          type_enterprising: 0,
+          type_conventional: 0,
+        },
+        started_at: new Date(),
+        finished_at: null,
+      });
+    } catch (error) {
+      console.error("Error creating new quiz response:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchQuizData = async () => {
@@ -61,28 +102,31 @@ const QuizTypeOne = () => {
 
   const handleAnswerClick = (score) => {
     const newResponses = { ...responses, [quizData.statements[currentQuestionIndex].number]: score };
+    const newNotes = { ...notes, [quizData.statements[currentQuestionIndex].number]: noteText };
     setResponses(newResponses);
+    setNotes(newNotes);
 
     if (currentQuestionIndex < quizData.statements.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setNoteText("");
+      saveProgress(newResponses, newNotes, currentQuestionIndex + 1, "in progress");
     } else {
-      setStatus("finished");
-      alert("Quiz completed!");
+      const totalScores = calculateScores(newResponses);
+      saveProgress(newResponses, newNotes, currentQuestionIndex + 1, "finished", totalScores);
+      onQuizComplete(totalScores);
     }
-
-    saveProgress(newResponses, currentQuestionIndex + 1, status);
   };
 
-  const saveProgress = async (responses, lastQuestionIndex, status) => {
+  const saveProgress = async (responses, notes, lastQuestionIndex, status, totalScores = {}) => {
     try {
-      const response = await axios.post("http://localhost:8000/api/quizresponse", {
+      const response = await axios.put("http://localhost:8000/api/quizresponse", {
         user_id: mongoUserId,
         quiz_id: quizId,
         responses: responses,
+        notes: notes, // Add notes here
         status: status,
         last_question_index: lastQuestionIndex,
-        total_scores: calculateScores(responses),
+        total_scores: totalScores,
         started_at: new Date(),
         finished_at: status === "finished" ? new Date() : null,
       });
@@ -113,6 +157,10 @@ const QuizTypeOne = () => {
   };
 
   if (!quizData) return <div>Loading...</div>;
+
+  if (currentQuestionIndex >= quizData.statements.length) {
+    return <div>Error: Invalid question index</div>;
+  }
 
   const progress = ((currentQuestionIndex + 1) / quizData.statements.length) * 100;
 
@@ -153,3 +201,7 @@ const QuizTypeOne = () => {
 };
 
 export default QuizTypeOne;
+
+QuizTypeOne.propTypes = {
+  onQuizComplete: PropTypes.func.isRequired,
+};

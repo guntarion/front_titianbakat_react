@@ -4,14 +4,30 @@ import PropTypes from "prop-types";
 const QuizResult = ({ totalscores }) => {
   return (
     <div className="quiz-result-container">
-      <h3>Quiz Results</h3>
-      <div>
-        <p>Type Realistic: {totalscores.type_realistic}</p>
-        <p>Type Investigative: {totalscores.type_investigative}</p>
-        <p>Type Artistic: {totalscores.type_artistic}</p>
-        <p>Type Social: {totalscores.type_social}</p>
-        <p>Type Enterprising: {totalscores.type_enterprising}</p>
-        <p>Type Conventional: {totalscores.type_conventional}</p>
+      <h2>Quiz Results</h2>
+      <div className="result-item">
+        <h3>Realistic</h3>
+        <p>{totalscores.type_realistic}</p>
+      </div>
+      <div className="result-item">
+        <h3>Investigative</h3>
+        <p>{totalscores.type_investigative}</p>
+      </div>
+      <div className="result-item">
+        <h3>Artistic</h3>
+        <p>{totalscores.type_artistic}</p>
+      </div>
+      <div className="result-item">
+        <h3>Social</h3>
+        <p>{totalscores.type_social}</p>
+      </div>
+      <div className="result-item">
+        <h3>Enterprising</h3>
+        <p>{totalscores.type_enterprising}</p>
+      </div>
+      <div className="result-item">
+        <h3>Conventional</h3>
+        <p>{totalscores.type_conventional}</p>
       </div>
     </div>
   );

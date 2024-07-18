@@ -48,10 +48,10 @@ const OccupationalThemeAssessment = (props) => {
           <div className="row">
             <div className="col-12">
               {showResults ? (
-                  <QuizResult totalscores={totalscores} />
-                ) : (
-                  <QuizTypeOne onQuizComplete={handleQuizComplete} />
-                )}
+                <QuizResult totalscores={totalscores} />
+              ) : (
+                <QuizTypeOne onQuizComplete={handleQuizComplete} />
+              )}
             </div>
           </div>
         </div>
