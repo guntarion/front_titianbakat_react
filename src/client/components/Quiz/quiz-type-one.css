@@ -1,10 +1,12 @@
 /* quiz-type-one.css */
 .quiz-container {
+  max-width: 600px;
+  margin: 0 auto;
+  margin: 20px;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin: 20px;
 }
 
 .progress-bar-komponen {
@@ -16,6 +18,7 @@
 
 .question-container {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .options button {
@@ -30,4 +33,12 @@
 
 .options button:hover {
   background-color: #0056b3;
+}
+
+.answer-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
 }

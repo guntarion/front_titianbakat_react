@@ -1,13 +1,21 @@
 // src/client/components/pages/asesmenpage/occupational-themes.jsx
-// src/client/components/Quiz/quiz-type-one.jsx
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../header";
 import Footer from "../../footer";
 import QuizTypeOne from "../../Quiz/quiz-type-one";
+import QuizResult from "../../Quiz/quiz-result-occupationalthemes";
 
 
 const OccupationalThemeAssessment = (props) => {
+  const [showResults, setShowResults] = useState(false);
+  const [totalscores, setTotalscores] = useState({});
+
+  const handleQuizComplete = (scores) => {
+    setTotalscores(scores);
+    setShowResults(true);
+  };
+
   return (
     <div>
       <Header {...props} />
@@ -39,8 +47,11 @@ const OccupationalThemeAssessment = (props) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-12">
-              <h5>Blank Page</h5>
-              <QuizTypeOne />
+              {showResults ? (
+                  <QuizResult totalscores={totalscores} />
+                ) : (
+                  <QuizTypeOne onQuizComplete={handleQuizComplete} />
+                )}
             </div>
           </div>
         </div>
