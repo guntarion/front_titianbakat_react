@@ -12,29 +12,36 @@ const questions = [
 ];
 
 const QuizTypeOne = () => {
-const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-const handleAnswerClick = () => {
-  if (currentQuestionIndex < questions.length - 1) {
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
-  } else {
-    alert("Quiz completed!");
-  }
-};
+  const handleAnswerClick = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      alert("Quiz completed!");
+    }
+  };
 
-const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
     <div className="quiz-container">
-      <div className="progress-bar">
-        <div style={{ width: `${progress}%` }}>
+      <div className="progress mb-3">
+        <div
+          className="progress-bar progress-bar-striped bg-success"
+          role="progressbar"
+          style={{ width: `${progress}%` }}
+          aria-valuenow={progress}
+          aria-valuemin={0}
+          aria-valuemax={100}
+        >
           {progress.toFixed(0)}%
         </div>
       </div>
       <div className="question-container">
         <h3>{questions[currentQuestionIndex]}</h3>
         <div className="options">
-          {["Never", "Rarely", "Often", "Always"].map((option) => (
+          {["Nggak Banget", "Nggak", "Netral", "Iya", "Iya Banget"].map((option) => (
             <button key={option} onClick={handleAnswerClick}>
               {option}
             </button>

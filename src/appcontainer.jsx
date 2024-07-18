@@ -22,6 +22,9 @@ import HomeSlider2 from "./client/components/home/homeslider2";
 import Home10 from "./client/components/home/home10";
 import Home7 from "./client/components/home/home7";
 
+import MultipleIntelligencesAssessment from "./client/components/pages/asesmenpage/multiple-intelligences";
+import OccupationalThemeAssessment from "./client/components/pages/asesmenpage/occupational-themes";
+
 
 //blog
 import BlogList from "./client/components/blog/bloglist";
@@ -260,6 +263,9 @@ const AppContainer = function (props) {
         ) : (
           <div>
             <Switch>
+              <Route path="/asesmen/occupational-themes" exact component={OccupationalThemeAssessment} />
+              <Route path="/asesmen/multiple-intelligences" exact component={MultipleIntelligencesAssessment} />
+
               <Route path="/user/doctor-grid" exact component={DoctorGrid} />
               <Route path="/user/doctor-list" exact component={DoctorList} />
               <Route path="/pages/video-call" exact component={VideoCall} />

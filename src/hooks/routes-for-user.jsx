@@ -38,6 +38,8 @@ import Booking from "../client/components/patients/booking/booking1";
 import Booking2 from "../client/components/patients/booking/booking2";
 import BlankPage from "../client/components/pages/starter page/index.jsx";
 import NewPage from '../client/components/pages/newpage/NewPage.jsx';
+import MultipleIntelligencesAssessment from "../client/components/pages/asesmenpage/multiple-intelligences";
+import OccupationalThemeAssessment from "../client/components/pages/asesmenpage/occupational-themes";
 
 const RoutesForUser = () => {
   return (
@@ -77,6 +79,8 @@ const RoutesForUser = () => {
       <Route path="/pages/invoice-view" exact component={InvoiceView} />
       <Route path="/user/doctor-grid" exact component={DoctorGrid} />
       <Route path="/user/doctor-list" exact component={DoctorList} />
+      <Route path="/asesmen/occupational-themes" exact component={OccupationalThemeAssessment} />
+      <Route path="/asesmen/multiple-intelligences" exact component={MultipleIntelligencesAssessment} />
 
       {/* Add other user routes here */}
     </Switch>

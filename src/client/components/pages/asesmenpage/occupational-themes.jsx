@@ -1,12 +1,13 @@
-// src/client/components/page-anda/page-asesmen-one.jsx
-
+// src/client/components/pages/asesmenpage/occupational-themes.jsx
+// src/client/components/Quiz/quiz-type-one.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "../header";
-import Footer from "../footer";
-import QuizTypeOne from "../Quiz/quiz-type-one";
+import Header from "../../header";
+import Footer from "../../footer";
+import QuizTypeOne from "../../Quiz/quiz-type-one";
 
-const PageAsesmenOne = (props) => {
+
+const OccupationalThemeAssessment = (props) => {
   return (
     <div>
       <Header {...props} />
@@ -16,14 +17,14 @@ const PageAsesmenOne = (props) => {
           <div className="container">
             <div className="row align-items-center inner-banner">
               <div className="col-md-12 col-12 text-center">
-                <h2 className="breadcrumb-title">Asesmen</h2>
+                <h2 className="breadcrumb-title">Occupational Themes</h2>
                 <nav aria-label="breadcrumb" className="page-breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
                       <Link to="/index-6">Home</Link>
                     </li>
                     <li className="breadcrumb-item" aria-current="page">
-                      Asesmen Type One
+                      Occupational Themes
                     </li>
                   </ol>
                 </nav>
@@ -38,6 +39,7 @@ const PageAsesmenOne = (props) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-12">
+              <h5>Blank Page</h5>
               <QuizTypeOne />
             </div>
           </div>
@@ -48,4 +50,4 @@ const PageAsesmenOne = (props) => {
   );
 };
 
-export default PageAsesmenOne;
+export default OccupationalThemeAssessment;

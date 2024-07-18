@@ -8,17 +8,6 @@
   text-align: center;
 }
 
-.progress-bar {
-  width: 100%;
-  background: #e0e0e0;
-  height: 10px;
-  margin: 10px 0;
-}
-
-.progress {
-  height: 100%;
-  background: #76c7c0;
-}
 
 .quiz-body {
   margin: 20px 0;

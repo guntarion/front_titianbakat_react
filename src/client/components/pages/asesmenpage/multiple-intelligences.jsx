@@ -1,12 +1,9 @@
-// src/client/components/page-anda/page-asesmen-one.jsx
-
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "../header";
-import Footer from "../footer";
-import QuizTypeOne from "../Quiz/quiz-type-one";
+import Header from "../../header";
+import Footer from "../../footer";
 
-const PageAsesmenOne = (props) => {
+const MultipleIntelligencesAssessment = (props) => {
   return (
     <div>
       <Header {...props} />
@@ -16,14 +13,14 @@ const PageAsesmenOne = (props) => {
           <div className="container">
             <div className="row align-items-center inner-banner">
               <div className="col-md-12 col-12 text-center">
-                <h2 className="breadcrumb-title">Asesmen</h2>
+                <h2 className="breadcrumb-title">Blank Page</h2>
                 <nav aria-label="breadcrumb" className="page-breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link to="/index-6">Home</Link>
+                      <Link to="/index-2">Home</Link>
                     </li>
                     <li className="breadcrumb-item" aria-current="page">
-                      Asesmen Type One
+                      Blank Page
                     </li>
                   </ol>
                 </nav>
@@ -33,12 +30,12 @@ const PageAsesmenOne = (props) => {
         </div>
         {/* /Breadcrumb */}
       </>
-
+      MultipleIntelligencesAssessment
       <div className="content">
         <div className="container-fluid">
           <div className="row">
             <div className="col-12">
-              <QuizTypeOne />
+              <h5>Blank Page</h5>
             </div>
           </div>
         </div>
@@ -48,4 +45,4 @@ const PageAsesmenOne = (props) => {
   );
 };
 
-export default PageAsesmenOne;
+export default MultipleIntelligencesAssessment;

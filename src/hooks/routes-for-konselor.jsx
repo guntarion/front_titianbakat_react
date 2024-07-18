@@ -24,6 +24,8 @@ import EditBilling from "../client/components/doctors/editbilling/index";
 import Accounts from "../client/components/doctors/account/index.jsx";
 import Invoice from "../client/components/pages/invoices/invoices";
 import AvailableTiming from "../client/components/doctors/availabletiming/index.jsx";
+import MultipleIntelligencesAssessment from "../client/components/pages/asesmenpage/multiple-intelligences";
+import OccupationalThemeAssessment from "../client/components/pages/asesmenpage/occupational-themes";
 
 const RoutesForKonselor = () => {
   return (
@@ -49,6 +51,8 @@ const RoutesForKonselor = () => {
       <Route path="/konselor/register-step- 3" exact component={Registerstepthree} />
       <Route path="/konselor/editprescription" exact component={EditPrescription} />
       <Route path="/konselor/editbilling" exact component={EditBilling} />
+      <Route path="/asesmen/occupational-themes" exact component={OccupationalThemeAssessment} />
+      <Route path="/asesmen/multiple-intelligences" exact component={MultipleIntelligencesAssessment} />
       {/* Add other konselor routes here */}
     </Switch>
   );
