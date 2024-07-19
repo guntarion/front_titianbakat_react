@@ -1,3 +1,13 @@
+
+
+export { default as img_riasec_realistic } from "../assets/images/quiz/riasec_realistic.png";
+export { default as img_riasec_artistic } from "../assets/images/quiz/riasec_artistic.png";
+export { default as img_riasec_conventional } from "../assets/images/quiz/riasec_conventional.png";
+export { default as img_riasec_enterprising } from "../assets/images/quiz/riasec_enterprising.png";
+export { default as img_riasec_investigative } from "../assets/images/quiz/riasec_investigative.png";
+export { default as img_riasec_social } from "../assets/images/quiz/riasec_social.png";
+
+
 export { default as doctorthumb02 } from "../assets/images/doctors/doctor-thumb-02.jpg";
 export { default as coming_soon } from "../assets/images/coming-soon.png";
 export { default as smiling_icon } from "../assets/images/icons/smiling-icon.svg";
