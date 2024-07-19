@@ -1,7 +1,8 @@
+// src/client/components/Quiz/quiz-result-occupationalthemes.jsx
 import React from "react";
 import PropTypes from "prop-types";
 
-const QuizResult = ({ totalscores }) => {
+const QuizResult_OccupationalThemes = ({ totalscores }) => {
   return (
     <div className="quiz-result-container">
       <h2>Quiz Results</h2>
@@ -33,7 +34,7 @@ const QuizResult = ({ totalscores }) => {
   );
 };
 
-QuizResult.propTypes = {
+QuizResult_OccupationalThemes.propTypes = {
   totalscores: PropTypes.shape({
     type_realistic: PropTypes.number,
     type_investigative: PropTypes.number,
@@ -44,4 +45,4 @@ QuizResult.propTypes = {
   })
 };
 
-export default QuizResult;
+export default QuizResult_OccupationalThemes;

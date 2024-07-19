@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Header from "../../header";
 import Footer from "../../footer";
 import QuizTypeOne from "../../Quiz/quiz-type-one";
-import QuizResult from "../../Quiz/quiz-result-occupationalthemes";
+import QuizResult_OccupationalThemes from "../../Quiz/quiz-result-occupationalthemes";
 
 
 const OccupationalThemeAssessment = (props) => {
@@ -15,6 +15,15 @@ const OccupationalThemeAssessment = (props) => {
     setTotalscores(scores);
     setShowResults(true);
   };
+
+  const scoreTypes = [
+    "type_realistic",
+    "type_investigative",
+    "type_artistic",
+    "type_social",
+    "type_enterprising",
+    "type_conventional",
+  ];
 
   return (
     <div>
@@ -48,9 +57,13 @@ const OccupationalThemeAssessment = (props) => {
           <div className="row">
             <div className="col-12">
               {showResults ? (
-                <QuizResult totalscores={totalscores} />
+                <QuizResult_OccupationalThemes totalscores={totalscores} />
               ) : (
-                <QuizTypeOne onQuizComplete={handleQuizComplete} />
+                <QuizTypeOne
+                  quizId="quiz_01_riasec"
+                  onQuizComplete={handleQuizComplete}
+                  scoreTypes={scoreTypes}
+                />
               )}
             </div>
           </div>

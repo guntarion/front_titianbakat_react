@@ -1,14 +1,12 @@
 // src/client/components/quiz-type-one/quiz-type-one.jsx
-import PropTypes from 'prop-types';
-
-// src/client/components/quiz-type-one/quiz-type-one.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import PropTypes from 'prop-types';
 import "./quiz-type-one.css";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../../../AuthContext";
 
-const QuizTypeOne = ({ onQuizComplete }) => {
+const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
   const { user } = useAuth();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [noteText, setNoteText] = useState("");
@@ -17,7 +15,6 @@ const QuizTypeOne = ({ onQuizComplete }) => {
   const [responses, setResponses] = useState({});
   const [notes, setNotes] = useState({});
   // const [status, setStatus] = useState("in progress");
-  const quizId = "quiz_01_riasec"; // Set your quiz ID here
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -37,7 +34,6 @@ const QuizTypeOne = ({ onQuizComplete }) => {
                 setResponses({});
                 setNotes({});
                 setCurrentQuestionIndex(0);
-                // Create a new document for a new quiz session
                 await createNewQuizResponse(data.mongoUserId, quizId);
               } else {
                 setResponses(response.data.responses || {});
@@ -60,9 +56,14 @@ const QuizTypeOne = ({ onQuizComplete }) => {
     if (user) {
       fetchUserData();
     }
-  }, [user]);
+  }, [user, quizId]);
 
   const createNewQuizResponse = async (userId, quizId) => {
+    const initialScores = scoreTypes.reduce((acc, type) => {
+      acc[type] = 0;
+      return acc;
+    }, {});
+
     try {
       await axios.post("http://localhost:8000/api/quizresponse/new", {
         user_id: userId,
@@ -71,14 +72,7 @@ const QuizTypeOne = ({ onQuizComplete }) => {
         notes: {},
         status: "in progress",
         last_question_index: 0,
-        total_scores: {
-          type_realistic: 0,
-          type_investigative: 0,
-          type_artistic: 0,
-          type_social: 0,
-          type_enterprising: 0,
-          type_conventional: 0,
-        },
+        total_scores: initialScores,
         started_at: new Date(),
         finished_at: null,
       });
@@ -98,7 +92,7 @@ const QuizTypeOne = ({ onQuizComplete }) => {
     };
 
     fetchQuizData();
-  }, []);
+  }, [quizId]);
 
   const handleAnswerClick = (score) => {
     const newResponses = { ...responses, [quizData.statements[currentQuestionIndex].number]: score };
@@ -137,14 +131,10 @@ const QuizTypeOne = ({ onQuizComplete }) => {
   };
 
   const calculateScores = (responses) => {
-    const scores = {
-      type_realistic: 0,
-      type_investigative: 0,
-      type_artistic: 0,
-      type_social: 0,
-      type_enterprising: 0,
-      type_conventional: 0,
-    };
+    const scores = scoreTypes.reduce((acc, type) => {
+      acc[type] = 0;
+      return acc;
+    }, {});
 
     for (const [statementNumber, score] of Object.entries(responses)) {
       const statement = quizData.statements.find((s) => s.number === parseInt(statementNumber));
@@ -200,8 +190,10 @@ const QuizTypeOne = ({ onQuizComplete }) => {
   );
 };
 
-export default QuizTypeOne;
-
 QuizTypeOne.propTypes = {
+  quizId: PropTypes.string.isRequired,
+  scoreTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
   onQuizComplete: PropTypes.func.isRequired,
 };
+
+export default QuizTypeOne;
