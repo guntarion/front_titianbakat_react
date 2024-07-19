@@ -6,6 +6,8 @@ export { default as img_riasec_conventional } from "../assets/images/quiz/riasec
 export { default as img_riasec_enterprising } from "../assets/images/quiz/riasec_enterprising.png";
 export { default as img_riasec_investigative } from "../assets/images/quiz/riasec_investigative.png";
 export { default as img_riasec_social } from "../assets/images/quiz/riasec_social.png";
+export { default as img_riasec_opening } from "../assets/images/quiz/riasec_opening.jpg";
+export { default as img_mi_opening } from "../assets/images/quiz/mi_opening.jpg";
 
 
 export { default as doctorthumb02 } from "../assets/images/doctors/doctor-thumb-02.jpg";

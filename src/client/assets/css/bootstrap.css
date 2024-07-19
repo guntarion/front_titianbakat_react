@@ -598,6 +598,14 @@ progress {
   height: auto;
 }
 
+.img-fluidme {
+  max-width: 100%;
+  margin-bottom: 1.0rem;
+  height: auto;
+}
+
+
+
 .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;
