@@ -2,12 +2,12 @@
 import React from 'react';
 import { PolarArea } from 'react-chartjs-2';
 import { Chart as ChartJS, RadialLinearScale, PointElement, ArcElement, LineElement, Filler, Tooltip, Legend } from 'chart.js';
-import './OccupationalThemesChart.css'; // Import the CSS file
+import './Chart_OccupationalThemes.css'; // Import the CSS file
 import PropTypes from "prop-types";
 
 ChartJS.register(RadialLinearScale, PointElement, ArcElement, LineElement, Filler, Tooltip, Legend);
 
-const OccupationalThemesChart = ({ totalscores }) => {
+const Chart_OccupationalThemes = ({ totalscores }) => {
   const labels = ['Realistic', 'Investigative', 'Artistic', 'Social', 'Enterprising', 'Conventional'];
 
   const data = {
@@ -67,7 +67,7 @@ const OccupationalThemesChart = ({ totalscores }) => {
   );
 };
 
-OccupationalThemesChart.propTypes = {
+Chart_OccupationalThemes.propTypes = {
   totalscores: PropTypes.shape({
     type_realistic: PropTypes.number,
     type_investigative: PropTypes.number,
@@ -78,4 +78,4 @@ OccupationalThemesChart.propTypes = {
   })
 };
 
-export default OccupationalThemesChart;
+export default Chart_OccupationalThemes;

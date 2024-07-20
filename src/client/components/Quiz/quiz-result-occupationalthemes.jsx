@@ -1,7 +1,7 @@
 // src/client/components/Quiz/quiz-result-occupationalthemes.jsx
 import React from "react";
 import PropTypes from "prop-types";
-import OccupationalThemesChart from './OccupationalThemesChart'; // Import the chart component
+import Chart_OccupationalThemes from './Chart_OccupationalThemes'; // Import the chart component
 
 import {
   img_riasec_realistic,
@@ -38,6 +38,7 @@ const karakteristik = {
     text: "Pekerjaan-pekerjaan yang mengandung rutinitas dan terkait dengan mengikuti prosedur yang telah ditetapkan. Pekerjaan ini bisa mencakup kerja dengan data dan rincian. Biasanya dalam kerja ini ada garis otoritas yang jelas untuk mengikuti.",
   },
 };
+const interpolateScore = (score) => ((score + 30) / 60) * 100;
 
 const QuizResult_OccupationalThemes = ({ totalscores }) => {
   const highestScoreType = Object.keys(totalscores).reduce((a, b) => (totalscores[a] > totalscores[b] ? a : b));
@@ -47,17 +48,17 @@ const QuizResult_OccupationalThemes = ({ totalscores }) => {
       <h2>Quiz Results</h2>
 
       <div className="quiz-result-container">
-        <p>Realistic: {totalscores.type_realistic}</p>
-        <p>Investigative: {totalscores.type_investigative}</p>
-        <p>Artistic: {totalscores.type_artistic}</p>
-        <p>Social: {totalscores.type_social}</p>
-        <p>Enterprising: {totalscores.type_enterprising}</p>
-        <p>Conventional: {totalscores.type_conventional}</p>
+        <p>Realistic: {interpolateScore(totalscores.type_realistic).toFixed(2)}</p>
+        <p>Investigative: {interpolateScore(totalscores.type_investigative).toFixed(2)}</p>
+        <p>Artistic: {interpolateScore(totalscores.type_artistic).toFixed(2)}</p>
+        <p>Social: {interpolateScore(totalscores.type_social).toFixed(2)}</p>
+        <p>Enterprising: {interpolateScore(totalscores.type_enterprising).toFixed(2)}</p>
+        <p>Conventional: {interpolateScore(totalscores.type_conventional).toFixed(2)}</p>
       </div>
 
       <div className="result-item">
         <img src={karakteristik[highestScoreType].img} className="img-fluid" alt="#" />
-        <OccupationalThemesChart totalscores={totalscores} />
+        <Chart_OccupationalThemes totalscores={totalscores} />
         <h3>{highestScoreType.replace('type_', '').replace('_', ' ')}</h3>
         <p>{karakteristik[highestScoreType].text}</p>
       </div>
