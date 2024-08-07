@@ -12,7 +12,7 @@ const opn = require("opn"); // Import the 'opn' package
 const publicPath = "/"; // To run this file in local
 //  const publicPath = "/react/template/"; // To build the file
 module.exports = {
-  mode: "development",
+  mode: "production",
   entry: path.join(__dirname, "src", "index.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -137,7 +137,7 @@ module.exports = {
   ],
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("development"),
+      "process.env.NODE_ENV": JSON.stringify("production"),
     }),
     new webpack.HotModuleReplacementPlugin(),
 
