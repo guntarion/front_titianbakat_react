@@ -5,6 +5,7 @@ import Header from "../../header";
 import Footer from "../../footer";
 import QuizTypeOne from "../../Quiz/quiz-type-one";
 import QuizResult_MultipleIntelligences from "../../Quiz/quiz-result-multipleintelligences";
+import Followup_MultipleIntelligences from "../../Quiz/followup_multipleintelligences";
 import axios from "axios";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../../../../AuthContext"; 
@@ -20,6 +21,7 @@ const MultipleIntelligencesAssessment = (props) => {
   const [hasQuizResult, setHasQuizResult] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [mongoUserId, setMongoUserId] = useState("");
+  const [highestScoreType, setHighestScoreType] = useState("");
 
   const scoreTypes = [
     "type_logika",
@@ -47,6 +49,7 @@ const MultipleIntelligencesAssessment = (props) => {
             const response = await axios.get(`http://localhost:8000/api/quizresponse/${data.mongoUserId}/quiz_02_multipleintelligences`);
             if (response.data && response.data.status === "finished") {
               setTotalscores(response.data.total_scores);
+              setHighestScoreType(Object.keys(response.data.total_scores).reduce((a, b) => response.data.total_scores[a] > response.data.total_scores[b] ? a : b));
               setHasQuizResult(true);
             } else {
               setHasQuizResult(false);
@@ -70,6 +73,7 @@ const MultipleIntelligencesAssessment = (props) => {
 
   const handleQuizComplete = (scores) => {
     setTotalscores(scores);
+    setHighestScoreType(Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b));
     setShowQuiz(false);
     setHasQuizResult(true);
   };
@@ -110,7 +114,13 @@ const MultipleIntelligencesAssessment = (props) => {
           <div className="row">
             <div className="col-12">
               {hasQuizResult && !showQuiz ? (
+                <>
                 <QuizResult_MultipleIntelligences totalscores={totalscores} />
+                <Followup_MultipleIntelligences type={highestScoreType} category="aktivitas" />
+                <Followup_MultipleIntelligences type={highestScoreType} category="proyek" />
+                <Followup_MultipleIntelligences type={highestScoreType} category="kebiasaan" />
+                </>
+                
               ) : (
                 <div>
                   {!showQuiz && (
