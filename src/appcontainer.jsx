@@ -1,3 +1,4 @@
+// src/appcontainer.jsx
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import config from "config";
@@ -21,6 +22,9 @@ import HomeSlider2 from "./client/components/home/homeslider2";
 import Home10 from "./client/components/home/home10";
 import Home7 from "./client/components/home/home7";
 
+import MultipleIntelligencesAssessment from "./client/components/pages/asesmenpage/multiple-intelligences";
+import OccupationalThemeAssessment from "./client/components/pages/asesmenpage/occupational-themes";
+
 
 //blog
 import BlogList from "./client/components/blog/bloglist";
@@ -37,9 +41,7 @@ import InvoiceView from "./client/components/pages/invoices/view";
 import DoctorGrid from "./client/components/patients/doctorgrid";
 import DoctorList from "./client/components/patients/doctorlist";
 import DoctorProfile from "./client/components/patients/doctorprofile";
-import DoctorChat from "./client/components/doctors/chat";
 import PatientChat from "./client/components/patients/chat";
-import MyPatient from "./client/components/doctors/mypatient";
 import Booking from "./client/components/patients/booking/booking1";
 import Booking2 from "./client/components/patients/booking/booking2";
 
@@ -52,8 +54,11 @@ import Orders from "./client/components/patients/orders";
 import MedicalRecords from "./client/components/patients/medicalrecords";
 import MedicalDetails from "./client/components/patients/medicaldetails";
 import Favourties from "./client/components/patients/dashboard/favourties";
-import Profile from "./client/components/patients/dashboard/profile";
-import Password from "./client/components/patients/dashboard/password";
+import UserProfile from "./client/components/patients/dashboard/profile";
+import ChangeUserPassword from "./client/components/patients/dashboard/password";
+
+import DoctorChat from "./client/components/doctors/chat";
+import MyPatient from "./client/components/doctors/mypatient";
 import DoctorDashboard from "./client/components/doctors/dashboard";
 import SocialMedia from "./client/components/doctors/socialmedia";
 import ScheduleTiming from "./client/components/doctors/scheduletimings";
@@ -68,6 +73,9 @@ import DoctorRegister from "./client/components/doctors/register";
 import Registerstepone from "./client/components/doctors/register/registerstepone";
 import Registersteptwo from "./client/components/doctors/register/registersteptwo";
 import Registerstepthree from "./client/components/doctors/register/registerstepthree";
+import EditPrescription from "./client/components/doctors/patientprofile/edit-prescription";
+import EditBilling from "./client/components/doctors/editbilling/index";
+
 import Terms from "./client/components/pages/terms";
 import Policy from "./client/components/pages/policy";
 import Aboutus from "./client/components/pages/aboutus/aboutus";
@@ -81,6 +89,7 @@ import Patientregisterstepfive from "./client/components/register/patientregiste
 import BlankPage from "./client/components/pages/starter page/index.jsx";
 import NewPage from './client/components/pages/newpage/NewPage.jsx';
 import PageAsesmenOne from './client/components/page-anda/page-asesmen-one';
+import PageAsesmenTwo from './client/components/page-anda/page-asesmen-two';
 import Pharmacy from "./client/components/Pharmacy/pharmacy";
 import pharmacydetail from "./client/components/Pharmacy/pharmactdetail";
 import PharmacySearch from "./client/components/Pharmacy/pharmacysearch";
@@ -99,14 +108,12 @@ import Doctorblog from "./client/components/blog/doctorblog/doctorblog";
 import Doctoraddblog from "./client/components/blog/doctorblog/doctoraddblog";
 import Doctorpendingblog from "./client/components/blog/doctorblog/doctorpendingblog";
 import Doctoreditblog from "./client/components/blog/doctorblog/doctoreditblog";
-import EditPrescription from "./client/components/doctors/patientprofile/edit-prescription";
-import EditBilling from "./client/components/doctors/editbilling/index";
+
 import MapList from "./client/components/patients/map-list/index";
 import OnboardingEmail from "./client/components/pages/doctoronboarding/onboardingemail";
 import OnboardingPersonalize from "./client/components/pages/doctoronboarding/onboardingpersonalize";
 import OnboardingIdentity from "./client/components/pages/doctoronboarding/onboardingidentity";
 import OnboardingPayments from "./client/components/pages/doctoronboarding/onboardingpayments";
-// import onboardingpersonalize from "./client/components/pages/doctoronboarding/onboardingpayments";
 import OnboardingPreferences from "./client/components/pages/doctoronboarding/onboardingpreferences";
 import Onboardingverification from "./client/components/pages/doctoronboarding/onboardingverification";
 import PatientOnboardingEmail from "./client/components/pages/patientonboarding/Email";
@@ -115,6 +122,9 @@ import PatientOnboardingDetails from "./client/components/pages/patientonboardin
 import PatientFamilyDetails from "./client/components/pages/patientonboarding/FamilyDetails";
 import DependantDetails from "./client/components/pages/patientonboarding/DependantDetails";
 import OtherDetails from "./client/components/pages/patientonboarding/OtherDetails";
+
+// import onboardingpersonalize from "./client/components/pages/doctoronboarding/onboardingpayments";
+
 import OnboardingEmailOtp from "./client/components/pages/doctoronboarding/onboardingemail-otp";
 import Onboardingphone from "./client/components/pages/doctoronboarding/onboardingphone";
 import Onboardingphoneotp from "./client/components/pages/doctoronboarding/onboardingphoneotp";
@@ -125,6 +135,7 @@ import patientphoneotp from "./client/components/pages/patientonboarding/patient
 import patientpassword from "./client/components/pages/patientonboarding/patientpassword";
 import PhoneOtp from "./client/components/pages/patientonboarding/phoneotp";
 import Producthealthcare from "./client/components/pages/producthealthcare/index";
+
 import Generalhome from "./client/components/home/general/generalhome.jsx";
 import Comingsoon from "./client/components/pages/coming soon/index.jsx";
 import Maintenance from "./client/components/pages/maintanence/index.jsx";
@@ -147,7 +158,10 @@ import Faq from "./client/components/pages/faq/index.jsx";
 import EmailOtp from "./client/components/pages/authentication/email-otp.jsx";
 import MobileOtp from "./client/components/pages/authentication/phone-otp.jsx";
 import AvailableTiming from "./client/components/doctors/availabletiming/index.jsx";
+
+
 import Accounts from "./client/components/doctors/account/index.jsx";
+
 import Cardiohome from "./client/components/home/cardiology/cardiohome.jsx";
 import Paediatrichome from "./client/components/home/paediatric/paediatrichome.jsx";
 import Home6 from "./client/components/home/home6.jsx";
@@ -249,11 +263,17 @@ const AppContainer = function (props) {
         ) : (
           <div>
             <Switch>
+              <Route path="/asesmen/occupational-themes" exact component={OccupationalThemeAssessment} />
+              <Route path="/asesmen/multiple-intelligences" exact component={MultipleIntelligencesAssessment} />
+
               <Route path="/user/doctor-grid" exact component={DoctorGrid} />
               <Route path="/user/doctor-list" exact component={DoctorList} />
               <Route path="/pages/video-call" exact component={VideoCall} />
               <Route path="/pages/voice-call" exact component={VoiceCall} />
-              <Route path="/konselor/chat-doctor" exact component={DoctorChat} />
+
+              <Route path="/loginemail" exact component={Loginemail} />
+              <Route path="/login-titian-bakat" exact component={LoginTitianBakat} />
+              
 
               <Route path="/login" exact component={LoginContainer} />
               <Route path="/register" exact component={Register} />
@@ -310,23 +330,24 @@ const AppContainer = function (props) {
               <Route path="/pages/new-page" exact component={NewPage} />
               <Route path="/pages/calendar" exact component={Calendar} />
               <Route path="/pages/invoice" exact component={Invoice} />
-              <Route path="/konselor/invoice" exact component={Invoice} />
+              
               <Route path="/pages/invoice-view" exact component={InvoiceView} />
               <Route path="/pages/aboutus" exact component={Aboutus} />
               <Route path="/pages/contactus" exact component={Contactus} />
+
               <Route path="/pages/comingsoon" exact component={Comingsoon} />
               <Route path="/pages/maintenance" exact component={Maintenance} />
               <Route path="/pages/pricing-plan" exact component={PricingPlan} />
               <Route path="/pages/error-404" exact component={Error404} />
               <Route path="/pages/error-500" exact component={Error500} />
               <Route path="/pages/faq" exact component={Faq} />
+              
               <Route path="/user/patientregisterstep-1" exact component={Patientregisterstepone} />
               <Route path="/user/patientregisterstep-2" exact component={Patientregistersteptwo} />
               <Route path="/user/patientregisterstep-3" exact component={Patientregisterstepthree} />
               <Route path="/user/patientregisterstep-4" exact component={Patientregisterstepfour} />
               <Route path="/user/patientregisterstep-5" exact component={Patientregisterstepfive} />
               <Route path="/user/doctor-profile" exact component={DoctorProfile} />
-              <Route path="/konselor/my-patients" exact component={MyPatient} />
               <Route path="/user/booking1" exact component={Booking} />
               <Route path="/user/booking2" exact component={Booking2} />
               <Route path="/user/patient-chat" exact component={PatientChat} />
@@ -339,9 +360,13 @@ const AppContainer = function (props) {
               <Route path="/user/medicalrecords" exact component={MedicalRecords} />
               <Route path="/user/medicaldetails" exact component={MedicalDetails} />
               <Route path="/user/favourites" exact component={Favourties} />
-              <Route path="/user/profile" exact component={Profile} />
-              <Route path="/user/change-password" exact component={Password} />
+              <Route path="/user/profile" exact component={UserProfile} />
+              <Route path="/user/change-password" exact component={ChangeUserPassword} />
+
+              
               <Route path="/konselor/doctor-dashboard" exact component={DoctorDashboard} />
+              <Route path="/konselor/my-patients" exact component={MyPatient} />
+              <Route path="/konselor/invoice" exact component={Invoice} />
               <Route path="/konselor/social-media" exact component={SocialMedia} />
               <Route path="/konselor/schedule-timing" exact component={ScheduleTiming} />
               <Route path="/konselor/available-timing" exact component={AvailableTiming} />
@@ -349,14 +374,19 @@ const AppContainer = function (props) {
               <Route path="/konselor/doctor-change-password" exact component={DoctorPassword} />
               <Route path="/konselor/appointments" exact component={Appointments} />
               <Route path="/konselor/patient-profile" exact component={PatientProfile} />
-              <Route path="/add-prescription" exact component={AddPescription} />
-              <Route path="/add-billing" exact component={AddBilling} />
               <Route path="/konselor/profile-setting" exact component={ProfileSetting} />
               <Route path="/konselor/review" exact component={Review} />
               <Route path="/konselor/doctor-register" exact component={DoctorRegister} />
-              <Route path="/registerstepone" exact component={Registerstepone} />
-              <Route path="/register-step-2" exact component={Registersteptwo} />
-              <Route path="/register-step- 3" exact component={Registerstepthree} />
+
+              <Route path="/konselor/chat-doctor" exact component={DoctorChat} />
+              <Route path="/konselor/add-billing" exact component={AddBilling} />
+              <Route path="/konselor/add-prescription" exact component={AddPescription} />
+              <Route path="/konselor/registerstepone" exact component={Registerstepone} />
+              <Route path="/konselor/register-step-2" exact component={Registersteptwo} />
+              <Route path="/konselor/register-step- 3" exact component={Registerstepthree} />
+              <Route path="/konselor/editprescription" exact component={EditPrescription} />
+              <Route path="/konselor/editbilling" exact component={EditBilling} />
+              
               <Route path="/pages/terms" exact component={Terms} />
               <Route path="/pages/privacy-policy" exact component={Policy} />
 
@@ -364,6 +394,7 @@ const AppContainer = function (props) {
               
               <Route path="/user/map-list" exact component={MapList} />
               <Route path="/page-anda/page-asesmen-one" exact component={PageAsesmenOne} />
+              <Route path="/page-anda/page-asesmen-two" exact component={PageAsesmenTwo} />
               <Route path="/asesmen/Pharmacy-index" exact component={Pharmacy} />
               <Route path="/asesmen/Pharmacy-details" exact component={pharmacydetail} />
               <Route path="/asesmen/pharmacy-search" exact component={PharmacySearch} />
@@ -376,8 +407,7 @@ const AppContainer = function (props) {
               <Route path="/asesmen/pharmacy-registerstep-1" exact component={Pharmacyregisterstepone} />
               <Route path="/asesmen/pharmacy-registerstep-2" exact component={Pharmacyregistersteptwo} />
               <Route path="/asesmen/pharmacy-registerstep-3" exact component={Pharmacyregisterstepthree} />
-              <Route path="/editprescription" exact component={EditPrescription} />
-              <Route path="/editbilling" exact component={EditBilling} />
+              
               <Route path="/pages/onboarding-email" exact component={OnboardingEmail} />
               <Route path="/pages/onboarding-identity" exact component={OnboardingIdentity} />
               <Route path="/pages/onboarding-payments" exact component={OnboardingPayments} />
@@ -405,8 +435,7 @@ const AppContainer = function (props) {
               <Route path="/payment" exact component={Payment} />
               <Route path="/bookingsuccess" exact component={Bookingsuccess} />
               <Route path="/patientdetails" exact component={Patientdetails} />
-              <Route path="/loginemail" exact component={Loginemail} />
-              <Route path="/login-titian-bakat" exact component={LoginTitianBakat} />
+              
               <Route path="/index-13" exact component={HomecareHome} />
             </Switch>
           </div>

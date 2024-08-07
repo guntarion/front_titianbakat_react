@@ -1,19 +1,38 @@
-import React, { useEffect } from "react";
-// import { useHistory } from "react-router-dom";
+// src/client/components/forgot-password/index.jsx
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import loginBanner from "../../assets/images/login-banner.png";
 import { Link } from "react-router-dom";
+import { auth } from "../../../firebase";
+import { sendPasswordResetEmail } from "firebase/auth";
 import Header from "../header";
 import Footer from "../footer";
 
 const ForgotPassword = (props) => {
-  // const history = useHistory();
-  const config = "/react/template";
+  // eslint-disable-next-line no-unused-vars
+  const history = useHistory();
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     document.body.classList.add("account-page");
 
     return () => document.body.classList.remove("account-page");
   }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage("");
+    setError("");
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setMessage("Password reset email sent. Please check your inbox.");
+    } catch (err) {
+      setError("Failed to send password reset email. Please try again.");
+    }
+  };
 
   return (
     <>
@@ -38,20 +57,25 @@ const ForgotPassword = (props) => {
                       <div className="login-header">
                         <h3>Forgot Password?</h3>
                         <p className="small text-muted">
-                          Enter your email to get a password reset link
+                          Enter your email to get a password reset link.
                         </p>
                       </div>
                       {/* Forgot Password Form */}
-                      <form action={`${config}/home`}>
+                      <form onSubmit={handleSubmit}>
                         <div className="form-group form-focus">
                           <input
                             type="email"
                             className="form-control floating"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
                           />
                           <label className="focus-label">Email</label>
                         </div>
+                        {message && <p className="text-success">{message}</p>}
+                        {error && <p className="text-danger">{error}</p>}
                         <div className="text-end">
-                          <Link className="forgot-link" to="/login">
+                          <Link className="forgot-link" to="/login-titian-bakat">
                             Remember your password?
                           </Link>
                         </div>

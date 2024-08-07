@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars";
 // import FeatherIcon from "feather-icons-react";
-import { Appcontext } from "../../../approuter";
+import AuthContext from "../../../AuthContext";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 const SidebarNav = () => {
@@ -11,7 +11,7 @@ const SidebarNav = () => {
   const location = useLocation();
   const pathname = location.pathname;
 
-  const { setIsAuth } = useContext(Appcontext);
+  const { setIsAuth } = useContext(AuthContext);
   const [isSideMenu, setSideMenu] = useState("");
   const [isSideMenuNew, setSideMenuNew] = useState("");
   const [isSideMenuNew2, setSideMenuNew2] = useState("");

@@ -4,9 +4,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../header";
 import Footer from "../footer";
-import QuizTypeOne from "../quiz-type-one/quiz-type-one";
+import QuizTypeOne from "../Quiz/quiz-type-one";
 
-const NewPage = (props) => {
+const PageAsesmenOne = (props) => {
   return (
     <div>
       <Header {...props} />
@@ -16,14 +16,14 @@ const NewPage = (props) => {
           <div className="container">
             <div className="row align-items-center inner-banner">
               <div className="col-md-12 col-12 text-center">
-                <h2 className="breadcrumb-title">New Page</h2>
+                <h2 className="breadcrumb-title">Asesmen</h2>
                 <nav aria-label="breadcrumb" className="page-breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
                       <Link to="/index-6">Home</Link>
                     </li>
                     <li className="breadcrumb-item" aria-current="page">
-                      Halaman Baru
+                      Asesmen Type One
                     </li>
                   </ol>
                 </nav>
@@ -38,8 +38,6 @@ const NewPage = (props) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-12">
-              <h5>Asesmen</h5>
-              Bagian Isi KOnten Baru
               <QuizTypeOne />
             </div>
           </div>
@@ -50,4 +48,4 @@ const NewPage = (props) => {
   );
 };
 
-export default NewPage;
+export default PageAsesmenOne;

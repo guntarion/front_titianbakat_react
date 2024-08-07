@@ -1,47 +1,81 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { googleicon, shape01, shape02 } from "./img";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
-import AuthenticationHeader from "../../authiticationHeader";
 import { auth } from "../../../../firebase.js"; 
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from "../../../../AuthContext";
 
-const LoginEmail = () => {
+const LoginTitianBakat = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const { setUser, setRole } = useAuth();
   const history = useHistory();
-  const inputRef = React.createRef();
+  const inputRef = useRef();
+
+  useEffect(() => {
+    const savedUser = JSON.parse(localStorage.getItem("user")) || JSON.parse(sessionStorage.getItem("user"));
+    if (savedUser && window.location.pathname !== "/login-titian-bakat") {
+      setUser(savedUser);
+      history.push("/index-6");
+    }
+  }, [setUser, history]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-    inputRef.current.type = showPassword ? "password" : "text";
+    if (inputRef.current) {
+      inputRef.current.type = showPassword ? "password" : "text";
+    }
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      setUser(userCredential.user); // Store user info in context
+      if (rememberMe) {
+        localStorage.setItem("user", JSON.stringify(userCredential.user));
+      } else {
+        sessionStorage.setItem("user", JSON.stringify(userCredential.user));
+      }
+      toast.success("Login successful!");
       history.push("/index-6"); // Redirect to home or another page after successful login
     } catch (err) {
       setError(err.message);
+      toast.error(err.message);
     }
   };
 
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
+      const userCredential = await signInWithPopup(auth, provider);
+      setUser(userCredential.user); // Store user info in context
+      if (rememberMe) {
+        localStorage.setItem("user", JSON.stringify(userCredential.user));
+      } else {
+        sessionStorage.setItem("user", JSON.stringify(userCredential.user));
+      }
+      toast.success("Login successful!");
       history.push("/index-6"); // Redirect to home or another page after successful login
     } catch (err) {
       setError(err.message);
+      toast.error(err.message);
     }
+  };
+
+  const handleRememberMeChange = (e) => {
+    setRememberMe(e.target.checked);
   };
 
   return (
     <>
-      <AuthenticationHeader />
       <div className="login-content-info">
         <div className="container">
           <div className="row justify-content-center">
@@ -57,13 +91,13 @@ const LoginEmail = () => {
                 </div>
                 <div className="account-info">
                   <div className="login-back">
-                    <Link to="/index-2">
-                      <i className="fas fa-arrow-left-long" /> Back
+                    <Link to="/index-6">
+                      <i className="fas fa-arrow-left-long" /> Kembali
                     </Link>
                   </div>
                   <div className="login-title">
                     <h3>Sign in</h3>
-                    <p>Well send a confirmation code to your email.</p>
+                    <p>Bismillah.</p>
                   </div>
                   {error && <p className="error-message">{error}</p>}
                   <form onSubmit={handleLogin}>
@@ -82,7 +116,7 @@ const LoginEmail = () => {
                       <div className="form-group-flex">
                         <label>Password</label>
                         <Link to="/pages/forgot-password" className="forgot-link">
-                          Forgot password?
+                          Lupa password?
                         </Link>
                       </div>
                       <div className="pass-group">
@@ -111,8 +145,13 @@ const LoginEmail = () => {
                     <div className="form-group form-check-box">
                       <div className="form-group-flex">
                         <label className="custom_check d-inline-flex">
-                          Remember Me
-                          <input type="checkbox" name="login" />
+                          Ingat saya
+                          <input 
+                            type="checkbox" 
+                            name="login" 
+                            checked={rememberMe}
+                            onChange={handleRememberMeChange}
+                          />
                           <span className="checkmark" />
                         </label>
                       </div>
@@ -128,12 +167,12 @@ const LoginEmail = () => {
                     </div>
                     <div className="social-login -btn">
                       <button type="button" className="btn btn-block" onClick={handleGoogleLogin}>
-                        <img src={googleicon} alt="" /> Log in with Google
+                        <img src={googleicon} alt="" /> Log in dengan Google
                       </button>
                     </div>
                     <div className="account-signup">
                       <p>
-                        Dont have an account? <Link to="/signup">Sign up</Link>
+                        Belum punya akun? <Link to="/signup">Sign up</Link>
                       </p>
                     </div>
                   </form>
@@ -143,8 +182,9 @@ const LoginEmail = () => {
           </div>
         </div>
       </div>
+      <ToastContainer /> {/* Toast container to display notifications */}
     </>
   );
 };
 
-export default LoginEmail;
+export default LoginTitianBakat;

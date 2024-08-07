@@ -40,7 +40,7 @@ import DataTables from "./components/datatables";
 import BasicTables from "./components/basictables";
 import ProductCategories from "./components/productlist/ProductCategories";
 
-import { Appcontext } from "../approuter";
+import AuthContext from "../AuthContext"; // Import AuthContext
 import InvoiceReportList from "./components/Reports/InvoiceReport/InvoiceReportList";
 
 const AppUniversal = function (props) {
@@ -48,7 +48,7 @@ const AppUniversal = function (props) {
   const toggleMobileMenu = () => {
     setMenu(!menu);
   };
-  const { isAuth, setIsAuth } = useContext(Appcontext);
+  const { isAuth, setIsAuth } = useContext(AuthContext);
 
   const location = props?.location;
 

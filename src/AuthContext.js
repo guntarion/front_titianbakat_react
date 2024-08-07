@@ -1,21 +1,50 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types'; // Import PropTypes
+import { auth, db } from './firebase'; // Adjust the path as necessary
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 
-// Create the context
 const AuthContext = createContext();
 
-// Create a custom hook to use the AuthContext
 export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-// Create a provider component
 export const AuthProvider = ({ children }) => {
-  const [isAuth, setIsAuth] = useState("user"); // default value for isAuth, it could be "admin" or "user"
-  const [role, setRole] = useState(""); // add role state
+  const [user, setUser] = useState(null);
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    const fetchUserRole = async (uid) => {
+      try {
+        const userDoc = await getDoc(doc(db, "users", uid));
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setRole(userData.role || 'user');
+        } else {
+          setRole(null);
+        }
+      } catch (error) {
+        console.error('Error fetching user role:', error);
+        setRole(null);
+      }
+    };
+
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        fetchUserRole(currentUser.uid);
+      } else {
+        setUser(null);
+        setRole(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuth, setIsAuth, role, setRole }}>
+    <AuthContext.Provider value={{ user, role, setUser, setRole }}>
       {children}
     </AuthContext.Provider>
   );
@@ -24,3 +53,5 @@ export const AuthProvider = ({ children }) => {
 AuthProvider.propTypes = {
   children: PropTypes.node // Add prop types validation for the children prop
 };
+
+export default AuthContext;

@@ -8,6 +8,7 @@ import {
   eye_icon,
   hospital,
 } from "../../imagepath";
+// eslint-disable-next-line no-unused-vars
 import { Link } from "react-router-dom";
 
 function CenterSectionHome6() {
@@ -27,8 +28,8 @@ function CenterSectionHome6() {
                     <i className="fa-solid fa-headphones" />
                   </span>
                   <div>
-                    <h6>24/7 Service</h6>
-                    <p>We are available when you want</p>
+                    <h6>WhatsApp Support</h6>
+                    <p>We provide you with 24/7 support</p>
                   </div>
                 </div>
               </div>
@@ -38,21 +39,15 @@ function CenterSectionHome6() {
                 <div className="section-heading sec-heading-eye">
                   <img src={eye_icon} alt="" className="img-fluid" />
                   <h2>
-                    <span>Who</span> We Are
+                    Discover Your <span>TRUE</span> Potential
                   </h2>
-                  <p>The Great Place Of Eyecare Hospital Center</p>
+                  <p>Welcome to the Ultimate Talent Management Platform</p>
                 </div>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries
+                Unlock the secrets of your personality, latent talents, and potential career paths with our state-of-the-art assessment tools. Our platform offers a holistic approach to understanding both the nurture (result of upbringing) and nature (inherent traits) aspects of your abilities.
                 </p>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard
+                Understand how your upbringing has shaped you and uncover your inherent talents with our dual approach. We combine traditional assessments with cutting-edge fingerprint analysis to provide a comprehensive view of your abilities.
                 </p>
               </div>
               <div className="row">
@@ -61,11 +56,11 @@ function CenterSectionHome6() {
                     <span>
                       <img src={doc_01} alt="" className="img-fluid" />
                     </span>
-                    <h6>Expert Professionals and World Class Facilities</h6>
-                    <Link to="/patient/search-doctor2">
+                    <h6>Comprehensive Personality Assessments</h6>
+                    {/* <Link to="/patient/search-doctor2">
                       Find Doctors
                       <i className="fa-solid fa-chevron-right" />
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
                 <div className="col-md-4">
@@ -73,11 +68,11 @@ function CenterSectionHome6() {
                     <span>
                       <img src={doc_02} alt="" className="img-fluid" />
                     </span>
-                    <h6>Specialty Eyecare treatment for all</h6>
-                    <Link to="/patient/booking1">
+                    <h6>Nurture vs. Nature Analysis</h6>
+                    {/* <Link to="/patient/booking1">
                       Book Now
                       <i className="fa-solid fa-chevron-right" />
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
                 <div className="col-md-4">
@@ -85,11 +80,11 @@ function CenterSectionHome6() {
                     <span>
                       <img src={doc_03} alt="" className="img-fluid" />
                     </span>
-                    <h6>Online Appointment and Excellent Treatment</h6>
-                    <Link to="/patient/booking2">
+                    <h6>Supported with AI to customize your development path</h6>
+                    {/* <Link to="/patient/booking2">
                       Make an Appointment
                       <i className="fa-solid fa-chevron-right" />
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               </div>

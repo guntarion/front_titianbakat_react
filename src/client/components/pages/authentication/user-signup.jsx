@@ -1,3 +1,4 @@
+// src/client/components/pages/authentication/user-signup.jsx
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { shape01, shape02 } from "./img";
@@ -6,6 +7,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import axios from "axios"; // Import axios
 import { auth } from "../../../../firebase.js";
 
 const UserSignup = () => {
@@ -15,21 +17,38 @@ const UserSignup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false); // State for the checkbox
+  const [error, setError] = useState(""); // State for error messages
   const history = useHistory();
 
   const handleUserSignup = async (event) => {
     event.preventDefault();
 
+    if (!termsAccepted) {
+      setError("Please accept the Terms of Service and Privacy Policy.");
+      return;
+    }
+
     try {
+      // Check MongoDB for existing user
+      const response = await axios.post("http://localhost:8000/api/users/", {
+        namaLengkap: fullName,
+        namaPanggilan: nickName,
+        alamatEmail: email,
+        nomerWhatsapp: phone,
+        role: "user"
+      });
+
+      const mongoUserId = response.data.id;
+
+      // If user is successfully created in MongoDB, proceed to Firebase
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
       const db = getFirestore();
       await setDoc(doc(db, "users", user.uid), {
         email,
-        namaLengkap: fullName,
-        namaPanggilan: nickName,
-        nomorWhatsApp: phone,
+        mongoUserId, // Store MongoDB ID in Firestore
         role: "user"
       });
 
@@ -37,6 +56,7 @@ const UserSignup = () => {
       history.push("/index-6"); // Redirect to the home page or any other page after successful signup
     } catch (error) {
       console.error("Error creating user:", error);
+      setError("An error occurred during signup. Please try again.");
     }
   };
 
@@ -62,13 +82,13 @@ const UserSignup = () => {
                       <fieldset id="first" className={`${tab === true ? "d-block" : "d-none"}`}>
                         <div className="login-back">
                           <Link to="/index-6">
-                            <i className="fa-solid fa-arrow-left-long" /> Back
+                            <i className="fa-solid fa-arrow-left-long" /> Kembali
                           </Link>
                         </div>
                         <div className="login-title">
                           <h3>User Signup</h3>
                           <p className="mb-0">
-                            Welcome back! Please enter your details.
+                            Selamat Datang! Silahkan inputkan informasi Anda.
                           </p>
                         </div>
                         
@@ -104,7 +124,7 @@ const UserSignup = () => {
                             />
                           </div>
                           <div className="form-group d-flex" style={{ flexDirection: "column" }}>
-                            <label>Nomor WhatsApp</label>
+                            <label>Nomer WhatsApp</label>
                             <PhoneInput
                               containerClassName="intl-tel-input"
                               inputClassName="form-control form-control-lg group_formcontrol form-control-phone"
@@ -131,14 +151,20 @@ const UserSignup = () => {
                           <div className="form-group form-check-box terms-check-box">
                             <div className="form-group-flex">
                               <label className="custom_check">
-                                I have read and agree to Doccure’s{" "}
-                                <Link to="#">Terms of Service</Link> and{" "}
+                                Saya telah membaca dan bersepakat dengan {" "}
+                                <Link to="#">Terms of Service</Link> dan{" "}
                                 <Link to="#">Privacy Policy.</Link>
-                                <input type="checkbox" name="Terms" />
+                                <input 
+                                  type="checkbox" 
+                                  name="Terms" 
+                                  checked={termsAccepted}
+                                  onChange={(e) => setTermsAccepted(e.target.checked)}
+                                />
                                 <span className="checkmark" />
                               </label>
                             </div>
                           </div>
+                          {error && <div className="alert alert-danger">{error}</div>}
                           <div className="form-group">
                             <button className="btn btn-block" type="submit">
                               Register Now
@@ -159,3 +185,4 @@ const UserSignup = () => {
 };
 
 export default UserSignup;
+

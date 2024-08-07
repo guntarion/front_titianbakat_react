@@ -48,8 +48,7 @@ const Footer = (props) => {
                       </div>
                       <div className="footer-about-content">
                         <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore.
+                        Be the Best You Can Be! Embark on a journey of self-discovery and growth, unlocking your true potential and striving to be the best you can be every single day.
                         </p>
                       </div>
                     </div>
@@ -153,12 +152,12 @@ const Footer = (props) => {
                       <div className="copyright-text">
                         <p className="mb-0">
                           {" "}
-                          Copyright © 2023{" "}
+                          Copyright © 2024{" "}
                           <Link
-                            to="https://themeforest.net/user/dreamguys/portfolio"
+                            to="https://www.titianbakat.com/"
                             target="_blank"
                           >
-                            Dreamguys.
+                            Titian Bakat
                           </Link>{" "}
                           All Rights Reserved
                         </p>

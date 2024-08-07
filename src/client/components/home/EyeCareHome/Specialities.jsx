@@ -57,9 +57,9 @@ function SpecialtiesHome6() {
             <div className="section-heading sec-heading-eye text-center">
               <img src={eye_icon} alt="" className="img-fluid" />
               <h2>
-                <span>Our</span> Specialties
+                Asesmen <span>Bakat</span> Anda
               </h2>
-              <p>The Great Place Of Eyecare Hospital Center</p>
+              <p>Menemukan berlian di dalam diri Anda</p>
             </div>
           </div>
         </div>
@@ -71,24 +71,25 @@ function SpecialtiesHome6() {
                 <div className="item">
                   <div className="special-item">
                     <div className="special-img">
-                      <Link to="/consultation">
+                      <Link to="/asesmen/occupational-themes">
                         <img src={clinic_012} alt="" className="img-fluid" />
                       </Link>
                     </div>
                     <div className="special-icon">
-                      <Link to="/consultation">
+                      <Link to="/asesmen/occupational-themes">
                         <i className="fa-solid fa-circle-chevron-right" />
                       </Link>
                     </div>
                     <h6>
-                      <Link to="/consultation">Corneal Ulcer </Link>
+                      <Link to="/asesmen/occupational-themes">Occupational Themes </Link>
                     </h6>
                   </div>
                 </div>
+
                 <div className="item">
                   <div className="special-item">
                     <div className="special-img">
-                      <Link to="/consultation">
+                      <Link to="/asesmen/multiple-intelligences">
                         <img
                           // src="assets/img/clinic/clinic-03.png"
                           src={clinic_013}
@@ -98,12 +99,12 @@ function SpecialtiesHome6() {
                       </Link>
                     </div>
                     <div className="special-icon">
-                      <Link to="/consultation">
+                      <Link to="/asesmen/multiple-intelligences">
                         <i className="fa-solid fa-circle-chevron-right" />
                       </Link>
                     </div>
                     <h6>
-                      <Link to="/consultation">Keratoconus</Link>
+                      <Link to="/asesmen/multiple-intelligences">Multiple Intelligences</Link>
                     </h6>
                   </div>
                 </div>
@@ -125,7 +126,7 @@ function SpecialtiesHome6() {
                       </Link>
                     </div>
                     <h6>
-                      <Link to="/consultation">Glaucoma</Link>
+                      <Link to="/consultation">Learning Styles</Link>
                     </h6>
                   </div>
                 </div>
@@ -147,7 +148,7 @@ function SpecialtiesHome6() {
                       </Link>
                     </div>
                     <h6>
-                      <Link to="/consultation">Keratoconus</Link>
+                      <Link to="/consultation">Personality Elements</Link>
                     </h6>
                   </div>
                 </div>

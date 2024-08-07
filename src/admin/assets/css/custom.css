@@ -2785,7 +2785,7 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 
 .line {
   background-color: #20c0f3;
-  height: 2px;
+  height: 12px;
   width: 60px;
   margin: 0;
 }
