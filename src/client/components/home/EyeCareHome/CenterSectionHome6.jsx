@@ -28,8 +28,8 @@ function CenterSectionHome6() {
                     <i className="fa-solid fa-headphones" />
                   </span>
                   <div>
-                    <h6>WhatsApp Support</h6>
-                    <p>We provide you with 24/7 support</p>
+                    <h6>Explore Your Talents!</h6>
+                    <p>Become the Best Version of Yourself</p>
                   </div>
                 </div>
               </div>

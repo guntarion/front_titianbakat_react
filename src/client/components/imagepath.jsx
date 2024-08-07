@@ -107,8 +107,8 @@ export { default as clinic_014 } from "../assets/images/clients/clinic-014.png";
 export { default as clinic_015 } from "../assets/images/clients/clinic-015.png";
 
 export { default as heart_bg } from "../assets/images/bg/heart-bg.png";
-export { default as health_care_1 } from "../assets/images/icons/health-care-1.png";
-export { default as heart_2 } from "../assets/images/icons/heart-2.svg";
+// export { default as health_care_1 } from "../assets/images/icons/health-care-1.png";
+// export { default as heart_2 } from "../assets/images/icons/heart-2.svg";
 export { default as healthcare } from "../assets/images/bg/health-care.png";
 export { default as healthcarelove } from "../assets/images/icons/health-care-love.svg";
 export { default as userdoctor } from "../assets/images/icons/user-doctor.svg";
@@ -210,7 +210,7 @@ export { default as add_circle } from "../assets/images/icons/add-circle.png";
 export { default as star } from "../assets/images/icons/star.svg";
 export { default as eye_icon_01 } from "../assets/images/icons/eye-icon-01.svg";
 export { default as eye_icon } from "../assets/images/icons/eye-icon.svg";
-export { default as ban_six_icon1 } from "../assets/images/icons/ban-six-icon1.svg";
+// export { default as ban_six_icon1 } from "../assets/images/icons/ban-six-icon1.svg";
 export { default as ban_six_icon3 } from "../assets/images/icons/ban-six-icon3.svg";
 export { default as ban_six_icon2 } from "../assets/images/icons/ban-six-icon2.svg";
 export { default as ban_six_icon4 } from "../assets/images/icons/ban-img-icon-4.svg";
@@ -444,13 +444,13 @@ export { default as feedback_fifteen } from "../assets/images/feedback-fifteen.p
 {
   /*client Home-10 ENT-hospitalhome contact*/
 }
-export { default as experience_4 } from "../assets/images/icons/experience-4.png";
-export { default as experience_1 } from "../assets/images/icons/experience-1.svg";
-export { default as experience_2 } from "../assets/images/icons/experience-2.svg";
-export { default as experience_3 } from "../assets/images/icons/experience-3.svg";
-export { default as experience_5 } from "../assets/images/icons/experience-5.png";
-export { default as experience_6 } from "../assets/images/icons/experience-6.png";
-export { default as appointment_ryt_1 } from "../assets/images/appointment-ryt-1.png";
+// export { default as experience_4 } from "../assets/images/icons/experience-4.png";
+// export { default as experience_1 } from "../assets/images/icons/experience-1.svg";
+// export { default as experience_2 } from "../assets/images/icons/experience-2.svg";
+// export { default as experience_3 } from "../assets/images/icons/experience-3.svg";
+// export { default as experience_5 } from "../assets/images/icons/experience-5.png";
+// export { default as experience_6 } from "../assets/images/icons/experience-6.png";
+// export { default as appointment_ryt_1 } from "../assets/images/appointment-ryt-1.png";
 {
   /*client Home-10 ENT-hospitalhome Patientaboutus*/
 }
@@ -666,10 +666,10 @@ export { default as tag_icon } from "../assets/images/icons/tag-icon.svg";
 export { default as admin_icon } from "../assets/images/icons/admin-icon.svg";
 export { default as comment_icon } from "../assets/images/icons/comment-icon.svg";
 export { default as pharmacy_app_bg } from "../assets/images/pharmacy-app-bg.png";
-export { default as payment_icon_01 } from "../assets/images/icons/payment-icon-01.svg";
-export { default as payment_icon_02 } from "../assets/images/icons/payment-icon-02.svg";
-export { default as payment_icon_03 } from "../assets/images/icons/payment-icon-03.svg";
-export { default as payment_icon_04 } from "../assets/images/icons/payment-icon-04.svg";
+// export { default as payment_icon_01 } from "../assets/images/icons/payment-icon-01.svg";
+// export { default as payment_icon_02 } from "../assets/images/icons/payment-icon-02.svg";
+// export { default as payment_icon_03 } from "../assets/images/icons/payment-icon-03.svg";
+// export { default as payment_icon_04 } from "../assets/images/icons/payment-icon-04.svg";
 
 export { default as app_icon_store } from "../assets/images/icons/app-store.svg";
 export { default as google_icon_play } from "../assets/images/icons/google-play.svg";

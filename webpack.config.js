@@ -7,12 +7,13 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const opn = require("opn"); // Import the 'opn' package
 
 const publicPath = "/"; // To run this file in local
 //  const publicPath = "/react/template/"; // To build the file
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: path.join(__dirname, "src", "index.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -23,6 +24,12 @@ module.exports = {
     onAfterSetupMiddleware() {
       opn(`http://localhost:${this.port}/index`);
     },
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all', // This can split all code chunks to separate files
+    },
+    runtimeChunk: 'single', // Extract runtime code into a separate chunk
   },
   // devServer: {
   //   static: {
@@ -137,9 +144,10 @@ module.exports = {
   ],
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("production"),
+      "process.env.NODE_ENV": JSON.stringify("development"),
     }),
     new webpack.HotModuleReplacementPlugin(),
+    // new BundleAnalyzerPlugin(),
 
     new HtmlWebpackPlugin({
       title: "Hot Module Replacement",

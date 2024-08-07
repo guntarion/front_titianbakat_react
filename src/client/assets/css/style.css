@@ -18895,7 +18895,7 @@ span.call-duration.float-end {
   }
 }
 .doctor-divison .doc-background {
-  background: url(../images/shapes/doctor-bg.jpg);
+  /* background: url(../images/shapes/doctor-bg.jpg); */
   background-position: center;
   min-height: 350px;
   background-size: cover;
@@ -18988,7 +18988,7 @@ span.call-duration.float-end {
   background: #ffffff;
 }
 .doctor-divison .pat-background {
-  background: url(../images/shapes/doctor-right-bg.jpg);
+  /* background: url(../images/shapes/doctor-right-bg.jpg); */
   background-position: center;
   min-height: 350px;
   background-size: cover;
@@ -19325,7 +19325,7 @@ span.call-duration.float-end {
 }
 
 .doctor-divison.provider-select .doc-background {
-  background: url(../images/shapes/doctor-bg.jpg);
+  /* background: url(../images/shapes/doctor-bg.jpg); */
   background-size: cover;
   padding: 60px 30px;
 }
@@ -19344,7 +19344,7 @@ span.call-duration.float-end {
   color: #4B4B4B;
 }
 .doctor-divison.provider-select .pat-background {
-  background: url(../images/shapes/doctor-right-bg.jpg);
+  /* background: url(../images/shapes/doctor-right-bg.jpg); */
   background-size: cover;
   padding: 60px 30px;
 }

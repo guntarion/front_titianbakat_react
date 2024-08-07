@@ -15,10 +15,10 @@ import {
   partners_7,
   partners_8,
   partners_9,
-  payment_icon_01,
-  payment_icon_02,
-  payment_icon_03,
-  payment_icon_04,
+  // payment_icon_01,
+  // payment_icon_02,
+  // payment_icon_03,
+  // payment_icon_04,
   product_19,
   product_20,
   product_21,
@@ -1451,22 +1451,22 @@ const PharmacyFeatured = () => {
                 <ul className="payment-methods d-flex align-items-center">
                   <li>
                     <Link to="#">
-                      <img src={payment_icon_01} alt="" />
+                      {/* <img src={payment_icon_01} alt="" /> */}
                     </Link>
                   </li>
                   <li>
                     <Link to="#">
-                      <img src={payment_icon_02} alt="" />
+                      {/* <img src={payment_icon_02} alt="" /> */}
                     </Link>
                   </li>
                   <li>
                     <Link to="#">
-                      <img src={payment_icon_03} alt="" />
+                      {/* <img src={payment_icon_03} alt="" /> */}
                     </Link>
                   </li>
                   <li>
                     <Link to="#">
-                      <img src={payment_icon_04} alt="" />
+                      {/* <img src={payment_icon_04} alt="" /> */}
                     </Link>
                   </li>
                 </ul>

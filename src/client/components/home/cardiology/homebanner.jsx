@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  health_care_1,
-  heart_2,
+  // heart_2,
   heart_bg,
   home5banner_img,
 } from "../../imagepath";
@@ -31,7 +30,7 @@ const Homebanner = () => {
             <div className="col-lg-7">
               <div className="banner-content aos" data-aos="fade-up">
                 <h6>
-                  <img src={heart_2} className="me-2" alt="#" />
+                  {/* <img src={heart_2} className="me-2" alt="#" /> */}
                   Every Beat, Every Moment
                 </h6>
                 <h1>
@@ -61,7 +60,7 @@ const Homebanner = () => {
               <div className="search-box-one search-ten aos" data-aos="fade-up">
                 <div className="search-title">
                   <h5>Book An Apppointment</h5>
-                  <img src={health_care_1} alt="#" />
+                  {/* <img src={health_care_1} alt="#" /> */}
                 </div>
                 <form action={`${config}/patient/search-doctor1`}>
                   <div className="row row-gap">

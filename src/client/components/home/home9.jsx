@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  ban_six_icon1,
+  // ban_six_icon1,
   ban_six_icon2,
   ban_six_icon3,
   ban_six_icon4,
@@ -108,7 +108,7 @@ function Home9(props) {
               >
                 <img src={banner_six_2} className="img-fluid" alt="" />
                 <div className="banner-img1 banner-imgfourteen">
-                  <img src={ban_six_icon1} className="img-fluid" alt="" />
+                  {/* <img src={ban_six_icon1} className="img-fluid" alt="" /> */}
                 </div>
                 <div className="banner-img2">
                   <img src={ban_six_icon3} className="img-fluid" alt="" />
