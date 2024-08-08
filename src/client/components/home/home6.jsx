@@ -52,7 +52,7 @@ const Home6 = (props) => {
                   Temukan Bakatmu
                 </Link>
               </div>
-              <div className="banner-users">
+              {/* <div className="banner-users">
                 <h6>
                   <img src={star} alt="img" />
                   4.8 Well Experienced
@@ -77,7 +77,7 @@ const Home6 = (props) => {
                     <img src={doctor_18} alt="img" />
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </div>
             <div className="col-lg-6 aos" data-aos="fade-up">
               <img src={banner_11} className="img-fluid dr-img" alt="" />
@@ -92,15 +92,15 @@ const Home6 = (props) => {
       </section>
       <SpecialtiesHome6 />
       <CenterSectionHome6 />
-      <CounterSectionHome6 />
+      {/* <CounterSectionHome6 /> */}
       {/* <ClinicSectionHome6 /> */}
       {/* <StoreSectionHome6 /> */}
       {/* <UserOffer /> */}
-      <FacilitiesSectionHome6 />
-      <BlogSectionHome6 />
+      {/* <FacilitiesSectionHome6 /> */}
+      {/* <BlogSectionHome6 /> */}
       {/* <TestimonialsHome6 /> */}
       {/* <AppointmentHome6 /> */}
-      <FaqHome6 />
+      {/* <FaqHome6 /> */}
       <FooterHome6 />
       <ProgressCircle />
     </>

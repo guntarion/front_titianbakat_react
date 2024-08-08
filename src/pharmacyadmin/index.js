@@ -1,5 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+// import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom"
 
 import App from "./App";
 
@@ -24,11 +25,13 @@ import { $, jQuery } from "jquery";
 // export for others scripts to use
 window.$ = $;
 window.jQuery = jQuery;
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+const rootElement = document.getElementById("root");
+// eslint-disable-next-line react/no-deprecated
+ReactDOM.render(
   <>
-  <App />
-  </>
+    <App />
+  </>,
+  rootElement  // Directly pass rootElement to ReactDOM.render
 );
 // ReactDOM.render(
 //   <React.StrictMode>

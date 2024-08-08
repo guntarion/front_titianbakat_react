@@ -1,7 +1,7 @@
 // src/index.js
 
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";  // Changed from react-dom/client to react-dom
 import AppRouter from "./approuter";
 import { AuthProvider } from "./AuthContext"; // Import AuthProvider
 import "./client/assets/css/bootstrap.min.css";
@@ -33,9 +33,11 @@ if (window.location.pathname.includes("pharmacyadmin")) {
   require("../src/client/components/customstyleclient.css");
 }
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+const rootElement = document.getElementById("root");
+// eslint-disable-next-line react/no-deprecated
+ReactDOM.render(
   <AuthProvider>
     <AppRouter />
-  </AuthProvider>
+  </AuthProvider>,
+  rootElement  // Directly pass rootElement to ReactDOM.render
 );

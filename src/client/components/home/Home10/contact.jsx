@@ -4,12 +4,8 @@ import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {
-  appointment_ryt_1,
-  experience_1,
-  experience_2,
-  experience_3,
-  experience_5,
-  experience_6,
+  // appointment_ryt_1,
+  // experience_6,
 } from "../../imagepath";
 const Contact = () => {
   //Aos
@@ -41,27 +37,27 @@ const Contact = () => {
                 <ul>
                   <li>
                     <div className="appointment-schedule-img">
-                      <img src={experience_2} alt="" />
+                      {/* <img src={experience_2} alt="" /> */}
                       <div className="appoint-inner-img">
-                        <img src={experience_3} />
+                        {/* <img src={experience_3} /> */}
                       </div>
                     </div>
                     <span>Find Experience Doctors</span>
                   </li>
                   <li>
                     <div className="appointment-schedule-img">
-                      <img src={experience_5} alt="" />
+                      {/* <img src={experience_5} alt="" /> */}
                       <div className="appoint-inner-img">
-                        <img src={experience_1} alt="" />
+                        {/* <img src={experience_1} alt="" /> */}
                       </div>
                     </div>
                     <span>Share your Health Issues</span>
                   </li>
                   <li>
                     <div className="appointment-schedule-img">
-                      <img src={experience_6} alt="" />
+                      {/* <img src={experience_6} alt="" /> */}
                       <div className="appoint-inner-img">
-                        <img src={experience_2} alt="" />
+                        {/* <img src={experience_2} alt="" /> */}
                       </div>
                     </div>
                     <span>Get solution about health</span>
@@ -72,7 +68,7 @@ const Contact = () => {
             </div>
             <div className="col-lg-5">
               <div className="appointment-right-image appoint-fift-img">
-                <img src={appointment_ryt_1} alt="" className="img-fluid" />
+                {/* <img src={appointment_ryt_1} alt="" className="img-fluid" /> */}
               </div>
             </div>
           </div>

@@ -387,7 +387,7 @@
         }
     }
     .doc-background {
-        background: url(../images/shapes/doctor-bg.jpg);
+        // background: url(../images/shapes/doctor-bg.jpg);
         background-position: $__center;
         min-height: 350px;
         background-size: $__cover;
@@ -756,7 +756,7 @@
 .doctor-divison {
     &.provider-select {
         .doc-background {
-            background: url(../images/shapes/doctor-bg.jpg);
+            // background: url(../images/shapes/doctor-bg.jpg);
             background-size: $__cover;
             padding: 60px 30px;
             &::before {
@@ -773,7 +773,7 @@
             }
         }
         .pat-background {
-            background: url(../images/shapes/doctor-right-bg.jpg);
+            // background: url(../images/shapes/doctor-right-bg.jpg);
             background-size: $__cover;
             padding: 60px 30px;
             &::before {

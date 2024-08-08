@@ -16889,7 +16889,7 @@ span.call-duration.float-end {
   }
 }
 .patient-select .select-box {
-  background: url(../img/slider/doctor-bg.jpg);
+  /* background: url(../img/slider/doctor-bg.jpg); */
   border-radius: 60px 10px 10px 60px;
   border: 5px solid rgba(255, 255, 255, 0.8);
   padding: 30px;
@@ -18200,7 +18200,7 @@ span.call-duration.float-end {
   }
 }
 .doctor-divison .doc-background {
-  background: url(../img/shapes/doctor-bg.jpg);
+  /* background: url(../img/shapes/doctor-bg.jpg); */
   background-position: center;
   min-height: 350px;
   background-size: cover;
@@ -18293,7 +18293,7 @@ span.call-duration.float-end {
   background-color: #0E82FD;
 }
 .doctor-divison .pat-background {
-  background: url(../img/shapes/doctor-right-bg.jpg);
+  /* background: url(../img/shapes/doctor-right-bg.jpg); */
   background-position: center;
   min-height: 350px;
   background-size: cover;
@@ -18941,7 +18941,7 @@ span.call-duration.float-end {
 }
 
 .doctor-divison.provider-select .doc-background {
-  background: url(../img/shapes/doctor-bg.jpg);
+  /* background: url(../img/shapes/doctor-bg.jpg); */
   background-size: cover;
   padding: 60px 30px;
 }
@@ -18960,7 +18960,7 @@ span.call-duration.float-end {
   color: #4B4B4B;
 }
 .doctor-divison.provider-select .pat-background {
-  background: url(../img/shapes/doctor-right-bg.jpg);
+  /* background: url(../img/shapes/doctor-right-bg.jpg); */
   background-size: cover;
   padding: 60px 30px;
 }
