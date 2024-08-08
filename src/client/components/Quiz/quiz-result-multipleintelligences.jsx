@@ -52,31 +52,33 @@ type_naturalis: {
 const interpolateScore = (score) => ((score + 30) / 60) * 100;
 
 const QuizResult_MultipleIntelligences = ({ totalscores }) => {
-  const highestScoreType = Object.keys(totalscores).reduce((a, b) => (totalscores[a] > totalscores[b] ? a : b));
+  const sortedScores = Object.entries(totalscores)
+    .sort(([, a], [, b]) => interpolateScore(b) - interpolateScore(a))
+    .slice(0, 3);
+
+  const [highestScoreType] = sortedScores[0];
 
   return (
     <div className="quiz-result-container">
       <h2>Quiz Results</h2>
-      <p>Visual-Spatial: {interpolateScore(totalscores.type_spasial).toFixed(2)}</p>
-      <p>Logical-Mathematical: {interpolateScore(totalscores.type_logika).toFixed(2)}</p>
-      <p>Verbal-Linguistic: {interpolateScore(totalscores.type_linguistik).toFixed(2)}</p>
-      <p>Musical: {interpolateScore(totalscores.type_musikal).toFixed(2)}</p>
-      <p>Bodily-Kinesthetic: {interpolateScore(totalscores.type_kinestetik).toFixed(2)}</p>
-      <p>Interpersonal: {interpolateScore(totalscores.type_interpersonal).toFixed(2)}</p>
-      <p>Intrapersonal: {interpolateScore(totalscores.type_intrapersonal).toFixed(2)}</p>
-      <p>Naturalistic: {interpolateScore(totalscores.type_naturalis).toFixed(2)}</p>
-    
-    <div className="result-item">
-      <img src={karakteristik[highestScoreType].img} className="img-fluid" alt="#" />
-      <Chart_MultipleIntelligences totalscores={totalscores} />
-      <h3>{highestScoreType.replace('type_', '').replace('_', ' ')}</h3>
-      <p>{karakteristik[highestScoreType].text}</p>
+      
+      <div className="row">
+        <div className="col-md-6">
+          <img src={karakteristik[highestScoreType].img} className="img-fluid" alt="#" />
+        </div>
+        <div className="col-md-6">
+          <Chart_MultipleIntelligences totalscores={totalscores} />
+        </div>
+      </div>
+      
+      {sortedScores.map(([type, score], index) => (
+        <div key={type} className="result-item mt-4">
+          <h3>{index + 1}. {type.replace('type_', '').replace('_', ' ')}</h3>
+          <p><strong>Score:</strong> {interpolateScore(score).toFixed(2)}</p>
+          <p>{karakteristik[type].text}</p>
+        </div>
+      ))}
     </div>
-    
-    
-    </div>
-
-    
   );
 };
 

@@ -8,14 +8,14 @@ export { default as img_riasec_investigative } from "../assets/images/quiz/riase
 export { default as img_riasec_social } from "../assets/images/quiz/riasec_social.png";
 export { default as img_riasec_opening } from "../assets/images/quiz/riasec_opening.jpg";
 export { default as img_mi_opening } from "../assets/images/quiz/mi_opening.jpg";
-export { default as img_mi_spasial } from "../assets/images/quiz/mi_Visual.png";
-export { default as img_mi_interpersonal } from "../assets/images/quiz/mi_Inter.png";
-export { default as img_mi_intrapersonal } from "../assets/images/quiz/mi_Intra.png";
-export { default as img_mi_kinestetik } from "../assets/images/quiz/mi_Kinesthetic.png";
-export { default as img_mi_linguistik } from "../assets/images/quiz/mi_Linguistic.png";
-export { default as img_mi_logika } from "../assets/images/quiz/mi_Math.png";
-export { default as img_mi_musikal } from "../assets/images/quiz/mi_Musical.png";
-export { default as img_mi_naturalis } from "../assets/images/quiz/mi_Naturalist.png";
+export { default as img_mi_spasial } from "../assets/images/quiz/mi_spatial.jpg";
+export { default as img_mi_interpersonal } from "../assets/images/quiz/mi_interpersonal.jpg";
+export { default as img_mi_intrapersonal } from "../assets/images/quiz/mi_intrapersonal.jpg";
+export { default as img_mi_kinestetik } from "../assets/images/quiz/mi_kinesthetic.jpg";
+export { default as img_mi_linguistik } from "../assets/images/quiz/mi_linguistic.jpg";
+export { default as img_mi_logika } from "../assets/images/quiz/mi_logics.jpg";
+export { default as img_mi_musikal } from "../assets/images/quiz/mi_musical.jpg";
+export { default as img_mi_naturalis } from "../assets/images/quiz/mi_naturalist.jpg";
 
 
 export { default as doctorthumb02 } from "../assets/images/doctors/doctor-thumb-02.jpg";
