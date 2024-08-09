@@ -185,7 +185,7 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
           className="mt-3 answer-input"
         />
       </div>
-      <p style={{ textAlign: "center" }}>{currentQuestionIndex + 1} of {quizData.statements.length} questions completed.</p>
+      <p style={{ textAlign: "center" }}>{currentQuestionIndex + 1} dari {quizData.statements.length} pertanyaan terlampaui.</p>
     </div>
   );
 };

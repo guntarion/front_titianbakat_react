@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
-import { logo_03 } from "../../imagepath";
+import { logo } from "../../imagepath";
 // import { FiClock, FiMail, FiPhone } from "react-icons/fi";
 import { Link } from "react-router-dom";
 // import FeatherIcon from "feather-icons-react/build/FeatherIcon";
@@ -78,8 +78,8 @@ function FooterHome6() {
                 </div>
                 <div className="col-md-2">
                   <div className="footer-bottom-logo">
-                    <Link to="/index-10">
-                      <img src={logo_03} className="img-fluid" alt="Logo" />
+                    <Link to="/index-6">
+                      <img src={logo} className="img-fluid" alt="Logo" />
                     </Link>
                   </div>
                 </div>
@@ -88,10 +88,7 @@ function FooterHome6() {
                   <div className="copyright-menu">
                     <ul className="policy-menu">
                       <li>
-                        <Link to="/privacy-policy">Privacy Policy</Link>
-                      </li>
-                      <li>
-                        <Link to="/terms-condition">Terms and Conditions</Link>
+                        <Link to="/terms-privacy-policy">Terms & Privacy Policy</Link>
                       </li>
                     </ul>
                   </div>

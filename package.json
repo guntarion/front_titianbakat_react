@@ -1,6 +1,8 @@
 {
-  "name": "my-app",
+  "name": "titianbakat-app",
   "version": "1.0.0",
+  "private": true,
+  "homepage": "https://titianbakat.com",
   "scripts": {
     "start": "webpack-dev-server",
     "dev": "webpack serve",

@@ -46,8 +46,8 @@ const Home6 = (props) => {
           <div className="row align-items-center">
             <div className="col-lg-6 aos" data-aos="fade-up">
               <div className="banner-header">
-                <p>Explore and Nurture your Talents</p>
-                <h1>Become the best version of yourself</h1>
+                <p>For a Brighter Today and Tomorrow</p>
+                <h1>Orchestrating Natural and Nurtured Talents</h1>
                 <Link to="/patient/booking1" className="btn btn-light-blue">
                   Temukan Bakatmu
                 </Link>

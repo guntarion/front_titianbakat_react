@@ -78,6 +78,7 @@ import EditBilling from "./client/components/doctors/editbilling/index";
 
 import Terms from "./client/components/pages/terms";
 import Policy from "./client/components/pages/policy";
+import TermsPrivasiPolicy from "./client/components/pages/termsprivacypolicy";
 import Aboutus from "./client/components/pages/aboutus/aboutus";
 import Contactus from "./client/components/pages/contactus/contactus";
 import Patientregisterstepone from "./client/components/register/patientregisterstepone";
@@ -389,6 +390,7 @@ const AppContainer = function (props) {
               
               <Route path="/pages/terms" exact component={Terms} />
               <Route path="/pages/privacy-policy" exact component={Policy} />
+              <Route path="/terms-privacy-policy" exact component={TermsPrivasiPolicy} />
 
               {/* Pharmacy */}
               

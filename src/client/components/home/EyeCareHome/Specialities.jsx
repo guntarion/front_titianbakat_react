@@ -57,9 +57,9 @@ function SpecialtiesHome6() {
             <div className="section-heading sec-heading-eye text-center">
               <img src={eye_icon} alt="" className="img-fluid" />
               <h2>
-                Asesmen <span>Bakat</span> Anda
+                Eksplorasi Bakat dan Tendensi Anda secara <span>GRATIS!</span>
               </h2>
-              <p>Menemukan berlian di dalam diri Anda</p>
+              <p>Kumpulkan Poin untuk meng-unlock asesmen</p>
             </div>
           </div>
         </div>
@@ -111,7 +111,7 @@ function SpecialtiesHome6() {
                 <div className="item">
                   <div className="special-item">
                     <div className="special-img">
-                      <Link to="/consultation">
+                      <Link to="/index-6">
                         <img
                           // src="assets/img/clinic/clinic-01.png"
                           src={clinic_011}
@@ -121,19 +121,19 @@ function SpecialtiesHome6() {
                       </Link>
                     </div>
                     <div className="special-icon">
-                      <Link to="/consultation">
+                      <Link to="/index-6">
                         <i className="fa-solid fa-circle-chevron-right" />
                       </Link>
                     </div>
                     <h6>
-                      <Link to="/consultation">Learning Styles</Link>
+                      <Link to="/index-6">Learning Styles</Link>
                     </h6>
                   </div>
                 </div>
                 <div className="item">
                   <div className="special-item">
                     <div className="special-img">
-                      <Link to="/consultation">
+                      <Link to="/index-6">
                         <img
                           // src="assets/img/clinic/clinic-05.png"
                           src={clinic_015}
@@ -143,12 +143,12 @@ function SpecialtiesHome6() {
                       </Link>
                     </div>
                     <div className="special-icon">
-                      <Link to="/consultation">
+                      <Link to="/index-6">
                         <i className="fa-solid fa-circle-chevron-right" />
                       </Link>
                     </div>
                     <h6>
-                      <Link to="/consultation">Personality Elements</Link>
+                      <Link to="/index-6">Personality Elements</Link>
                     </h6>
                   </div>
                 </div>

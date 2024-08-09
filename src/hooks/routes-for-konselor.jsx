@@ -4,6 +4,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import DoctorChat from "../client/components/doctors/chat";
+import Policy from "../client/components/pages/policy";
 import MyPatient from "../client/components/doctors/mypatient";
 import DoctorDashboard from "../client/components/doctors/dashboard";
 import SocialMedia from "../client/components/doctors/socialmedia";
@@ -53,6 +54,7 @@ const RoutesForKonselor = () => {
       <Route path="/konselor/editbilling" exact component={EditBilling} />
       <Route path="/asesmen/occupational-themes" exact component={OccupationalThemeAssessment} />
       <Route path="/asesmen/multiple-intelligences" exact component={MultipleIntelligencesAssessment} />
+      <Route path="/pages/privacy-policy" exact component={Policy} />
       {/* Add other konselor routes here */}
     </Switch>
   );

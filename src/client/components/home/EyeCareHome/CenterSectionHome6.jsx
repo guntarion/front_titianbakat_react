@@ -80,7 +80,7 @@ function CenterSectionHome6() {
                     <span>
                       <img src={doc_03} alt="" className="img-fluid" />
                     </span>
-                    <h6>Supported with AI to customize your development path</h6>
+                    <h6>Supported with Actionable Follow Ups</h6>
                     {/* <Link to="/patient/booking2">
                       Make an Appointment
                       <i className="fa-solid fa-chevron-right" />
