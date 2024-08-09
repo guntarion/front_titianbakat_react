@@ -97,7 +97,7 @@ const LoginTitianBakat = () => {
                   </div>
                   <div className="login-title">
                     <h3>Sign in</h3>
-                    <p>Bismillah.</p>
+                    <p>Silahkan gunakan email dan password Anda, atau gunakan akun Google.</p>
                   </div>
                   {error && <p className="error-message">{error}</p>}
                   <form onSubmit={handleLogin}>
@@ -106,7 +106,7 @@ const LoginTitianBakat = () => {
                       <input
                         type="email"
                         className="form-control"
-                        placeholder="example@email.com"
+                        placeholder="email_anda@gmail.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required

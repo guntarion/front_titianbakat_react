@@ -1,29 +1,24 @@
 // src/approuter.jsx
 import React, { useContext, useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Redirect, Switch, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import config from 'config';
 import AuthContext from "./AuthContext";
-import AppContainer from "./appcontainer.jsx";
+// import AppContainer from "./appcontainer.jsx";
 import RoutesForAdmin from "./hooks/routes-for-admin.jsx";
 import RoutesForKonselor from "./hooks/routes-for-konselor.jsx";
 import RoutesForUser from "./hooks/routes-for-user.jsx";
 import ProtectedRoute from "./ProtectedRoute";
+import Home6 from "./client/components/home/home6.jsx";
 import LoginEmail from "./client/components/pages/authentication/login-titianbakat";
 
 const AppRouter = () => {
-  // eslint-disable-next-line no-unused-vars
-  const { user, role } = useContext(AuthContext); // Use user and role from context
-  const history = useHistory();
+  const { user } = useContext(AuthContext);
+  // const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (user) {
-      history.push('/index-6');
-    } else {
-      history.push('/login-titian-bakat');
-    }
     setIsLoading(false);
-  }, [user, history]);
+  }, [user]);
 
   if (isLoading) {
     return <div>Loading...</div>; // Show a loading indicator while checking authentication
@@ -31,12 +26,14 @@ const AppRouter = () => {
 
   return (
     <Switch>
-      <Route exact path="/index-6" render={(props) => <AppContainer {...props} />} />
+      <Route exact path="/" component={Home6} />
+      <Route exact path="/index-6" component={Home6} />
+      {/* <Route exact path="/index-6" render={(props) => <AppContainer {...props} />} /> */}
       <Route exact path="/login-titian-bakat" component={LoginEmail} />
       <ProtectedRoute path="/admin" component={RoutesForAdmin} role="admin" />
       <ProtectedRoute path="/konselor" component={RoutesForKonselor} role="konselor" />
       <ProtectedRoute path="/user" component={RoutesForUser} role="user" />
-      <Redirect from="/" to="/index-6" />
+      <Route component={Home6} />
     </Switch>
   );
 };

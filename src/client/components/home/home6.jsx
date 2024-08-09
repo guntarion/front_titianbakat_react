@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from '../../../AuthContext';
 import {
   ban_bg_01,
   ban_bg_02,
@@ -33,6 +34,7 @@ import FaqHome6 from "./EyeCareHome/FaqHome6";
 // import UserOffer from "./EyeCareHome/UserOffer";
 
 const Home6 = (props) => {
+  const { user } = useAuth();
   useEffect(() => {
     AOS.init({ duration: 1200, once: true });
   }, []);

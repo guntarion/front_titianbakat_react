@@ -256,7 +256,7 @@ const handleLogout = async () => {
                       )}
                     </li>
                   )}
-                  <li className={`has-submenu ${pathnames.includes("/blog") ? "active" : ""}`}>
+                  {/* <li className={`has-submenu ${pathnames.includes("/blog") ? "active" : ""}`}>
                     <Link to="#" className={isSideMenu === "blog" ? "subdrop" : ""} onClick={() => toggleSidebar(isSideMenu === "blog" ? "" : "blog")}>
                       Blog <i className="fas fa-chevron-down" />
                     </Link>
@@ -276,7 +276,7 @@ const handleLogout = async () => {
                         </li>
                       </ul>
                     )}
-                  </li>
+                  </li> */}
                 </ul>
               </div>
               {user ? (
