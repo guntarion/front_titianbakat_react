@@ -8,6 +8,21 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../../../AuthContext";
 
+const translateFirebaseError = (errorCode) => {
+  switch (errorCode) {
+    case 'auth/invalid-credential':
+      return 'Email atau kata sandi salah. Silakan coba lagi.';
+    case 'auth/user-not-found':
+      return 'Akun tidak ditemukan. Silakan periksa email Anda atau daftar untuk membuat akun baru.';
+    case 'auth/wrong-password':
+      return 'Kata sandi salah. Silakan coba lagi.';
+    case 'auth/too-many-requests':
+      return 'Terlalu banyak percobaan gagal. Silakan coba lagi nanti.';
+    default:
+      return 'Terjadi kesalahan. Silakan coba lagi nanti.';
+  }
+};
+
 const LoginTitianBakat = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -44,11 +59,12 @@ const LoginTitianBakat = () => {
       } else {
         sessionStorage.setItem("user", JSON.stringify(userCredential.user));
       }
-      toast.success("Login successful!");
+      toast.success("Login berhasil!");
       history.push("/index-6"); // Redirect to home or another page after successful login
     } catch (err) {
-      setError(err.message);
-      toast.error(err.message);
+      const errorMessage = translateFirebaseError(err.code);
+      setError(errorMessage);
+      toast.error(errorMessage);
     }
   };
 
@@ -115,7 +131,7 @@ const LoginTitianBakat = () => {
                     <div className="form-group">
                       <div className="form-group-flex">
                         <label>Password</label>
-                        <Link to="/pages/forgot-password" className="forgot-link">
+                        <Link to="/forgot-password-send-email" className="forgot-link">
                           Lupa password?
                         </Link>
                       </div>
@@ -172,7 +188,7 @@ const LoginTitianBakat = () => {
                     </div>
                     <div className="account-signup">
                       <p>
-                        Belum punya akun? <Link to="/signup">Sign up</Link>
+                        Belum punya akun? <Link to="/user-signup">Sign up</Link>
                       </p>
                     </div>
                   </form>

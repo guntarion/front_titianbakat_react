@@ -8,6 +8,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import axios from "axios";
 import { auth } from "../../../../firebase.js";
+import config from '../../../../config'; 
+// src/client/components/pages/authentication/user-signup.jsx
 
 const UserSignup = () => {
   const [tab] = useState(true);
@@ -68,7 +70,7 @@ const UserSignup = () => {
 
     try {
       // Check MongoDB for existing user
-      const response = await axios.post("http://localhost:8000/api/users/", {
+      const response = await axios.post(`${config.API_URL}/users/`, {
         namaLengkap: fullName,
         namaPanggilan: nickName,
         alamatEmail: email,

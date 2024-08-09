@@ -14,6 +14,7 @@ import TBUserSignup from "./client/components/pages/authentication/user-signup.j
 import TermsPrivasiPolicy from "./client/components/pages/termsprivacypolicy";
 import OccupationalThemeAssessment from "./client/components/pages/asesmenpage/occupational-themes";
 import MultipleIntelligencesAssessment from "./client/components/pages/asesmenpage/multiple-intelligences";
+import ForgotPasswordSendEmail from "./client/components/pages/authentication/forgot-password-send-email.jsx";
 
 const AppRouter = () => {
   const { user } = useContext(AuthContext);
@@ -36,6 +37,7 @@ const AppRouter = () => {
       <Route exact path="/login-titian-bakat" component={LoginEmail} />
       <Route exact path="/user-signup" component={TBUserSignup} />
       <Route path="/terms-privacy-policy" exact component={TermsPrivasiPolicy} />
+      <Route path="/forgot-password-send-email" exact component={ForgotPasswordSendEmail} />
       <ProtectedRoute path="/admin" component={RoutesForAdmin} role="admin" />
       <ProtectedRoute path="/konselor" component={RoutesForKonselor} role="konselor" />
       <ProtectedRoute path="/user" component={RoutesForUser} role="user" />

@@ -9,6 +9,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import LoginContainer from "./client/components/login/login.jsx";
 import Register from "./client/components/register/register.jsx";
 import ForgotPassword from "./client/components/forgot-password";
+import ForgotPasswordSendEmail from "./client/components/pages/authentication/forgot-password-send-email.jsx";
 import Home from "./client/components/home/index";
 import Home9 from "./client/components/home/home9";
 import Home2 from "./client/components/home/home2";
@@ -148,7 +149,7 @@ import LoginPhone from "./client/components/pages/authentication/login-phone.jsx
 import LoginEmailOtp from "./client/components/pages/authentication/login-email-otp.jsx";
 import LoginPhoneOtp from "./client/components/pages/authentication/login-phone-otp.jsx";
 import Loginemail from "./client/components/home/loginemail.jsx";
-import ForgotPassword2 from "./client/components/pages/authentication/forgot-password2.jsx";
+
 import TBUserSignup from "./client/components/pages/authentication/user-signup.jsx";
 import KonselorSignup from "./client/components/pages/authentication/konselor-signup.jsx";
 import Signup from "./client/components/pages/authentication/signup.jsx";
@@ -279,7 +280,7 @@ const AppContainer = function (props) {
             <Route path="/login" exact component={LoginContainer} />
             <Route path="/register" exact component={Register} />
             <Route path="/pages/forgot-password" exact component={ForgotPassword} />
-            <Route path="/pages/forgot-password2" exact component={ForgotPassword2} />
+            <Route path="/forgot-password-send-email" exact component={ForgotPasswordSendEmail} />
             <Route path="/pages/login-email" exact component={LoginEmail} />
             <Route path="/pages/login-phone" exact component={LoginPhone} />
             <Route path="/pages/email-otp" exact component={LoginEmailOtp} />

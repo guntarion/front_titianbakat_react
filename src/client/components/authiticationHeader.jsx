@@ -468,7 +468,7 @@ const AuthenticationHeader = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link to="/pages/forgot-password2">
+                        <Link to="/forgot-password-send-email">
                           Forgot Password 2
                         </Link>
                       </li>
