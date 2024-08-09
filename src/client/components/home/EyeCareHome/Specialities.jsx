@@ -10,7 +10,8 @@ import {
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import ProtectedLink from '../../ProtectedLink';
 
 function SpecialtiesHome6() {
   const doctersettings = {
@@ -71,17 +72,17 @@ function SpecialtiesHome6() {
                 <div className="item">
                   <div className="special-item">
                     <div className="special-img">
-                      <Link to="/asesmen/occupational-themes">
+                      <ProtectedLink to="/asesmen/occupational-themes">
                         <img src={clinic_012} alt="" className="img-fluid" />
-                      </Link>
+                      </ProtectedLink>
                     </div>
                     <div className="special-icon">
-                      <Link to="/asesmen/occupational-themes">
+                      <ProtectedLink to="/asesmen/occupational-themes">
                         <i className="fa-solid fa-circle-chevron-right" />
-                      </Link>
+                      </ProtectedLink>
                     </div>
                     <h6>
-                      <Link to="/asesmen/occupational-themes">Occupational Themes </Link>
+                      <ProtectedLink to="/asesmen/occupational-themes">Occupational Themes </ProtectedLink>
                     </h6>
                   </div>
                 </div>
@@ -89,66 +90,66 @@ function SpecialtiesHome6() {
                 <div className="item">
                   <div className="special-item">
                     <div className="special-img">
-                      <Link to="/asesmen/multiple-intelligences">
+                      <ProtectedLink to="/asesmen/multiple-intelligences">
                         <img
                           // src="assets/img/clinic/clinic-03.png"
                           src={clinic_013}
                           alt=""
                           className="img-fluid"
                         />
-                      </Link>
+                      </ProtectedLink>
                     </div>
                     <div className="special-icon">
-                      <Link to="/asesmen/multiple-intelligences">
+                      <ProtectedLink to="/asesmen/multiple-intelligences">
                         <i className="fa-solid fa-circle-chevron-right" />
-                      </Link>
+                      </ProtectedLink>
                     </div>
                     <h6>
-                      <Link to="/asesmen/multiple-intelligences">Multiple Intelligences</Link>
+                      <ProtectedLink to="/asesmen/multiple-intelligences">Multiple Intelligences</ProtectedLink>
                     </h6>
                   </div>
                 </div>
                 <div className="item">
                   <div className="special-item">
                     <div className="special-img">
-                      <Link to="/index-6">
+                      <ProtectedLink to="/index-6">
                         <img
                           // src="assets/img/clinic/clinic-01.png"
                           src={clinic_011}
                           alt=""
                           className="img-fluid"
                         />
-                      </Link>
+                      </ProtectedLink>
                     </div>
                     <div className="special-icon">
-                      <Link to="/index-6">
+                      <ProtectedLink to="/index-6">
                         <i className="fa-solid fa-circle-chevron-right" />
-                      </Link>
+                      </ProtectedLink>
                     </div>
                     <h6>
-                      <Link to="/index-6">Learning Styles</Link>
+                      <ProtectedLink to="/index-6">Learning Styles</ProtectedLink>
                     </h6>
                   </div>
                 </div>
                 <div className="item">
                   <div className="special-item">
                     <div className="special-img">
-                      <Link to="/index-6">
+                      <ProtectedLink to="/index-6">
                         <img
                           // src="assets/img/clinic/clinic-05.png"
                           src={clinic_015}
                           alt=""
                           className="img-fluid"
                         />
-                      </Link>
+                      </ProtectedLink>
                     </div>
                     <div className="special-icon">
-                      <Link to="/index-6">
+                      <ProtectedLink to="/index-6">
                         <i className="fa-solid fa-circle-chevron-right" />
-                      </Link>
+                      </ProtectedLink>
                     </div>
                     <h6>
-                      <Link to="/index-6">Personality Elements</Link>
+                      <ProtectedLink to="/index-6">Personality Elements</ProtectedLink>
                     </h6>
                   </div>
                 </div>

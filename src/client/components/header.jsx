@@ -291,7 +291,7 @@ const handleLogout = async () => {
               ) : (
                 <ul className="nav header-navbar-rht">
                   <li className="nav-item">
-                    <Link className="nav-link header-login" to="/signup">
+                    <Link className="nav-link header-login" to="/user-signup">
                       <i className="me-2">
                         <FeatherIcon icon="lock" />
                       </i>
@@ -299,7 +299,7 @@ const handleLogout = async () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link header-login btn-light-blue" to="/login-titian-bakat">
+                    <Link className="nav-link header-login" to="/login-titian-bakat">
                       <i className="me-2">
                         <FeatherIcon icon="user" />
                       </i>

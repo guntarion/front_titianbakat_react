@@ -2,12 +2,11 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { shape01, shape02 } from "./img";
-import AuthenticationHeader from "../../authiticationHeader";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import axios from "axios"; // Import axios
+import axios from "axios";
 import { auth } from "../../../../firebase.js";
 
 const UserSignup = () => {
@@ -17,15 +16,53 @@ const UserSignup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [termsAccepted, setTermsAccepted] = useState(false); // State for the checkbox
-  const [error, setError] = useState(""); // State for error messages
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [error, setError] = useState("");
   const history = useHistory();
+
+  
+  const validateEmail = (email) => {
+    // eslint-disable-next-line no-useless-escape
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
 
   const handleUserSignup = async (event) => {
     event.preventDefault();
+    setError("");
+
+    if (!fullName.trim()) {
+      setError("Nama Panjang Julukan tidak boleh kosong.");
+      return;
+    }
+
+    if (!nickName.trim()) {
+      setError("Nama Panggilan tidak boleh kosong.");
+      return;
+    }
+
+    if (!email.trim()) {
+      setError("Email tidak boleh kosong.");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError("Format email tidak valid.");
+      return;
+    }
+
+    if (!password.trim()) {
+      setError("Password tidak boleh kosong.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password harus terdiri dari minimal 6 karakter.");
+      return;
+    }
 
     if (!termsAccepted) {
-      setError("Please accept the Terms of Service and Privacy Policy.");
+      setError("Silakan centang pada penerimaan atas Terms Layanan dan Kebijakan Privasi.");
       return;
     }
 
@@ -48,21 +85,24 @@ const UserSignup = () => {
       const db = getFirestore();
       await setDoc(doc(db, "users", user.uid), {
         email,
-        mongoUserId, // Store MongoDB ID in Firestore
+        mongoUserId,
         role: "user"
       });
 
       console.log("User information saved to Firestore");
-      history.push("/index-6"); // Redirect to the home page or any other page after successful signup
+      history.push("/index-6");
     } catch (error) {
       console.error("Error creating user:", error);
-      setError("An error occurred during signup. Please try again.");
+      if (error.code === "auth/email-already-in-use") {
+        setError("Email ini sudah terdaftar. Silakan gunakan email lain.");
+      } else {
+        setError("Terjadi kesalahan saat pendaftaran. Silakan coba lagi.");
+      }
     }
   };
 
   return (
     <>
-      <AuthenticationHeader />
       <div className="login-content-info">
         <div className="container">
           <div className="row justify-content-center">
@@ -86,19 +126,20 @@ const UserSignup = () => {
                           </Link>
                         </div>
                         <div className="login-title">
-                          <h3>User Signup</h3>
+                          <h3>Registrasi User</h3>
                           <p className="mb-0">
-                            Selamat Datang! Silahkan inputkan informasi Anda.
+                            Untuk bisa menggunakan layanan TitianBakat, silahkan mendaftar dengan melengkapi form berikut.
+                            Anda tidak perlu menggunakan nama sesuai KTP.
                           </p>
                         </div>
                         
                         <form onSubmit={handleUserSignup}>
                           <div className="form-group">
-                            <label>Nama Lengkap</label>
+                            <label>Nama Panjang Julukan</label>
                             <input
                               type="text"
                               className="form-control"
-                              placeholder="Nama Lengkap Anda"
+                              placeholder="misal: Bambang Sang Pujangga"
                               value={fullName}
                               onChange={(e) => setFullName(e.target.value)}
                             />
@@ -108,7 +149,7 @@ const UserSignup = () => {
                             <input
                               type="text"
                               className="form-control"
-                              placeholder="Nama Panggilan"
+                              placeholder="misal: Beng-Beng"
                               value={nickName}
                               onChange={(e) => setNickName(e.target.value)}
                             />
@@ -124,7 +165,7 @@ const UserSignup = () => {
                             />
                           </div>
                           <div className="form-group d-flex" style={{ flexDirection: "column" }}>
-                            <label>Nomer WhatsApp</label>
+                            <label>Nomer HP WhatsApp</label>
                             <PhoneInput
                               containerClassName="intl-tel-input"
                               inputClassName="form-control form-control-lg group_formcontrol form-control-phone"
@@ -151,9 +192,7 @@ const UserSignup = () => {
                           <div className="form-group form-check-box terms-check-box">
                             <div className="form-group-flex">
                               <label className="custom_check">
-                                Saya telah membaca dan bersepakat dengan {" "}
-                                <Link to="#">Terms of Service</Link> dan{" "}
-                                <Link to="#">Privacy Policy.</Link>
+                                Saya menerima {" "} <Link to="/terms-privacy-policy">Terms Layanan dan Kebijakan Privasi</Link> yang ada.
                                 <input 
                                   type="checkbox" 
                                   name="Terms" 
@@ -167,7 +206,7 @@ const UserSignup = () => {
                           {error && <div className="alert alert-danger">{error}</div>}
                           <div className="form-group">
                             <button className="btn btn-block" type="submit">
-                              Register Now
+                              Register Sekarang
                             </button>
                           </div>
                         </form>
@@ -185,4 +224,3 @@ const UserSignup = () => {
 };
 
 export default UserSignup;
-

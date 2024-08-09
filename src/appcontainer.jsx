@@ -78,7 +78,6 @@ import EditBilling from "./client/components/doctors/editbilling/index";
 
 import Terms from "./client/components/pages/terms";
 import Policy from "./client/components/pages/policy";
-import TermsPrivasiPolicy from "./client/components/pages/termsprivacypolicy";
 import Aboutus from "./client/components/pages/aboutus/aboutus";
 import Contactus from "./client/components/pages/contactus/contactus";
 import Patientregisterstepone from "./client/components/register/patientregisterstepone";
@@ -150,7 +149,7 @@ import LoginEmailOtp from "./client/components/pages/authentication/login-email-
 import LoginPhoneOtp from "./client/components/pages/authentication/login-phone-otp.jsx";
 import Loginemail from "./client/components/home/loginemail.jsx";
 import ForgotPassword2 from "./client/components/pages/authentication/forgot-password2.jsx";
-import UserSignup from "./client/components/pages/authentication/user-signup.jsx";
+import TBUserSignup from "./client/components/pages/authentication/user-signup.jsx";
 import KonselorSignup from "./client/components/pages/authentication/konselor-signup.jsx";
 import Signup from "./client/components/pages/authentication/signup.jsx";
 import SuccessSignup from "./client/components/pages/authentication/success-signup.jsx";
@@ -174,278 +173,276 @@ import Bookingsuccess from "./client/components/home/bookingsuccess.jsx";
 import Patientdetails from "./client/components/home/patientdetails.jsx";
 import HomecareHome from "./client/components/home/HomecareHome/index.jsx";
 import HomeTwelve from "./client/components/home/home12/hometwelve.jsx";
+
 const AppContainer = function (props) {
-  // const config = "/react/template/";
-  if (props) {
-    const url = props.location.pathname.split("/")[1];
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      const cursorInner = document.querySelector(".cursor-inner");
+      const cursorOuter = document.querySelector(".cursor-outer");
 
-    useEffect(() => {
-      const handleMouseMove = (event) => {
-        const cursorInner = document.querySelector(".cursor-inner");
-        const cursorOuter = document.querySelector(".cursor-outer");
+      if (cursorOuter) {
+        cursorOuter.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+      }
 
-        if (cursorOuter) {
-          cursorOuter.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
-        }
+      if (cursorInner) {
+        cursorInner.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+      }
+    };
 
-        if (cursorInner) {
-          cursorInner.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
-        }
-      };
-
-      const handleMouseEnter = () => {
-        const cursorInner = document.querySelector(".cursor-inner");
-        const cursorOuter = document.querySelector(".cursor-outer");
-
-        if (cursorInner) {
-          cursorInner.classList.add("s");
-        }
-
-        if (cursorOuter) {
-          cursorOuter.classList.add("s");
-        }
-      };
-
-      const handleMouseLeave = (event) => {
-        const cursorInner = document.querySelector(".cursor-inner");
-        const cursorOuter = document.querySelector(".cursor-outer");
-
-        if (
-          event.target.tagName !== "A" ||
-          !event.target.closest(".cursor-pointer")
-        ) {
-          if (cursorInner) {
-            cursorInner.classList.remove("cursor-hover");
-          }
-
-          if (cursorOuter) {
-            cursorOuter.classList.remove("cursor-hover");
-          }
-        }
-      };
-
-      document.body.addEventListener("mousemove", handleMouseMove);
-      document.body.addEventListener("mouseenter", handleMouseEnter);
-      document.body.addEventListener("mouseleave", handleMouseLeave);
-
+    const handleMouseEnter = () => {
       const cursorInner = document.querySelector(".cursor-inner");
       const cursorOuter = document.querySelector(".cursor-outer");
 
       if (cursorInner) {
-        cursorInner.style.visibility = "visible";
+        cursorInner.classList.add("s");
       }
 
       if (cursorOuter) {
-        cursorOuter.style.visibility = "visible";
+        cursorOuter.classList.add("s");
       }
+    };
 
-      return () => {
-        document.body.removeEventListener("mousemove", handleMouseMove);
-        document.body.removeEventListener("mouseenter", handleMouseEnter);
-        document.body.removeEventListener("mouseleave", handleMouseLeave);
-      };
-    }, []);
+    const handleMouseLeave = (event) => {
+      const cursorInner = document.querySelector(".cursor-inner");
+      const cursorOuter = document.querySelector(".cursor-outer");
 
-    return (
-      <Router basename={`${config.publicPath}`}>
-        {" "}
-        {url === "admin" ? (
-          <div>
-            <Switch>
-              <Route path="/admin" component={AppUniversal} />
-            </Switch>
-          </div>
-        ) : url === "pharmacyadmin" ? (
-          <div>
-            <Switch>
-              <Route path="/pharmacyadmin" component={PharmacyadminApp} />
-            </Switch>
-          </div>
-        ) : (
-          <div>
-            <Switch>
-              <Route path="/asesmen/occupational-themes" exact component={OccupationalThemeAssessment} />
-              <Route path="/asesmen/multiple-intelligences" exact component={MultipleIntelligencesAssessment} />
+      if (
+        event.target.tagName !== "A" ||
+        !event.target.closest(".cursor-pointer")
+      ) {
+        if (cursorInner) {
+          cursorInner.classList.remove("cursor-hover");
+        }
 
-              <Route path="/user/doctor-grid" exact component={DoctorGrid} />
-              <Route path="/user/doctor-list" exact component={DoctorList} />
-              <Route path="/pages/video-call" exact component={VideoCall} />
-              <Route path="/pages/voice-call" exact component={VoiceCall} />
+        if (cursorOuter) {
+          cursorOuter.classList.remove("cursor-hover");
+        }
+      }
+    };
 
-              <Route path="/loginemail" exact component={Loginemail} />
-              <Route path="/login-titian-bakat" exact component={LoginTitianBakat} />
-              
+    document.body.addEventListener("mousemove", handleMouseMove);
+    document.body.addEventListener("mouseenter", handleMouseEnter);
+    document.body.addEventListener("mouseleave", handleMouseLeave);
 
-              <Route path="/login" exact component={LoginContainer} />
-              <Route path="/register" exact component={Register} />
-              <Route path="/pages/forgot-password" exact component={ForgotPassword} />
-              <Route path="/pages/forgot-password2" exact component={ForgotPassword2} />
-              <Route path="/pages/login-email" exact component={LoginEmail} />
-              <Route path="/pages/login-phone" exact component={LoginPhone} />
-              <Route path="/pages/email-otp" exact component={LoginEmailOtp} />
-              <Route path="/pages/phone-otp" exact component={LoginPhoneOtp} />
-              <Route path="/pages/eotp" exact component={EmailOtp} />
-              <Route path="/pages/motp" exact component={MobileOtp} />
+    const cursorInner = document.querySelector(".cursor-inner");
+    const cursorOuter = document.querySelector(".cursor-outer");
 
-              <Route path="/user-signup" exact component={UserSignup} />
-              <Route path="/konselor-signup" exact component={KonselorSignup} />
-              <Route path="/success-signup" exact component={SuccessSignup} />
-              <Route path="/signup" exact component={Signup} />
+    if (cursorInner) {
+      cursorInner.style.visibility = "visible";
+    }
 
-              {/* home */}
-              <Route path="/index-2" exact component={Home} />
-              <Route path="/index-20" exact component={Generalhome} />
-              <Route path="/homeslider1" exact component={HomeSlider1} />
-              <Route path="/index-2" exact component={Home2} />
-              <Route path="/index-3" exact component={Home3} />
-              <Route path="/homeslider2" exact component={HomeSlider2} />
-              <Route path="/index-5" exact component={Cardiohome} />
-              <Route path="/index-8" exact component={Paediatrichome} />
+    if (cursorOuter) {
+      cursorOuter.style.visibility = "visible";
+    }
 
-              <Route path="/index-6" exact component={Home6} />
-              <Route path="/index-7" exact component={Home7} />
-              <Route path="/index-4" exact component={Home4} />
-              <Route path="/index-9" exact component={Home9} />
-              <Route path="/index-10" exact component={Home10} />
-              <Route path="/home11" exact component={Home11} />
-              <Route path="/index-11" exact component={CosmeticsHome} />
-              <Route path="/index-12" exact component={HomeTwelve} />
-              <Route path="/home12" exact component={Home12} />
-              <Route path="/home13" exact component={Home13} />
-              <Route path="/home14" exact component={Home14} />
+    return () => {
+      document.body.removeEventListener("mousemove", handleMouseMove);
+      document.body.removeEventListener("mouseenter", handleMouseEnter);
+      document.body.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []); // useEffect is now called unconditionally
 
-              {/* blog */}
-              <Route path="/blog/blog-list" exact component={BlogList} />
-              <Route path="/blog/blog-grid" exact component={BlogGrid} />
-              <Route path="/blog/blog-details" exact component={BlogDetails} />
-              <Route path="/doctor-blog" exact component={Doctorblog} />
-              <Route path="/blog/doctor-add-blog" exact component={Doctoraddblog} />
-              <Route path="/blog/doctor-pending-blog" exact component={Doctorpendingblog} />
-              <Route path="/blog/doctor-edit-blog" exact component={Doctoreditblog} />
-              {/* pages */}
-
-              <Route path="/user/search-doctor1" exact component={SearchDoctor} />
-              <Route path="/user/search-doctor2" exact component={SearchDoctor2} />
-              <Route path="/pages/component" exact component={Components} />
-              <Route path="/pages/blank-page" exact component={BlankPage} />
-              <Route path="/pages/new-page" exact component={NewPage} />
-              <Route path="/pages/calendar" exact component={Calendar} />
-              <Route path="/pages/invoice" exact component={Invoice} />
-              
-              <Route path="/pages/invoice-view" exact component={InvoiceView} />
-              <Route path="/pages/aboutus" exact component={Aboutus} />
-              <Route path="/pages/contactus" exact component={Contactus} />
-
-              <Route path="/pages/comingsoon" exact component={Comingsoon} />
-              <Route path="/pages/maintenance" exact component={Maintenance} />
-              <Route path="/pages/pricing-plan" exact component={PricingPlan} />
-              <Route path="/pages/error-404" exact component={Error404} />
-              <Route path="/pages/error-500" exact component={Error500} />
-              <Route path="/pages/faq" exact component={Faq} />
-              
-              <Route path="/user/patientregisterstep-1" exact component={Patientregisterstepone} />
-              <Route path="/user/patientregisterstep-2" exact component={Patientregistersteptwo} />
-              <Route path="/user/patientregisterstep-3" exact component={Patientregisterstepthree} />
-              <Route path="/user/patientregisterstep-4" exact component={Patientregisterstepfour} />
-              <Route path="/user/patientregisterstep-5" exact component={Patientregisterstepfive} />
-              <Route path="/user/doctor-profile" exact component={DoctorProfile} />
-              <Route path="/user/booking1" exact component={Booking} />
-              <Route path="/user/booking2" exact component={Booking2} />
-              <Route path="/user/patient-chat" exact component={PatientChat} />
-              <Route path="/user/checkout" exact component={Checkout} />
-              <Route path="/user/booking-success" exact component={BookingSuccess} />
-              <Route path="/user/dashboard" exact component={Dashboard} />
-              <Route path="/user/dependent" exact component={PatientDependent} />
-              <Route path="/user/accounts" exact component={PatientAccounts} />
-              <Route path="/user/orders" exact component={Orders} />
-              <Route path="/user/medicalrecords" exact component={MedicalRecords} />
-              <Route path="/user/medicaldetails" exact component={MedicalDetails} />
-              <Route path="/user/favourites" exact component={Favourties} />
-              <Route path="/user/profile" exact component={UserProfile} />
-              <Route path="/user/change-password" exact component={ChangeUserPassword} />
-
-              
-              <Route path="/konselor/doctor-dashboard" exact component={DoctorDashboard} />
-              <Route path="/konselor/my-patients" exact component={MyPatient} />
-              <Route path="/konselor/invoice" exact component={Invoice} />
-              <Route path="/konselor/social-media" exact component={SocialMedia} />
-              <Route path="/konselor/schedule-timing" exact component={ScheduleTiming} />
-              <Route path="/konselor/available-timing" exact component={AvailableTiming} />
-              <Route path="/konselor/account" exact component={Accounts} />
-              <Route path="/konselor/doctor-change-password" exact component={DoctorPassword} />
-              <Route path="/konselor/appointments" exact component={Appointments} />
-              <Route path="/konselor/patient-profile" exact component={PatientProfile} />
-              <Route path="/konselor/profile-setting" exact component={ProfileSetting} />
-              <Route path="/konselor/review" exact component={Review} />
-              <Route path="/konselor/doctor-register" exact component={DoctorRegister} />
-
-              <Route path="/konselor/chat-doctor" exact component={DoctorChat} />
-              <Route path="/konselor/add-billing" exact component={AddBilling} />
-              <Route path="/konselor/add-prescription" exact component={AddPescription} />
-              <Route path="/konselor/registerstepone" exact component={Registerstepone} />
-              <Route path="/konselor/register-step-2" exact component={Registersteptwo} />
-              <Route path="/konselor/register-step- 3" exact component={Registerstepthree} />
-              <Route path="/konselor/editprescription" exact component={EditPrescription} />
-              <Route path="/konselor/editbilling" exact component={EditBilling} />
-              
-              <Route path="/pages/terms" exact component={Terms} />
-              <Route path="/pages/privacy-policy" exact component={Policy} />
-              <Route path="/terms-privacy-policy" exact component={TermsPrivasiPolicy} />
-
-              {/* Pharmacy */}
-              
-              <Route path="/user/map-list" exact component={MapList} />
-              <Route path="/page-anda/page-asesmen-one" exact component={PageAsesmenOne} />
-              <Route path="/page-anda/page-asesmen-two" exact component={PageAsesmenTwo} />
-              <Route path="/asesmen/Pharmacy-index" exact component={Pharmacy} />
-              <Route path="/asesmen/Pharmacy-details" exact component={pharmacydetail} />
-              <Route path="/asesmen/pharmacy-search" exact component={PharmacySearch} />
-              <Route path="/asesmen/product-all" exact component={Product} />
-              <Route path="/asesmen/product-description" exact component={ProductDescription} />
-              <Route path="/asesmen/cart" exact component={Cart} />
-              <Route path="/asesmen/product-checkout" exact component={ProductCheckout} />
-              <Route path="/asesmen/payment-success" exact component={PayoutSuccess} />
-              <Route path="/asesmen/pharmacy-register" exact component={Pharmacyregister} />
-              <Route path="/asesmen/pharmacy-registerstep-1" exact component={Pharmacyregisterstepone} />
-              <Route path="/asesmen/pharmacy-registerstep-2" exact component={Pharmacyregistersteptwo} />
-              <Route path="/asesmen/pharmacy-registerstep-3" exact component={Pharmacyregisterstepthree} />
-              
-              <Route path="/pages/onboarding-email" exact component={OnboardingEmail} />
-              <Route path="/pages/onboarding-identity" exact component={OnboardingIdentity} />
-              <Route path="/pages/onboarding-payments" exact component={OnboardingPayments} />
-              <Route path="/pages/onboarding-personalize" exact component={OnboardingPersonalize} />
-              <Route path="/pages/onboarding-preferences" exact component={OnboardingPreferences} />
-              <Route path="/pages/onboarding-verification" exact component={Onboardingverification} />
-              <Route path="/pages/patient-email" exact component={PatientOnboardingEmail} />
-              <Route path="/pages/patient-personalize" exact component={PatientOnboardingPersonalize} />
-              <Route path="/pages/patient-details" exact component={PatientOnboardingDetails} />
-              <Route path="/pages/patient-family-details" exact component={PatientFamilyDetails} />
-              <Route path="/pages/patient-dependant-details" exact component={DependantDetails} />
-              <Route path="/pages/patient-other-details" exact component={OtherDetails} />
-              <Route path="/pages/onboarding-email-otp" exact component={OnboardingEmailOtp} />
-              <Route path="/pages/onboarding-phone" exact component={Onboardingphone} />
-              <Route path="/pages/onboarding-phone-otp" exact component={Onboardingphoneotp} />
-              <Route path="/pages/onboarding-password" exact component={Onboardingpassword} />
-              <Route path="/pages/patient-email-otp" exact component={PatientEmailOtp} />
-              <Route path="/pages/patient-phone" exact component={PatientPhone} />
-              <Route path="/pages/patient-phone-otp" exact component={patientphoneotp} />
-              <Route path="/pages/patient-password" exact component={patientpassword} />
-              <Route path="/pages/product-healthcare" exact component={Producthealthcare} />
-              <Route path="/pages/patient-phone-otp" exact component={PhoneOtp} />
-
-              <Route path="/consultation" exact component={Consultation} />
-              <Route path="/payment" exact component={Payment} />
-              <Route path="/bookingsuccess" exact component={Bookingsuccess} />
-              <Route path="/patientdetails" exact component={Patientdetails} />
-              
-              <Route path="/index-13" exact component={HomecareHome} />
-            </Switch>
-          </div>
-        )}
-      </Router>
-    );
+  if (!props) {
+    return null;
   }
-  return null;
+
+  const url = props.location.pathname.split("/")[1];
+
+  return (
+    <Router basename={`${config.publicPath}`}>
+      {url === "admin" ? (
+        <div>
+          <Switch>
+            <Route path="/admin" component={AppUniversal} />
+          </Switch>
+        </div>
+      ) : url === "pharmacyadmin" ? (
+        <div>
+          <Switch>
+            <Route path="/pharmacyadmin" component={PharmacyadminApp} />
+          </Switch>
+        </div>
+      ) : (
+        <div>
+          <Switch>
+            <Route path="/asesmen/occupational-themes" exact component={OccupationalThemeAssessment} />
+            <Route path="/asesmen/multiple-intelligences" exact component={MultipleIntelligencesAssessment} />
+
+            <Route path="/user/doctor-grid" exact component={DoctorGrid} />
+            <Route path="/user/doctor-list" exact component={DoctorList} />
+            <Route path="/pages/video-call" exact component={VideoCall} />
+            <Route path="/pages/voice-call" exact component={VoiceCall} />
+
+            <Route path="/loginemail" exact component={Loginemail} />
+            <Route path="/login-titian-bakat" exact component={LoginTitianBakat} />
+            
+            <Route path="/login" exact component={LoginContainer} />
+            <Route path="/register" exact component={Register} />
+            <Route path="/pages/forgot-password" exact component={ForgotPassword} />
+            <Route path="/pages/forgot-password2" exact component={ForgotPassword2} />
+            <Route path="/pages/login-email" exact component={LoginEmail} />
+            <Route path="/pages/login-phone" exact component={LoginPhone} />
+            <Route path="/pages/email-otp" exact component={LoginEmailOtp} />
+            <Route path="/pages/phone-otp" exact component={LoginPhoneOtp} />
+            <Route path="/pages/eotp" exact component={EmailOtp} />
+            <Route path="/pages/motp" exact component={MobileOtp} />
+
+            <Route path="/user-signup" exact component={TBUserSignup} />
+            <Route path="/konselor-signup" exact component={KonselorSignup} />
+            <Route path="/success-signup" exact component={SuccessSignup} />
+            <Route path="/signup" exact component={Signup} />
+
+            {/* home */}
+            <Route path="/index-2" exact component={Home} />
+            <Route path="/index-20" exact component={Generalhome} />
+            <Route path="/homeslider1" exact component={HomeSlider1} />
+            <Route path="/index-2" exact component={Home2} />
+            <Route path="/index-3" exact component={Home3} />
+            <Route path="/homeslider2" exact component={HomeSlider2} />
+            <Route path="/index-5" exact component={Cardiohome} />
+            <Route path="/index-8" exact component={Paediatrichome} />
+
+            <Route path="/index-6" exact component={Home6} />
+            <Route path="/index-7" exact component={Home7} />
+            <Route path="/index-4" exact component={Home4} />
+            <Route path="/index-9" exact component={Home9} />
+            <Route path="/index-10" exact component={Home10} />
+            <Route path="/home11" exact component={Home11} />
+            <Route path="/index-11" exact component={CosmeticsHome} />
+            <Route path="/index-12" exact component={HomeTwelve} />
+            <Route path="/home12" exact component={Home12} />
+            <Route path="/home13" exact component={Home13} />
+            <Route path="/home14" exact component={Home14} />
+
+            {/* blog */}
+            <Route path="/blog/blog-list" exact component={BlogList} />
+            <Route path="/blog/blog-grid" exact component={BlogGrid} />
+            <Route path="/blog/blog-details" exact component={BlogDetails} />
+            <Route path="/doctor-blog" exact component={Doctorblog} />
+            <Route path="/blog/doctor-add-blog" exact component={Doctoraddblog} />
+            <Route path="/blog/doctor-pending-blog" exact component={Doctorpendingblog} />
+            <Route path="/blog/doctor-edit-blog" exact component={Doctoreditblog} />
+            {/* pages */}
+
+            <Route path="/user/search-doctor1" exact component={SearchDoctor} />
+            <Route path="/user/search-doctor2" exact component={SearchDoctor2} />
+            <Route path="/pages/component" exact component={Components} />
+            <Route path="/pages/blank-page" exact component={BlankPage} />
+            <Route path="/pages/new-page" exact component={NewPage} />
+            <Route path="/pages/calendar" exact component={Calendar} />
+            <Route path="/pages/invoice" exact component={Invoice} />
+            
+            <Route path="/pages/invoice-view" exact component={InvoiceView} />
+            <Route path="/pages/aboutus" exact component={Aboutus} />
+            <Route path="/pages/contactus" exact component={Contactus} />
+
+            <Route path="/pages/comingsoon" exact component={Comingsoon} />
+            <Route path="/pages/maintenance" exact component={Maintenance} />
+            <Route path="/pages/pricing-plan" exact component={PricingPlan} />
+            <Route path="/pages/error-404" exact component={Error404} />
+            <Route path="/pages/error-500" exact component={Error500} />
+            <Route path="/pages/faq" exact component={Faq} />
+            
+            <Route path="/user/patientregisterstep-1" exact component={Patientregisterstepone} />
+            <Route path="/user/patientregisterstep-2" exact component={Patientregistersteptwo} />
+            <Route path="/user/patientregisterstep-3" exact component={Patientregisterstepthree} />
+            <Route path="/user/patientregisterstep-4" exact component={Patientregisterstepfour} />
+            <Route path="/user/patientregisterstep-5" exact component={Patientregisterstepfive} />
+            <Route path="/user/doctor-profile" exact component={DoctorProfile} />
+            <Route path="/user/booking1" exact component={Booking} />
+            <Route path="/user/booking2" exact component={Booking2} />
+            <Route path="/user/patient-chat" exact component={PatientChat} />
+            <Route path="/user/checkout" exact component={Checkout} />
+            <Route path="/user/booking-success" exact component={BookingSuccess} />
+            <Route path="/user/dashboard" exact component={Dashboard} />
+            <Route path="/user/dependent" exact component={PatientDependent} />
+            <Route path="/user/accounts" exact component={PatientAccounts} />
+            <Route path="/user/orders" exact component={Orders} />
+            <Route path="/user/medicalrecords" exact component={MedicalRecords} />
+            <Route path="/user/medicaldetails" exact component={MedicalDetails} />
+            <Route path="/user/favourites" exact component={Favourties} />
+            <Route path="/user/profile" exact component={UserProfile} />
+            <Route path="/user/change-password" exact component={ChangeUserPassword} />
+
+            
+            <Route path="/konselor/doctor-dashboard" exact component={DoctorDashboard} />
+            <Route path="/konselor/my-patients" exact component={MyPatient} />
+            <Route path="/konselor/invoice" exact component={Invoice} />
+            <Route path="/konselor/social-media" exact component={SocialMedia} />
+            <Route path="/konselor/schedule-timing" exact component={ScheduleTiming} />
+            <Route path="/konselor/available-timing" exact component={AvailableTiming} />
+            <Route path="/konselor/account" exact component={Accounts} />
+            <Route path="/konselor/doctor-change-password" exact component={DoctorPassword} />
+            <Route path="/konselor/appointments" exact component={Appointments} />
+            <Route path="/konselor/patient-profile" exact component={PatientProfile} />
+            <Route path="/konselor/profile-setting" exact component={ProfileSetting} />
+            <Route path="/konselor/review" exact component={Review} />
+            <Route path="/konselor/doctor-register" exact component={DoctorRegister} />
+
+            <Route path="/konselor/chat-doctor" exact component={DoctorChat} />
+            <Route path="/konselor/add-billing" exact component={AddBilling} />
+            <Route path="/konselor/add-prescription" exact component={AddPescription} />
+            <Route path="/konselor/registerstepone" exact component={Registerstepone} />
+            <Route path="/konselor/register-step-2" exact component={Registersteptwo} />
+            <Route path="/konselor/register-step- 3" exact component={Registerstepthree} />
+            <Route path="/konselor/editprescription" exact component={EditPrescription} />
+            <Route path="/konselor/editbilling" exact component={EditBilling} />
+            
+            <Route path="/pages/terms" exact component={Terms} />
+            <Route path="/pages/privacy-policy" exact component={Policy} />
+
+            {/* Pharmacy */}
+            
+            <Route path="/user/map-list" exact component={MapList} />
+            <Route path="/page-anda/page-asesmen-one" exact component={PageAsesmenOne} />
+            <Route path="/page-anda/page-asesmen-two" exact component={PageAsesmenTwo} />
+            <Route path="/asesmen/Pharmacy-index" exact component={Pharmacy} />
+            <Route path="/asesmen/Pharmacy-details" exact component={pharmacydetail} />
+            <Route path="/asesmen/pharmacy-search" exact component={PharmacySearch} />
+            <Route path="/asesmen/product-all" exact component={Product} />
+            <Route path="/asesmen/product-description" exact component={ProductDescription} />
+            <Route path="/asesmen/cart" exact component={Cart} />
+            <Route path="/asesmen/product-checkout" exact component={ProductCheckout} />
+            <Route path="/asesmen/payment-success" exact component={PayoutSuccess} />
+            <Route path="/asesmen/pharmacy-register" exact component={Pharmacyregister} />
+            <Route path="/asesmen/pharmacy-registerstep-1" exact component={Pharmacyregisterstepone} />
+            <Route path="/asesmen/pharmacy-registerstep-2" exact component={Pharmacyregistersteptwo} />
+            <Route path="/asesmen/pharmacy-registerstep-3" exact component={Pharmacyregisterstepthree} />
+            
+            <Route path="/pages/onboarding-email" exact component={OnboardingEmail} />
+            <Route path="/pages/onboarding-identity" exact component={OnboardingIdentity} />
+            <Route path="/pages/onboarding-payments" exact component={OnboardingPayments} />
+            <Route path="/pages/onboarding-personalize" exact component={OnboardingPersonalize} />
+            <Route path="/pages/onboarding-preferences" exact component={OnboardingPreferences} />
+            <Route path="/pages/onboarding-verification" exact component={Onboardingverification} />
+            <Route path="/pages/patient-email" exact component={PatientOnboardingEmail} />
+            <Route path="/pages/patient-personalize" exact component={PatientOnboardingPersonalize} />
+            <Route path="/pages/patient-details" exact component={PatientOnboardingDetails} />
+            <Route path="/pages/patient-family-details" exact component={PatientFamilyDetails} />
+            <Route path="/pages/patient-dependant-details" exact component={DependantDetails} />
+            <Route path="/pages/patient-other-details" exact component={OtherDetails} />
+            <Route path="/pages/onboarding-email-otp" exact component={OnboardingEmailOtp} />
+            <Route path="/pages/onboarding-phone" exact component={Onboardingphone} />
+            <Route path="/pages/onboarding-phone-otp" exact component={Onboardingphoneotp} />
+            <Route path="/pages/onboarding-password" exact component={Onboardingpassword} />
+            <Route path="/pages/patient-email-otp" exact component={PatientEmailOtp} />
+            <Route path="/pages/patient-phone" exact component={PatientPhone} />
+            <Route path="/pages/patient-phone-otp" exact component={patientphoneotp} />
+            <Route path="/pages/patient-password" exact component={patientpassword} />
+            <Route path="/pages/product-healthcare" exact component={Producthealthcare} />
+            <Route path="/pages/patient-phone-otp" exact component={PhoneOtp} />
+
+            <Route path="/consultation" exact component={Consultation} />
+            <Route path="/payment" exact component={Payment} />
+            <Route path="/bookingsuccess" exact component={Bookingsuccess} />
+            <Route path="/patientdetails" exact component={Patientdetails} />
+            
+            <Route path="/index-13" exact component={HomecareHome} />
+          </Switch>
+        </div>
+      )}
+    </Router>
+  );
 };
 
 export default AppContainer;

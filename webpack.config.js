@@ -10,6 +10,8 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const opn = require("opn"); // Import the 'opn' package
 
+const Dotenv = require('dotenv-webpack');
+
 const publicPath = "/"; // To run this file in local
 //  const publicPath = "/react/template/"; // To build the file
 module.exports = {
@@ -121,6 +123,11 @@ module.exports = {
       "process.env.NODE_ENV": JSON.stringify("development"),
     }),
     new webpack.HotModuleReplacementPlugin(),
+
+    new Dotenv({
+      systemvars: true, // load all the predefined 'process.env' variables which will trump anything local per dotenv specs.
+      defaults: false
+    }),
 
     new HtmlWebpackPlugin({
       title: "Hot Module Replacement",

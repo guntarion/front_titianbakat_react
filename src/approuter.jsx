@@ -10,6 +10,10 @@ import RoutesForUser from "./hooks/routes-for-user.jsx";
 import ProtectedRoute from "./ProtectedRoute";
 import Home6 from "./client/components/home/home6.jsx";
 import LoginEmail from "./client/components/pages/authentication/login-titianbakat";
+import TBUserSignup from "./client/components/pages/authentication/user-signup.jsx";
+import TermsPrivasiPolicy from "./client/components/pages/termsprivacypolicy";
+import OccupationalThemeAssessment from "./client/components/pages/asesmenpage/occupational-themes";
+import MultipleIntelligencesAssessment from "./client/components/pages/asesmenpage/multiple-intelligences";
 
 const AppRouter = () => {
   const { user } = useContext(AuthContext);
@@ -30,9 +34,13 @@ const AppRouter = () => {
       <Route exact path="/index-6" component={Home6} />
       {/* <Route exact path="/index-6" render={(props) => <AppContainer {...props} />} /> */}
       <Route exact path="/login-titian-bakat" component={LoginEmail} />
+      <Route exact path="/user-signup" component={TBUserSignup} />
+      <Route path="/terms-privacy-policy" exact component={TermsPrivasiPolicy} />
       <ProtectedRoute path="/admin" component={RoutesForAdmin} role="admin" />
       <ProtectedRoute path="/konselor" component={RoutesForKonselor} role="konselor" />
       <ProtectedRoute path="/user" component={RoutesForUser} role="user" />
+      <ProtectedRoute path="/asesmen/occupational-themes" component={OccupationalThemeAssessment} />
+      <ProtectedRoute path="/asesmen/multiple-intelligences" component={MultipleIntelligencesAssessment} />
       <Route component={Home6} />
     </Switch>
   );
