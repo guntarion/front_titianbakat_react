@@ -1,7 +1,7 @@
 // src/client/components/Quiz/quiz-result-multipleintelligences.jsx
 import React from "react";
 import PropTypes from "prop-types";
-import Chart_MultipleIntelligences from "./Chart_MultipleIntelligences";
+import ChartMultipleIntelligences from "./Chart_MultipleIntelligences";
 
 import {
   img_mi_spasial,
@@ -67,7 +67,7 @@ const QuizResult_MultipleIntelligences = ({ totalscores }) => {
           <img src={karakteristik[highestScoreType].img} className="img-fluid" alt="#" />
         </div>
         <div className="col-md-6">
-          <Chart_MultipleIntelligences totalscores={totalscores} />
+          <ChartMultipleIntelligences totalscores={totalscores} />
         </div>
       </div>
       

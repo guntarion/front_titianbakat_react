@@ -9,6 +9,8 @@ import { provincesAndCities } from "./provincesAndCities"; // Import the provinc
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../../../../../AuthContext"; // Assuming you have a useAuth hook
 import axios from "axios";
+import config from '../../../../../config'; 
+
 
 const UserProfile = (props) => {
   const { user } = useAuth(); // Get the current user
@@ -42,7 +44,7 @@ const UserProfile = (props) => {
         if (data.mongoUserId) {
           // Fetch additional data from MongoDB
           try {
-            const response = await axios.get(`http://localhost:8000/api/users/${data.mongoUserId}`);
+            const response = await axios.get(`${config.API_URL}/users/${data.mongoUserId}`);
             const mongoData = response.data;
             setNamaLengkap(mongoData.namaLengkap || "");
             setNamaPanggilan(mongoData.namaPanggilan || "");
@@ -101,7 +103,7 @@ const UserProfile = (props) => {
       
       if (mongoUserId) {
         console.log("🚀 ~ handleSubmit ~ mongoUserId:", mongoUserId)
-        const response = await axios.put(`http://localhost:8000/api/users/${mongoUserId}`, userData);
+        const response = await axios.put(`${config.API_URL}/users/${mongoUserId}`, userData);
         console.log("User data updated:", response.data);
       } else {
         console.error("MongoDB ID is not set.");

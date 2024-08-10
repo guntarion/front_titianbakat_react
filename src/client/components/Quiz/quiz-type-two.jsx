@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './quiz-type-two.css';
+import config from '../../../config'; 
 
 // eslint-disable-next-line react/prop-types
 const QuizTypeTwo = ({ quizId }) => {
@@ -12,7 +13,7 @@ const QuizTypeTwo = ({ quizId }) => {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/quizzes/${quizId}`);
+        const response = await axios.get(`${config.API_URL}/quizzes/${quizId}`);
         setQuiz(response.data);
       } catch (error) {
         console.error("Error fetching quiz data:", error);

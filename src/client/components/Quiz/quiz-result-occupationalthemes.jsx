@@ -1,7 +1,7 @@
 // src/client/components/Quiz/quiz-result-occupationalthemes.jsx
 import React from "react";
 import PropTypes from "prop-types";
-import Chart_OccupationalThemes from './Chart_OccupationalThemes'; // Import the chart component
+import ChartOccupationalThemes from './Chart_OccupationalThemes'; // Import the chart component
 
 import {
   img_riasec_realistic,
@@ -58,7 +58,7 @@ const QuizResult_OccupationalThemes = ({ totalscores }) => {
 
       <div className="result-item">
         <img src={karakteristik[highestScoreType].img} className="img-fluid" alt="#" />
-        <Chart_OccupationalThemes totalscores={totalscores} />
+        <ChartOccupationalThemes totalscores={totalscores} />
         <h3>{highestScoreType.replace('type_', '').replace('_', ' ')}</h3>
         <p>{karakteristik[highestScoreType].text}</p>
       </div>

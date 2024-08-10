@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import "./quiz-type-one.css";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../../../AuthContext";
+import config from '../../../config'; 
 
 const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
   const { user } = useAuth();
@@ -28,7 +29,7 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
 
         if (data.mongoUserId) {
           try {
-            const response = await axios.get(`http://localhost:8000/api/quizresponse/${data.mongoUserId}/${quizId}`);
+            const response = await axios.get(`${config.API_URL}/quizresponse/${data.mongoUserId}/${quizId}`);
             if (response.data) {
               if (response.data.status === "finished") {
                 setResponses({});
@@ -65,7 +66,7 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
     }, {});
 
     try {
-      await axios.post("http://localhost:8000/api/quizresponse/new", {
+      await axios.post(`${config.API_URL}/quizresponse/new`, {
         user_id: userId,
         quiz_id: quizId,
         responses: {},
@@ -84,7 +85,7 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
   useEffect(() => {
     const fetchQuizData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/quiz/${quizId}`);
+        const response = await axios.get(`${config.API_URL}/quiz/${quizId}`);
         setQuizData(response.data);
       } catch (error) {
         console.error("Error fetching quiz data:", error);
@@ -113,7 +114,7 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
 
   const saveProgress = async (responses, notes, lastQuestionIndex, status, totalScores = {}) => {
     try {
-      const response = await axios.put("http://localhost:8000/api/quizresponse", {
+      const response = await axios.put(`${config.API_URL}/quizresponse`, {
         user_id: mongoUserId,
         quiz_id: quizId,
         responses: responses,

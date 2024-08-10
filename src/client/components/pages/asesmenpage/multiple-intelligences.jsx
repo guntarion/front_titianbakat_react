@@ -2,13 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../header";
-import Footer from "../../footer";
 import QuizTypeOne from "../../Quiz/quiz-type-one";
-import QuizResult_MultipleIntelligences from "../../Quiz/quiz-result-multipleintelligences";
-import Followup_MultipleIntelligences from "../../Quiz/followup_multipleintelligences";
+import QuizResultMultipleIntelligences from "../../Quiz/quiz-result-multipleintelligences";
+import FollowupMultipleIntelligences from "../../Quiz/followup_multipleintelligences";
 import axios from "axios";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../../../../AuthContext"; 
+import FooterHome6 from "../../home/EyeCareHome/FooterHome6";
+import config from '../../../../config'; 
 
 import {
   img_mi_opening,
@@ -46,7 +47,7 @@ const MultipleIntelligencesAssessment = (props) => {
 
         if (data.mongoUserId) {
           try {
-            const response = await axios.get(`http://localhost:8000/api/quizresponse/${data.mongoUserId}/quiz_02_multipleintelligences`);
+            const response = await axios.get(`${config.API_URL}/quizresponse/${data.mongoUserId}/quiz_02_multipleintelligences`);
             if (response.data && response.data.status === "finished") {
               setTotalscores(response.data.total_scores);
               setHighestScoreType(Object.keys(response.data.total_scores).reduce((a, b) => response.data.total_scores[a] > response.data.total_scores[b] ? a : b));
@@ -115,10 +116,10 @@ const MultipleIntelligencesAssessment = (props) => {
             <div className="col-12">
               {hasQuizResult && !showQuiz ? (
                 <>
-                <QuizResult_MultipleIntelligences totalscores={totalscores} />
-                <Followup_MultipleIntelligences type={highestScoreType} category="aktivitas" />
-                <Followup_MultipleIntelligences type={highestScoreType} category="proyek" />
-                <Followup_MultipleIntelligences type={highestScoreType} category="kebiasaan" />
+                <QuizResultMultipleIntelligences totalscores={totalscores} />
+                <FollowupMultipleIntelligences type={highestScoreType} category="aktivitas" />
+                <FollowupMultipleIntelligences type={highestScoreType} category="proyek" />
+                <FollowupMultipleIntelligences type={highestScoreType} category="kebiasaan" />
                 </>
                 
               ) : (
@@ -126,23 +127,25 @@ const MultipleIntelligencesAssessment = (props) => {
                   {!showQuiz && (
                     <>
                       <img src={img_mi_opening} alt="" className="img-fluidme" />
-                      <h3 id="pengenalan-multiple-intelligences-dan-manfaatnya">Assessment Multiple Intelligences</h3>
+                      <br></br>
+                      <h2 id="pengenalan-multiple-intelligences-dan-manfaatnya">Assessment Multiple Intelligences</h2>
+                      <br></br>
                       <p><strong>Multiple Intelligences</strong> adalah teori yang dikembangkan oleh psikolog Howard Gardner, yang menyatakan bahwa kecerdasan manusia tidak hanya terbatas pada kemampuan kognitif seperti yang diukur oleh tes IQ tradisional. Gardner mengidentifikasi delapan jenis kecerdasan utama, yaitu: Linguistic, Logical-Mathematical, Spatial, Bodily-Kinesthetic, Musical, Interpersonal, Intrapersonal, dan Naturalist. Setiap individu memiliki kombinasi unik dari berbagai kecerdasan ini.</p>
                       <p><strong>Manfaat Mengetahui Multiple Intelligences</strong></p>
                       <ol>
                         <li>
                           <p><strong>Bagi Pelajar:</strong></p>
                           <ul>
-                            <li><strong>Penyesuaian Metode Belajar</strong>: Mengetahui tipe kecerdasan dapat membantu pelajar memahami cara belajar yang paling efektif bagi mereka, sehingga mereka dapat mencapai potensi penuh mereka dalam studi.</li>
-                            <li><strong>Pemilihan Kegiatan Ekstrakurikuler</strong>: Pelajar dapat memilih kegiatan ekstrakurikuler yang sesuai dengan kecerdasan dominan mereka, seperti bergabung dengan klub musik bagi yang memiliki kecerdasan musikal.</li>
+                            <li><i className="fas fa-circle-check" /> <strong>Penyesuaian Metode Belajar</strong>: Mengetahui tipe kecerdasan dapat membantu pelajar memahami cara belajar yang paling efektif bagi mereka, sehingga mereka dapat mencapai potensi penuh mereka dalam studi.</li>
+                            <li><i className="fas fa-circle-check" /> <strong>Pemilihan Kegiatan Ekstrakurikuler</strong>: Pelajar dapat memilih kegiatan ekstrakurikuler yang sesuai dengan kecerdasan dominan mereka, seperti bergabung dengan klub musik bagi yang memiliki kecerdasan musikal.</li>
                           </ul>
                         </li>
                         <br></br>
                         <li>
                           <p><strong>Bagi Pekerja:</strong></p>
                           <ul>
-                            <li><strong>Peningkatan Kinerja Kerja</strong>: Mengetahui kecerdasan yang dominan dapat membantu pekerja menemukan cara-cara terbaik untuk mengaplikasikan kemampuan mereka di tempat kerja, meningkatkan produktivitas dan kepuasan kerja.</li>
-                            <li><strong>Pengembangan Karier</strong>: Dengan memahami kecerdasan yang mereka miliki, pekerja dapat merencanakan jalur karier yang sesuai dengan kelebihan mereka dan mengembangkan keterampilan yang relevan.</li>
+                            <li><i className="fas fa-circle-check" /> <strong>Peningkatan Kinerja Kerja</strong>: Mengetahui kecerdasan yang dominan dapat membantu pekerja menemukan cara-cara terbaik untuk mengaplikasikan kemampuan mereka di tempat kerja, meningkatkan produktivitas dan kepuasan kerja.</li>
+                            <li><i className="fas fa-circle-check" /> <strong>Pengembangan Karier</strong>: Dengan memahami kecerdasan yang mereka miliki, pekerja dapat merencanakan jalur karier yang sesuai dengan kelebihan mereka dan mengembangkan keterampilan yang relevan.</li>
                           </ul>
                         </li>
                       </ol>
@@ -170,7 +173,7 @@ const MultipleIntelligencesAssessment = (props) => {
           </div>
         </div>
       </div>
-      <Footer {...props} />
+      <FooterHome6 {...props} />
     </div>
   );
 };

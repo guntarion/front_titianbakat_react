@@ -2,18 +2,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../header";
-import Footer from "../../footer";
+import FooterHome6 from "../../home/EyeCareHome/FooterHome6";
 import QuizTypeOne from "../../Quiz/quiz-type-one";
-import QuizResult_OccupationalThemes from "../../Quiz/quiz-result-occupationalthemes";
+import QuizResultOccupationalThemes from "../../Quiz/quiz-result-occupationalthemes";
 import axios from "axios";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../../../../AuthContext"; 
+import config from '../../../../config'; 
 
 import {
   img_riasec_opening,
 } from "../../imagepath";
-
-
 
 
 const OccupationalThemeAssessment = (props) => {
@@ -45,7 +44,7 @@ const OccupationalThemeAssessment = (props) => {
 
         if (data.mongoUserId) {
           try {
-            const response = await axios.get(`http://localhost:8000/api/quizresponse/${data.mongoUserId}/quiz_01_riasec`);
+            const response = await axios.get(`${config.API_URL}/quizresponse/${data.mongoUserId}/quiz_01_riasec`);
             if (response.data && response.data.status === "finished") {
               setTotalscores(response.data.total_scores);
               setHasQuizResult(true);
@@ -111,7 +110,7 @@ const OccupationalThemeAssessment = (props) => {
           <div className="row">
             <div className="col-12">
               {hasQuizResult && !showQuiz ? (
-                <QuizResult_OccupationalThemes totalscores={totalscores} />
+                <QuizResultOccupationalThemes totalscores={totalscores} />
               ) : (
                 <div>
                   {!showQuiz && (
@@ -164,7 +163,7 @@ const OccupationalThemeAssessment = (props) => {
           </div>
         </div>
       </div>
-      <Footer {...props} />
+      <FooterHome6 {...props} />
     </div>
   );
 };

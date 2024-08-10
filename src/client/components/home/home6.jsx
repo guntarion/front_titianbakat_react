@@ -50,7 +50,7 @@ const Home6 = (props) => {
               <div className="banner-header">
                 <p>For a Brighter Today and Tomorrow</p>
                 <h1>Orchestrating Natural and Nurtured Talents</h1>
-                <Link to="/patient/booking1" className="btn btn-light-blue">
+                <Link to="/asesmen/multiple-intelligences" className="btn btn-light-blue">
                   Temukan Bakatmu
                 </Link>
               </div>

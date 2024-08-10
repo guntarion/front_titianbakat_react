@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
+import config from '../../../config'; 
 
 const Followup_MultipleIntelligences = ({ type, category, updatePoints }) => {
   const [activities, setActivities] = useState([]);
@@ -13,7 +14,7 @@ const Followup_MultipleIntelligences = ({ type, category, updatePoints }) => {
   useEffect(() => {
     const fetchActivities = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/followup/${type}/${category}`);
+        const response = await axios.get(`${config.API_URL}/followup/${type}/${category}`);
         const activityList = response.data.split("__").filter(activity => activity.trim() !== "");
         setActivities(activityList);
       } catch (error) {

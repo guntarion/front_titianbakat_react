@@ -164,9 +164,9 @@ const handleLogout = async () => {
                       )}
                     </li>
                   )}
-                  {(role === "user" || role === "admin") && (
+                  {/* {(role === "user" || role === "admin") && ( */}
+                  {(role === "admin") && (
                     <>
-                      
                       <li>
                         <Link to="/user/dashboard">Profil Anda</Link>
                       </li>

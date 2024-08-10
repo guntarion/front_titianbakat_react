@@ -106,6 +106,16 @@ export { default as clinic_013 } from "../assets/images/clients/clinic-013.png";
 export { default as clinic_014 } from "../assets/images/clients/clinic-014.png";
 export { default as clinic_015 } from "../assets/images/clients/clinic-015.png";
 
+export { default as asesmen_09_assertive } from "../assets/images/asesmen/asesmen-09-assertive.png";
+export { default as asesmen_01_learning } from "../assets/images/asesmen/asesmen-01-learning.png";
+export { default as asesmen_02_holland } from "../assets/images/asesmen/asesmen-02-holland.png";
+export { default as asesmen_03_multipleintelligence } from "../assets/images/asesmen/asesmen-03-multipleintelligence.png";
+export { default as asesmen_04_emotionalquotient } from "../assets/images/asesmen/asesmen-04-emotionalquotient.png";
+export { default as asesmen_05_personalityelement } from "../assets/images/asesmen/asesmen-05-personalityelement.png";
+export { default as asesmen_06_hogwarts } from "../assets/images/asesmen/asesmen-06-hogwarts.png";
+export { default as asesmen_07_rational } from "../assets/images/asesmen/asesmen-07-rational.png";
+export { default as asesmen_08_anxious } from "../assets/images/asesmen/asesmen-08-anxious.png";
+
 export { default as heart_bg } from "../assets/images/bg/heart-bg.png";
 // export { default as health_care_1 } from "../assets/images/icons/health-care-1.png";
 // export { default as heart_2 } from "../assets/images/icons/heart-2.svg";
