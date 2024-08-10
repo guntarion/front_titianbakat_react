@@ -49,7 +49,7 @@ const Chart_MultipleIntelligences = ({ totalscores }) => {
       },
       title: {
         display: true,
-        text: 'Multiple Intelligences'
+        text: 'Multiple Intelligences berbasis Kuesioner'
       }
     },
     scales: {

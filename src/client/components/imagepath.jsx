@@ -1,5 +1,6 @@
 
 
+
 export { default as img_riasec_realistic } from "../assets/images/quiz/riasec_realistic.png";
 export { default as img_riasec_artistic } from "../assets/images/quiz/riasec_artistic.png";
 export { default as img_riasec_conventional } from "../assets/images/quiz/riasec_conventional.png";
@@ -8,6 +9,7 @@ export { default as img_riasec_investigative } from "../assets/images/quiz/riase
 export { default as img_riasec_social } from "../assets/images/quiz/riasec_social.png";
 export { default as img_riasec_opening } from "../assets/images/quiz/riasec_opening.jpg";
 export { default as img_mi_opening } from "../assets/images/quiz/mi_opening.jpg";
+export { default as img_mi_result } from "../assets/images/quiz/mi_all.jpg";
 export { default as img_mi_spasial } from "../assets/images/quiz/mi_spatial.jpg";
 export { default as img_mi_interpersonal } from "../assets/images/quiz/mi_interpersonal.jpg";
 export { default as img_mi_intrapersonal } from "../assets/images/quiz/mi_intrapersonal.jpg";

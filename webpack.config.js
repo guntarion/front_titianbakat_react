@@ -20,7 +20,7 @@ module.exports = (env, argv) => {
       publicPath: publicPath,
     },
     devServer: {
-      port: 3001,
+      port: 3000,
       historyApiFallback: true,
       onAfterSetupMiddleware() {
         opn(`http://localhost:${this.port}/index`);

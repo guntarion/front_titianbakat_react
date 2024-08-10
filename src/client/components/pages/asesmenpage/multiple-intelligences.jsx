@@ -117,9 +117,9 @@ const MultipleIntelligencesAssessment = (props) => {
               {hasQuizResult && !showQuiz ? (
                 <>
                 <QuizResultMultipleIntelligences totalscores={totalscores} />
-                <FollowupMultipleIntelligences type={highestScoreType} category="aktivitas" />
+                {/* <FollowupMultipleIntelligences type={highestScoreType} category="aktivitas" />
                 <FollowupMultipleIntelligences type={highestScoreType} category="proyek" />
-                <FollowupMultipleIntelligences type={highestScoreType} category="kebiasaan" />
+                <FollowupMultipleIntelligences type={highestScoreType} category="kebiasaan" /> */}
                 </>
                 
               ) : (
