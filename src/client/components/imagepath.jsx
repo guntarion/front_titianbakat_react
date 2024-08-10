@@ -19,6 +19,8 @@ export { default as img_mi_logika } from "../assets/images/quiz/mi_logics.jpg";
 export { default as img_mi_musikal } from "../assets/images/quiz/mi_musical.jpg";
 export { default as img_mi_naturalis } from "../assets/images/quiz/mi_naturalist.jpg";
 
+export { default as email_kami } from "../assets/images/email-kami-titianbakat.jpg";
+
 
 export { default as doctorthumb02 } from "../assets/images/doctors/doctor-thumb-02.jpg";
 export { default as coming_soon } from "../assets/images/coming-soon.png";

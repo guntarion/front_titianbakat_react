@@ -88,6 +88,9 @@ function FooterHome6() {
                   <div className="copyright-menu">
                     <ul className="policy-menu">
                       <li>
+                        <Link to="/contactus">Hubungi Kami</Link>
+                      </li>
+                      <li>
                         <Link to="/terms-privacy-policy">Terms & Privacy Policy</Link>
                       </li>
                     </ul>

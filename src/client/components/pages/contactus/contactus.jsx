@@ -1,10 +1,41 @@
-import React from "react";
+// src/client/components/pages/contactus/contactus.jsx
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import Header from "../../header";
-import Footer from "../../footer";
-import FeatherIcon from "feather-icons-react";
+import FooterHome6 from "../../home/EyeCareHome/FooterHome6";
+import config from '../../../../config';
+import {
+  email_kami,
+} from "../../imagepath";
 
 const Contactus = (props) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${config.API_URL}/send-email`, formData);
+      if (response.status === 200) {
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      setSubmitStatus("error");
+    }
+  };
+
   return (
     <>
       <Header {...props} />
@@ -15,14 +46,14 @@ const Contactus = (props) => {
           <div className="container">
             <div className="row align-items-center inner-banner">
               <div className="col-md-12 col-12 text-center">
-                <h2 className="breadcrumb-title">Contact Us</h2>
+                <h2 className="breadcrumb-title">Hubungi Kami</h2>
                 <nav aria-label="breadcrumb" className="page-breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link to="/index-2">Home</Link>
+                      <Link to="/index-6">Home</Link>
                     </li>
                     <li className="breadcrumb-item" aria-current="page">
-                      Contact Us
+                      Hubungi Kami
                     </li>
                   </ol>
                 </nav>
@@ -37,110 +68,59 @@ const Contactus = (props) => {
             <div className="row">
               <div className="col-lg-5 col-md-12">
                 <div className="section-inner-header contact-inner-header">
-                  <h6>Get in touch</h6>
-                  <h2>Have Any Question?</h2>
+                  <h6>Hubungi Kami</h6>
+                  <h2>Ada Pertanyaan atau Masukan?</h2>
                 </div>
+
                 <div className="card contact-card">
                   <div className="card-body">
-                    <div className="contact-icon">
-                      <i>
-                        <FeatherIcon
-                          icon="map-pin"
-                          style={{ width: "44px", height: "44px" }}
-                        />
-                      </i>
-                    </div>
-                    <div className="contact-details">
-                      <h4>Address</h4>
-                      <p>8432 Mante Highway, Aminaport, USA</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="card contact-card">
-                  <div className="card-body">
-                    <div className="contact-icon">
-                      <i>
-                        <FeatherIcon
-                          icon="phone"
-                          style={{ width: "44px", height: "44px" }}
-                        />
-                      </i>
-                    </div>
-                    <div className="contact-details">
-                      <h4>Phone Number</h4>
-                      <p>+1 315 369 5943</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="card contact-card">
-                  <div className="card-body">
-                    <div className="contact-icon">
-                      <i>
-                        <FeatherIcon
-                          icon="mail"
-                          style={{ width: "44px", height: "44px" }}
-                        />
-                      </i>
-                    </div>
-                    <div className="contact-details">
-                      <h4>Email Address</h4>
-                      <p>doccure@example.com</p>
-                    </div>
+                    <img src={email_kami} alt="Email Us" className="img-fluid" />
                   </div>
                 </div>
               </div>
               <div className="col-lg-7 col-md-12 d-flex">
                 <div className="card contact-form-card w-100">
                   <div className="card-body">
-                    <form action="#">
+                    <form onSubmit={handleSubmit}>
                       <div className="row">
                         <div className="col-md-6">
                           <div className="form-group">
-                            <label>Name</label>
+                            <label>Nama</label>
                             <input
                               type="text"
                               className="form-control"
-                              placeholder="Enter Your Name"
+                              placeholder="Infokan Nama Anda"
+                              name="name"
+                              value={formData.name}
+                              onChange={handleInputChange}
+                              required
                             />
                           </div>
                         </div>
                         <div className="col-md-6">
                           <div className="form-group">
-                            <label>Email Address</label>
+                            <label>Alamat Email</label>
                             <input
-                              type="text"
+                              type="email"
                               className="form-control"
-                              placeholder="Enter Email Address"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="form-group">
-                            <label>Phone Number</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Enter Phone Number"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="form-group">
-                            <label>Services</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Enter Services"
+                              placeholder="Alamat Email Anda"
+                              name="email"
+                              value={formData.email}
+                              onChange={handleInputChange}
+                              required
                             />
                           </div>
                         </div>
                         <div className="col-md-12">
                           <div className="form-group">
-                            <label>Message</label>
+                            <label>Pesan</label>
                             <textarea
                               className="form-control"
-                              placeholder="Enter your comments"
-                              defaultValue={""}
+                              placeholder="Silahkan sampaikan Pesan Anda"
+                              name="message"
+                              value={formData.message}
+                              onChange={handleInputChange}
+                              required
                             />
                           </div>
                         </div>
@@ -150,12 +130,22 @@ const Contactus = (props) => {
                               type="submit"
                               className="btn btn-primary prime-btn"
                             >
-                              Send Message
+                              Kirim Pesan
                             </button>
                           </div>
                         </div>
                       </div>
                     </form>
+                    {submitStatus === "success" && (
+                      <div className="alert alert-success mt-3">
+                        Pesan Anda telah terkirim. Terima kasih telah menghubungi kami!
+                      </div>
+                    )}
+                    {submitStatus === "error" && (
+                      <div className="alert alert-danger mt-3">
+                        Terjadi kesalahan saat mengirim pesan. Silakan coba lagi nanti.
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -163,18 +153,8 @@ const Contactus = (props) => {
           </div>
         </section>
         {/* /Contact Us */}
-        {/* Contact Map */}
-        <section className="contact-map d-flex">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3193.7301009561315!2d-76.13077892422932!3d36.82498697224007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89bae976cfe9f8af%3A0xa61eac05156fbdb9!2sBeachStreet%20USA!5e0!3m2!1sen!2sin!4v1669777904208!5m2!1sen!2sin"
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </section>
-        {/* /Contact Map */}
       </>
-      <Footer {...props} />
+      <FooterHome6 {...props} />
     </>
   );
 };
