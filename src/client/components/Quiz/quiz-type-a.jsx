@@ -1,13 +1,12 @@
-// src/client/components/quiz-type-one/quiz-type-one.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from 'prop-types';
-import "./quiz-type-one.css";
+import "./quiz-type-a.css";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../../../AuthContext";
-import config from '../../../config'; 
+import config from '../../../config';
 
-const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
+const QuizTypeA = ({ quizId, scoreTypes, onQuizComplete }) => {
   const { user } = useAuth();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [noteText, setNoteText] = useState("");
@@ -15,7 +14,6 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
   const [mongoUserId, setMongoUserId] = useState("");
   const [responses, setResponses] = useState({});
   const [notes, setNotes] = useState({});
-  // const [status, setStatus] = useState("in progress");
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -29,7 +27,15 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
 
         if (data.mongoUserId) {
           try {
-            const response = await axios.get(`${config.API_URL}/quizresponse/${data.mongoUserId}/${quizId}`);
+            const url = `${config.API_URL}/quizresponse/${data.mongoUserId}/${quizId}`;
+            console.log("Fetching quiz response - URL:", url);
+            console.log("Fetching quiz response - mongoUserId:", data.mongoUserId);
+            console.log("Fetching quiz response - quizId:", quizId);
+
+            const response = await axios.get(url);
+            console.log("Quiz response data:", response.data);
+            
+            
             if (response.data) {
               if (response.data.status === "finished") {
                 setResponses({});
@@ -59,27 +65,37 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
     }
   }, [user, quizId]);
 
-  // Executed the first time the quiz component mounts
   const createNewQuizResponse = async (userId, quizId) => {
     const initialScores = scoreTypes.reduce((acc, type) => {
       acc[type] = 0;
       return acc;
     }, {});
 
+    const requestBody = {
+      user_id: userId,
+      quiz_id: quizId,
+      responses: {},
+      notes: {},
+      status: "in progress",
+      last_question_index: 0,
+      total_scores: initialScores,
+      started_at: new Date(),
+      finished_at: null,
+    };
+
+    console.log("Creating new quiz response - Request body:", JSON.stringify(requestBody, null, 2));
+
     try {
-      await axios.post(`${config.API_URL}/quizresponse/new`, {
-        user_id: userId,
-        quiz_id: quizId,
-        responses: {},
-        notes: {},
-        status: "in progress",
-        last_question_index: 0,
-        total_scores: initialScores,
-        started_at: new Date(),
-        finished_at: null,
-      });
+      const url = `${config.API_URL}/quizresponse/new`;
+      console.log("Creating new quiz response - URL:", url);
+      const response = await axios.post(url, requestBody);
+      console.log("New quiz response created:", response.data);
     } catch (error) {
       console.error("Error creating new quiz response:", error);
+      if (error.response) {
+        console.error("Error response data:", error.response.data);
+        console.error("Error response status:", error.response.status);
+      }
     }
   };
 
@@ -97,12 +113,12 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
   }, [quizId]);
 
   const handleAnswerClick = (score) => {
-    const newResponses = { ...responses, [quizData.statements[currentQuestionIndex].number]: score };
-    const newNotes = { ...notes, [quizData.statements[currentQuestionIndex].number]: noteText };
+    const newResponses = { ...responses, [quizData.quiz_statements[currentQuestionIndex].id]: score };
+    const newNotes = { ...notes, [quizData.quiz_statements[currentQuestionIndex].id]: noteText };
     setResponses(newResponses);
     setNotes(newNotes);
 
-    if (currentQuestionIndex < quizData.statements.length - 1) {
+    if (currentQuestionIndex < quizData.quiz_statements.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setNoteText("");
       saveProgress(newResponses, newNotes, currentQuestionIndex + 1, "in progress");
@@ -119,7 +135,7 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
         user_id: mongoUserId,
         quiz_id: quizId,
         responses: responses,
-        notes: notes, // Add notes here
+        notes: notes,
         status: status,
         last_question_index: lastQuestionIndex,
         total_scores: totalScores,
@@ -138,10 +154,10 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
       return acc;
     }, {});
 
-    for (const [statementNumber, score] of Object.entries(responses)) {
-      const statement = quizData.statements.find((s) => s.number === parseInt(statementNumber));
+    for (const [statementId, score] of Object.entries(responses)) {
+      const statement = quizData.quiz_statements.find((s) => s.id === statementId);
       if (statement) {
-        scores[statement.type] += score;
+        scores[statement.type] += score * statement.polarity;
       }
     }
 
@@ -150,11 +166,11 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
 
   if (!quizData) return <div>Loading...</div>;
 
-  if (currentQuestionIndex >= quizData.statements.length) {
+  if (currentQuestionIndex >= quizData.quiz_statements.length) {
     return <div>Error: Invalid question index</div>;
   }
 
-  const progress = ((currentQuestionIndex + 1) / quizData.statements.length) * 100;
+  const progress = ((currentQuestionIndex + 1) / quizData.quiz_statements.length) * 100;
 
   return (
     <div className="quiz-container">
@@ -171,7 +187,7 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
         </div>
       </div>
       <div className="question-container">
-        <h3>{quizData.statements[currentQuestionIndex].statement}</h3>
+        <h3>{quizData.quiz_statements[currentQuestionIndex].statement_id}</h3>
         <div className="options">
           {["Nggak Banget", "Nggak", "Netral", "Iya", "Iya Banget"].map((option, index) => (
             <button key={option} onClick={() => handleAnswerClick(index - 2)}>
@@ -187,15 +203,15 @@ const QuizTypeOne = ({ quizId, scoreTypes, onQuizComplete }) => {
           className="mt-3 answer-input"
         />
       </div>
-      <p style={{ textAlign: "center" }}>{currentQuestionIndex + 1} dari {quizData.statements.length} pertanyaan terlampaui.</p>
+      <p style={{ textAlign: "center" }}>{currentQuestionIndex + 1} dari {quizData.quiz_statements.length} pertanyaan terlampaui.</p>
     </div>
   );
 };
 
-QuizTypeOne.propTypes = {
+QuizTypeA.propTypes = {
   quizId: PropTypes.string.isRequired,
   scoreTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
   onQuizComplete: PropTypes.func.isRequired,
 };
 
-export default QuizTypeOne;
+export default QuizTypeA;

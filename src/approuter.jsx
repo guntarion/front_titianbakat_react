@@ -14,17 +14,21 @@ import TBUserSignup from "./client/components/pages/authentication/user-signup.j
 import TermsPrivasiPolicy from "./client/components/pages/termsprivacypolicy";
 import OccupationalThemeAssessment from "./client/components/pages/asesmenpage/occupational-themes";
 import MultipleIntelligencesAssessment from "./client/components/pages/asesmenpage/multiple-intelligences";
+import BigFivePersonalityAssessment from "./client/components/pages/asesmenpage/big-five-personality";
+import LearningStyleAssessment from "./client/components/pages/asesmenpage/learning-style-page";
+
 import ForgotPasswordSendEmail from "./client/components/pages/authentication/forgot-password-send-email.jsx";
 import Contactus from "./client/components/pages/contactus/contactus";
 
+
 const AppRouter = () => {
-  const { user } = useContext(AuthContext);
+  const { user, role } = useContext(AuthContext);
   // const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(false);
-  }, [user]);
+  }, [user, role]);
 
   if (isLoading) {
     return <div>Loading...</div>; // Show a loading indicator while checking authentication
@@ -45,6 +49,8 @@ const AppRouter = () => {
       <ProtectedRoute path="/user" component={RoutesForUser} role="user" />
       <ProtectedRoute path="/asesmen/occupational-themes" component={OccupationalThemeAssessment} />
       <ProtectedRoute path="/asesmen/multiple-intelligences" component={MultipleIntelligencesAssessment} />
+      <ProtectedRoute path="/asesmen/big-five-personality" component={BigFivePersonalityAssessment} />
+      <ProtectedRoute path="/asesmen/learning-style" component={LearningStyleAssessment} />
       <Route component={Home6} />
     </Switch>
   );

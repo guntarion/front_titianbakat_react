@@ -1,20 +1,19 @@
 import React from "react";
 import {
-  clinic_011,
-  clinic_012,
-  clinic_013,
-  clinic_015,
   eye_icon,
   eye_icon_01,
   asesmen_01_learning,
   asesmen_02_holland,
   asesmen_03_multipleintelligence,
-  asesmen_04_emotionalquotient,
-  asesmen_05_personalityelement,
-  asesmen_06_hogwarts,
-  asesmen_07_rational,
-  asesmen_08_anxious,
-  asesmen_09_assertive
+  asesmen_20_bigfive,
+  asesmen_21_16pf,
+  asesmen_22_personalityelement,
+  asesmen_23_eneagram,
+  asesmen_24_hogwarts,
+  asesmen_50_emotionalquotient,
+  asesmen_51_assertive,
+  asesmen_52_anxious,
+  asesmen_53_rational
 } from "../../imagepath";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
@@ -98,6 +97,72 @@ function SpecialtiesHome6() {
                     </h6>
                   </div>
                 </div>
+                <div className="item">
+                  <div className="special-item">
+                    <div className="special-img">
+                      <ProtectedLink to="/asesmen/big-five-personality">
+                        <img
+                          src={asesmen_20_bigfive}
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </ProtectedLink>
+                    </div>
+                    <div className="special-icon">
+                      <ProtectedLink to="/asesmen/big-five-personality">
+                        <i className="fa-solid fa-circle-chevron-right" />
+                      </ProtectedLink>
+                    </div>
+                    <h6>
+                      <ProtectedLink to="/asesmen/big-five-personality">Big Five Personality <br /> <span>[LOCKED]</span></ProtectedLink>
+                    </h6>
+                  </div>
+                </div>
+
+                <div className="item">
+                  <div className="special-item">
+                    <div className="special-img">
+                      <ProtectedLink to="/asesmen/multiple-intelligences">
+                        <img
+                          // src="assets/img/clinic/clinic-03.png"
+                          src={asesmen_23_eneagram}
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </ProtectedLink>
+                    </div>
+                    <div className="special-icon">
+                      <ProtectedLink to="/asesmen/multiple-intelligences">
+                        <i className="fa-solid fa-circle-chevron-right" />
+                      </ProtectedLink>
+                    </div>
+                    <h6>
+                      <ProtectedLink to="/asesmen/multiple-intelligences">Eneagram  <br /> <span>[OPEN]</span></ProtectedLink>
+                    </h6>
+                  </div>
+                </div>
+
+              <div className="item">
+                <div className="special-item">
+                  <div className="special-img">
+                    <ProtectedLink to="/asesmen/learning-style">
+                      <img
+                        src={asesmen_01_learning}
+                        alt=""
+                        className="img-fluid"
+                      />
+                    </ProtectedLink>
+                  </div>
+                  <div className="special-icon">
+                    <ProtectedLink to="/asesmen/learning-style">
+                      <i className="fa-solid fa-circle-chevron-right" />
+                    </ProtectedLink>
+                  </div>
+                  <h6>
+                    <ProtectedLink to="/asesmen/learning-style">Learning Styles <br /> <span>[LOCKED]</span></ProtectedLink>
+                  </h6>
+                </div>
+              </div>
 
                 <div className="item">
                   <div className="special-item">
@@ -121,35 +186,14 @@ function SpecialtiesHome6() {
                     </h6>
                   </div>
                 </div>
-                <div className="item">
-                  <div className="special-item">
-                    <div className="special-img">
-                      <ProtectedLink to="/index-6">
-                        <img
-                          // src="assets/img/clinic/clinic-01.png"
-                          src={asesmen_01_learning}
-                          alt=""
-                          className="img-fluid"
-                        />
-                      </ProtectedLink>
-                    </div>
-                    <div className="special-icon">
-                      <ProtectedLink to="/index-6">
-                        <i className="fa-solid fa-circle-chevron-right" />
-                      </ProtectedLink>
-                    </div>
-                    <h6>
-                      <ProtectedLink to="/index-6">Learning Styles <br /> <span>[LOCKED]</span></ProtectedLink>
-                    </h6>
-                  </div>
-                </div>
+                
                 <div className="item">
                   <div className="special-item">
                     <div className="special-img">
                       <ProtectedLink to="/index-6">
                         <img
                           // src="assets/img/clinic/clinic-05.png"
-                          src={asesmen_05_personalityelement}
+                          src={asesmen_22_personalityelement}
                           alt=""
                           className="img-fluid"
                         />
@@ -165,12 +209,13 @@ function SpecialtiesHome6() {
                     </h6>
                   </div>
                 </div>
+                
                 <div className="item">
                   <div className="special-item">
                     <div className="special-img">
                       <ProtectedLink to="/index-6">
                         <img
-                          src={asesmen_04_emotionalquotient}
+                          src={asesmen_50_emotionalquotient}
                           alt=""
                           className="img-fluid"
                         />
@@ -191,7 +236,7 @@ function SpecialtiesHome6() {
                     <div className="special-img">
                       <ProtectedLink to="/index-6">
                         <img
-                          src={asesmen_06_hogwarts}
+                          src={asesmen_24_hogwarts}
                           alt=""
                           className="img-fluid"
                         />
@@ -212,7 +257,7 @@ function SpecialtiesHome6() {
                     <div className="special-img">
                       <ProtectedLink to="/index-6">
                         <img
-                          src={asesmen_07_rational}
+                          src={asesmen_53_rational}
                           alt=""
                           className="img-fluid"
                         />
@@ -233,7 +278,7 @@ function SpecialtiesHome6() {
                     <div className="special-img">
                       <ProtectedLink to="/index-6">
                         <img
-                          src={asesmen_08_anxious}
+                          src={asesmen_52_anxious}
                           alt=""
                           className="img-fluid"
                         />
@@ -254,7 +299,28 @@ function SpecialtiesHome6() {
                     <div className="special-img">
                       <ProtectedLink to="/index-6">
                         <img
-                          src={asesmen_09_assertive}
+                          src={asesmen_21_16pf}
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </ProtectedLink>
+                    </div>
+                    <div className="special-icon">
+                      <ProtectedLink to="/index-6">
+                        <i className="fa-solid fa-circle-chevron-right" />
+                      </ProtectedLink>
+                    </div>
+                    <h6>
+                      <ProtectedLink to="/index-6">16 Personality Factors <br /> <span>[LOCKED]</span></ProtectedLink>
+                    </h6>
+                  </div>
+                </div>
+                <div className="item">
+                  <div className="special-item">
+                    <div className="special-img">
+                      <ProtectedLink to="/index-6">
+                        <img
+                          src={asesmen_51_assertive}
                           alt=""
                           className="img-fluid"
                         />

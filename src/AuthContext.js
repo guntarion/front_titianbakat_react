@@ -1,3 +1,4 @@
+// src/AuthContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types'; // Import PropTypes
 import { auth, db } from './firebase'; // Adjust the path as necessary

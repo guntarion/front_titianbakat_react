@@ -5,27 +5,33 @@ import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useAuth } from './AuthContext';
 
-const ProtectedRoute = ({ component: Component, role,  ...rest }) => {
-  const { user} = useAuth();
+const ProtectedRoute = ({ component: Component, role: requiredRole, ...rest }) => {
+  const { user, role } = useAuth();
 
   return (
-      <Route
-        {...rest}
-        render={(props) =>
-          user && user.role === role ? (
-            <Component {...props} />
-          ) : (
-            <Redirect to="/index-6" /> // Redirect to home page instead of login
-          )
+    <Route
+      {...rest}
+      render={(props) => {
+        if (!user) {
+          // User is not authenticated
+          return <Redirect to="/login-titian-bakat" />;
         }
-      />
-    );
-  };
 
+        if (requiredRole && role !== requiredRole) {
+          // User doesn't have the required role
+          return <Redirect to="/index-6" />;
+        }
+
+        // User is authenticated and has the required role (if specified)
+        return <Component {...props} />;
+      }}
+    />
+  );
+};
 
 ProtectedRoute.propTypes = {
   component: PropTypes.elementType.isRequired,
-  role: PropTypes.string.isRequired,
+  role: PropTypes.string, // Changed to optional
 };
 
 export default ProtectedRoute;

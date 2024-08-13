@@ -1,5 +1,18 @@
-
-
+// SKILL
+export { default as asesmen_01_learning } from "../assets/images/asesmen/asesmen-01-learning.png";
+export { default as asesmen_02_holland } from "../assets/images/asesmen/asesmen-02-holland.png";
+export { default as asesmen_03_multipleintelligence } from "../assets/images/asesmen/asesmen-03-multipleintelligence.png";
+// PERSONALITY
+export { default as asesmen_20_bigfive } from "../assets/images/asesmen/asesmen-20-bigfive.png";
+export { default as asesmen_21_16pf } from "../assets/images/asesmen/asesmen-21-16pf.png";
+export { default as asesmen_22_personalityelement } from "../assets/images/asesmen/asesmen-22-personalityelement.png";
+export { default as asesmen_23_eneagram } from "../assets/images/asesmen/asesmen-23-eneagram.png";
+export { default as asesmen_24_hogwarts } from "../assets/images/asesmen/asesmen-24-hogwarts.png";
+// PRODUCTIVITY
+export { default as asesmen_50_emotionalquotient } from "../assets/images/asesmen/asesmen-50-emotionalquotient.png";
+export { default as asesmen_51_assertive } from "../assets/images/asesmen/asesmen-51-assertive.png";
+export { default as asesmen_52_anxious } from "../assets/images/asesmen/asesmen-52-anxious.png";
+export { default as asesmen_53_rational } from "../assets/images/asesmen/asesmen-53-rational.png";
 
 export { default as img_riasec_realistic } from "../assets/images/quiz/riasec_realistic.png";
 export { default as img_riasec_artistic } from "../assets/images/quiz/riasec_artistic.png";
@@ -8,6 +21,9 @@ export { default as img_riasec_enterprising } from "../assets/images/quiz/riasec
 export { default as img_riasec_investigative } from "../assets/images/quiz/riasec_investigative.png";
 export { default as img_riasec_social } from "../assets/images/quiz/riasec_social.png";
 export { default as img_riasec_opening } from "../assets/images/quiz/riasec_opening.jpg";
+
+export { default as img_ls_opening } from "../assets/images/quiz/mi_opening.jpg";
+
 export { default as img_mi_opening } from "../assets/images/quiz/mi_opening.jpg";
 export { default as img_mi_result } from "../assets/images/quiz/mi_all.jpg";
 export { default as img_mi_spasial } from "../assets/images/quiz/mi_spatial.jpg";
@@ -18,8 +34,16 @@ export { default as img_mi_linguistik } from "../assets/images/quiz/mi_linguisti
 export { default as img_mi_logika } from "../assets/images/quiz/mi_logics.jpg";
 export { default as img_mi_musikal } from "../assets/images/quiz/mi_musical.jpg";
 export { default as img_mi_naturalis } from "../assets/images/quiz/mi_naturalist.jpg";
+export { default as img_bigfive_opening } from "../assets/images/quiz/bigfive-opening.jpg";
+export { default as img_bigfive_ext } from "../assets/images/quiz/bigfive-extraversion.jpg";
+export { default as img_bigfive_agr } from "../assets/images/quiz/bigfive-agreeableness.jpg";
+export { default as img_bigfive_est } from "../assets/images/quiz/bigfive-emotionalstability.jpg";
+export { default as img_bigfive_csn } from "../assets/images/quiz/bigfive-conscientiousness.jpg";
+export { default as img_bigfive_opn } from "../assets/images/quiz/bigfive-openness.jpg";
+
 
 export { default as email_kami } from "../assets/images/email-kami-titianbakat.jpg";
+
 
 
 export { default as doctorthumb02 } from "../assets/images/doctors/doctor-thumb-02.jpg";
@@ -110,15 +134,7 @@ export { default as clinic_013 } from "../assets/images/clients/clinic-013.png";
 export { default as clinic_014 } from "../assets/images/clients/clinic-014.png";
 export { default as clinic_015 } from "../assets/images/clients/clinic-015.png";
 
-export { default as asesmen_09_assertive } from "../assets/images/asesmen/asesmen-09-assertive.png";
-export { default as asesmen_01_learning } from "../assets/images/asesmen/asesmen-01-learning.png";
-export { default as asesmen_02_holland } from "../assets/images/asesmen/asesmen-02-holland.png";
-export { default as asesmen_03_multipleintelligence } from "../assets/images/asesmen/asesmen-03-multipleintelligence.png";
-export { default as asesmen_04_emotionalquotient } from "../assets/images/asesmen/asesmen-04-emotionalquotient.png";
-export { default as asesmen_05_personalityelement } from "../assets/images/asesmen/asesmen-05-personalityelement.png";
-export { default as asesmen_06_hogwarts } from "../assets/images/asesmen/asesmen-06-hogwarts.png";
-export { default as asesmen_07_rational } from "../assets/images/asesmen/asesmen-07-rational.png";
-export { default as asesmen_08_anxious } from "../assets/images/asesmen/asesmen-08-anxious.png";
+
 
 export { default as heart_bg } from "../assets/images/bg/heart-bg.png";
 // export { default as health_care_1 } from "../assets/images/icons/health-care-1.png";
