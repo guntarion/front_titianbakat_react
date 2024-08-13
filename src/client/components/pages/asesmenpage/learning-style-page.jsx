@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../header';
 import QuizTypeA from '../../Quiz/quiz-type-a';
-import QuizResult from '../../Quiz/quiz-type-a-result';
+import QuizResult from '../../Quiz/Quiz-Result/result-learningstyle';
 import axios from 'axios';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../../../../AuthContext";

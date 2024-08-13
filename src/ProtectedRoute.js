@@ -12,13 +12,23 @@ const ProtectedRoute = ({ component: Component, role: requiredRole, ...rest }) =
     <Route
       {...rest}
       render={(props) => {
-        if (!user) {
-          // User is not authenticated
-          return <Redirect to="/login-titian-bakat" />;
+        // Allow access to the home page for all users
+        if (props.location.pathname === '/index-6' || props.location.pathname === '/') {
+          return <Component {...props} />;
         }
 
+        // For other routes, check authentication
+        if (!user) {
+          // User is not authenticated, redirect to login
+          return <Redirect to={{
+            pathname: "/login-titian-bakat",
+            state: { from: props.location }
+          }} />;
+        }
+
+        // User is authenticated, check for required role if specified
         if (requiredRole && role !== requiredRole) {
-          // User doesn't have the required role
+          // User doesn't have the required role, redirect to home
           return <Redirect to="/index-6" />;
         }
 
@@ -31,7 +41,11 @@ const ProtectedRoute = ({ component: Component, role: requiredRole, ...rest }) =
 
 ProtectedRoute.propTypes = {
   component: PropTypes.elementType.isRequired,
-  role: PropTypes.string, // Changed to optional
+  role: PropTypes.string, // Optional
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+    state: PropTypes.object
+  })
 };
 
 export default ProtectedRoute;

@@ -1,7 +1,7 @@
 // src/client/components/Quiz/quiz-result-multipleintelligences.jsx
 import React from "react";
 import PropTypes from "prop-types";
-import ChartMultipleIntelligences from "./Chart_MultipleIntelligences";
+import ChartMultipleIntelligences from "../Quiz-Chart/chart_multipieIntelligences";
 
 import {
   img_mi_result,
@@ -13,7 +13,7 @@ import {
   img_mi_logika,
   img_mi_musikal,
   img_mi_naturalis,
-} from "../imagepath";
+} from "../../imagepath";
 
 const karakteristik = {
 type_logika: {

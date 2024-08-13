@@ -7,6 +7,9 @@ import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../../../AuthContext";
+import axios from 'axios';
+import config from '../../../../config';
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 const translateFirebaseError = (errorCode) => {
   switch (errorCode) {
@@ -35,12 +38,17 @@ const LoginTitianBakat = () => {
   const inputRef = useRef();
 
   useEffect(() => {
-    const savedUser = JSON.parse(localStorage.getItem("user")) || JSON.parse(sessionStorage.getItem("user"));
-    if (savedUser && window.location.pathname !== "/login-titian-bakat") {
-      setUser(savedUser);
-      history.push("/index-6");
-    }
-  }, [setUser, history]);
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        await handleSuccessfulAuth(user);
+        console.log("🔰 User authenticated:", user);
+        toast.success("Login successful!");
+        history.push("/index-6");
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -49,10 +57,56 @@ const LoginTitianBakat = () => {
     }
   };
 
+  const checkCreateUser = async (user) => {
+    try {
+      const response = await axios.post(`${config.API_URL}/users/check-create`, {
+        alamatEmail: user.email,
+        role: "user",
+        namaLengkap: user.displayName || "",
+        userPhoto: user.photoURL || "",
+      });
+      return response.data.id;
+    } catch (error) {
+      console.error("Error checking/creating user:", error);
+      throw error;
+    }
+  };
+
+  const handleSuccessfulAuth = async (user) => {
+    try {
+      console.log("handleSuccessfulAuth called with user:", user);
+      const mongoUserId = await checkCreateUser(user);
+      console.log("mongoUserId received:", mongoUserId);
+
+      const db = getFirestore();
+      await setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        mongoUserId,
+        role: "user"
+      }, { merge: true });
+      console.log("Firestore document set successfully");
+
+      setUser(user);
+      if (rememberMe) {
+        localStorage.setItem("user", JSON.stringify(user));
+      } else {
+        sessionStorage.setItem("user", JSON.stringify(user));
+      }
+      console.log("User set in state and storage");
+
+      toast.success("Login berhasil!");
+      history.push("/index-6");
+    } catch (error) {
+      console.error("Error in handleSuccessfulAuth:", error);
+      toast.error("Terjadi kesalahan saat memproses login. Silakan coba lagi.");
+    }
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      await handleSuccessfulAuth(userCredential.user);
       setUser(userCredential.user); // Store user info in context
       if (rememberMe) {
         localStorage.setItem("user", JSON.stringify(userCredential.user));
@@ -71,18 +125,15 @@ const LoginTitianBakat = () => {
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      const userCredential = await signInWithPopup(auth, provider);
-      setUser(userCredential.user); // Store user info in context
-      if (rememberMe) {
-        localStorage.setItem("user", JSON.stringify(userCredential.user));
-      } else {
-        sessionStorage.setItem("user", JSON.stringify(userCredential.user));
-      }
-      toast.success("Login successful!");
-      history.push("/index-6"); // Redirect to home or another page after successful login
-    } catch (err) {
-      setError(err.message);
-      toast.error(err.message);
+      const result = await signInWithPopup(auth, provider);
+      console.log("Google sign-in successful:", result.user);
+      // The signed-in user info.
+      const user = result.user;
+      await handleSuccessfulAuth(user);
+    } catch (error) {
+      console.error("Error during Google sign-in:", error);
+      setError(error.message);
+      toast.error(error.message);
     }
   };
 

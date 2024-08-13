@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Header from "../../header";
 import FooterHome6 from "../../home/EyeCareHome/FooterHome6";
 import QuizTypeOne from "../../Quiz/quiz-type-one";
-import QuizResultOccupationalThemes from "../../Quiz/quiz-result-occupationalthemes";
+import QuizResultOccupationalThemes from "../../Quiz/Quiz-Result/result-occupationalthemes";
 import axios from "axios";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../../../../AuthContext"; 

@@ -1,69 +1,96 @@
+
+// src/client/components/Quiz/quiz-type-a.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from 'prop-types';
 import "./quiz-type-a.css";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { useAuth } from "../../../AuthContext";
 import config from '../../../config';
 
 const QuizTypeA = ({ quizId, scoreTypes, onQuizComplete }) => {
-  const { user } = useAuth();
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [noteText, setNoteText] = useState("");
-  const [quizData, setQuizData] = useState(null);
-  const [mongoUserId, setMongoUserId] = useState("");
-  const [responses, setResponses] = useState({});
-  const [notes, setNotes] = useState({});
+const { user } = useAuth();
+const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+const [noteText, setNoteText] = useState("");
+const [quizData, setQuizData] = useState(null);
+const [mongoUserId, setMongoUserId] = useState("");
+const [responses, setResponses] = useState({});
+const [notes, setNotes] = useState({});
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const db = getFirestore();
-      const docRef = doc(db, "users", user.uid);
+useEffect(() => {
+  const fetchUserData = async () => {
+    if (!user) {
+      console.log("❌ No user authenticated");
+      return;
+    }
+
+    console.log("🔑 Authenticated user ID:", user.uid);
+
+    const db = getFirestore();
+    const docRef = doc(db, "users", user.uid);
+
+    try {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
+        console.log("📄 User document exists");
         const data = docSnap.data();
-        setMongoUserId(data.mongoUserId || "");
+        console.log("📋 User data:", data);
 
         if (data.mongoUserId) {
-          try {
-            const url = `${config.API_URL}/quizresponse/${data.mongoUserId}/${quizId}`;
-            console.log("Fetching quiz response - URL:", url);
-            console.log("Fetching quiz response - mongoUserId:", data.mongoUserId);
-            console.log("Fetching quiz response - quizId:", quizId);
+          setMongoUserId(data.mongoUserId);
+        } else {
+          console.log("⚠️ No MongoDB User ID found, creating one");
+          const mongoUserId = await checkCreateUser(user);
+          await setDoc(docRef, { mongoUserId }, { merge: true });
+          setMongoUserId(mongoUserId);
+        }
 
-            const response = await axios.get(url);
-            console.log("Quiz response data:", response.data);
-            
-            
-            if (response.data) {
-              if (response.data.status === "finished") {
-                setResponses({});
-                setNotes({});
-                setCurrentQuestionIndex(0);
-                await createNewQuizResponse(data.mongoUserId, quizId);
-              } else {
-                setResponses(response.data.responses || {});
-                setNotes(response.data.notes || {});
-                setCurrentQuestionIndex(response.data.last_question_index || 0);
-              }
-            }
-          } catch (error) {
-            if (error.response && error.response.status === 404) {
-              console.log("Quiz response not found, starting a new one.");
-              await createNewQuizResponse(data.mongoUserId, quizId);
-            } else {
-              console.error("Error fetching quiz response:", error);
-            }
+        // Proceed with fetching quiz responses
+        try {
+          const url = `${config.API_URL}/quiz-responses/${mongoUserId}/${quizId}`;
+          console.log("🔍 Fetching quiz response - URL:", url);
+          const response = await axios.get(url);
+          console.log("📊 Quiz response data:", response.data);
+
+          if (response.data) {
+            setResponses(response.data.responses || {});
+            setNotes(response.data.notes || {});
+            setCurrentQuestionIndex(response.data.last_question_index || 0);
+          }
+        } catch (error) {
+          if (error.response && error.response.status === 404) {
+            console.log("🆕 Quiz response not found, creating a new one.");
+            await createNewQuizResponse(mongoUserId, quizId);
+          } else {
+            console.error("❌ Error fetching quiz response:", error);
           }
         }
+      } else {
+        console.log("❌ No Firestore document found for this user");
       }
-    };
-
-    if (user) {
-      fetchUserData();
+    } catch (error) {
+      console.error("❌ Error fetching Firestore document:", error);
     }
-  }, [user, quizId]);
+  };
+
+  fetchUserData();
+}, [user, quizId]);
+
+    const checkCreateUser = async (user) => {
+    try {
+        const response = await axios.post(`${config.API_URL}/users/check-create`, {
+        alamatEmail: user.email,
+        role: "user",
+        namaLengkap: user.displayName || "",
+        userPhoto: user.photoURL || "",
+        });
+        return response.data.id;
+    } catch (error) {
+        console.error("Error checking/creating user:", error);
+        throw error;
+    }
+    };   
 
   const createNewQuizResponse = async (userId, quizId) => {
     const initialScores = scoreTypes.reduce((acc, type) => {
@@ -86,7 +113,7 @@ const QuizTypeA = ({ quizId, scoreTypes, onQuizComplete }) => {
     console.log("Creating new quiz response - Request body:", JSON.stringify(requestBody, null, 2));
 
     try {
-      const url = `${config.API_URL}/quizresponse/new`;
+      const url = `${config.API_URL}/quiz-responses`;
       console.log("Creating new quiz response - URL:", url);
       const response = await axios.post(url, requestBody);
       console.log("New quiz response created:", response.data);
@@ -112,9 +139,18 @@ const QuizTypeA = ({ quizId, scoreTypes, onQuizComplete }) => {
     fetchQuizData();
   }, [quizId]);
 
-  const handleAnswerClick = (score) => {
-    const newResponses = { ...responses, [quizData.quiz_statements[currentQuestionIndex].id]: score };
-    const newNotes = { ...notes, [quizData.quiz_statements[currentQuestionIndex].id]: noteText };
+  const handleAnswerClick = (index) => {
+    let score;
+    const statement = quizData.quiz_statements[currentQuestionIndex];
+
+    if (statement.polarity === 1) {
+      score = index + 1; // For positive polarity, score is 1 to 5
+    } else {
+      score = 5 - index; // For negative polarity, score is 5 to 1
+    }
+
+    const newResponses = { ...responses, [statement.id]: score };
+    const newNotes = { ...notes, [statement.id]: noteText };
     setResponses(newResponses);
     setNotes(newNotes);
 
@@ -131,7 +167,9 @@ const QuizTypeA = ({ quizId, scoreTypes, onQuizComplete }) => {
 
   const saveProgress = async (responses, notes, lastQuestionIndex, status, totalScores = {}) => {
     try {
-      const response = await axios.put(`${config.API_URL}/quizresponse`, {
+      const url = `${config.API_URL}/quiz-responses/${mongoUserId}/${quizId}`;
+      console.log("💾 Saving progress - URL:", url);
+      const requestBody = {
         user_id: mongoUserId,
         quiz_id: quizId,
         responses: responses,
@@ -141,10 +179,12 @@ const QuizTypeA = ({ quizId, scoreTypes, onQuizComplete }) => {
         total_scores: totalScores,
         started_at: new Date(),
         finished_at: status === "finished" ? new Date() : null,
-      });
-      console.log("Progress saved:", response.data);
+      };
+      console.log("📤 Save progress request body:", JSON.stringify(requestBody, null, 2));
+      const response = await axios.put(url, requestBody);
+      console.log("✅ Progress saved:", response.data);
     } catch (error) {
-      console.error("Error saving progress:", error);
+      console.error("❌ Error saving progress:", error);
     }
   };
 
@@ -157,7 +197,7 @@ const QuizTypeA = ({ quizId, scoreTypes, onQuizComplete }) => {
     for (const [statementId, score] of Object.entries(responses)) {
       const statement = quizData.quiz_statements.find((s) => s.id === statementId);
       if (statement) {
-        scores[statement.type] += score * statement.polarity;
+        scores[statement.type] += score; 
       }
     }
 
@@ -190,7 +230,7 @@ const QuizTypeA = ({ quizId, scoreTypes, onQuizComplete }) => {
         <h3>{quizData.quiz_statements[currentQuestionIndex].statement_id}</h3>
         <div className="options">
           {["Nggak Banget", "Nggak", "Netral", "Iya", "Iya Banget"].map((option, index) => (
-            <button key={option} onClick={() => handleAnswerClick(index - 2)}>
+            <button key={option} onClick={() => handleAnswerClick(index)}>
               {option}
             </button>
           ))}

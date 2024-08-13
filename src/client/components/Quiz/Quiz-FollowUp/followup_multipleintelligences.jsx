@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
-import config from '../../../config'; 
+import config from '../../../../config'; 
 
 const Followup_MultipleIntelligences = ({ type, category, updatePoints }) => {
   const [activities, setActivities] = useState([]);

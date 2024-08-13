@@ -13,38 +13,55 @@ export { default as asesmen_50_emotionalquotient } from "../assets/images/asesme
 export { default as asesmen_51_assertive } from "../assets/images/asesmen/asesmen-51-assertive.png";
 export { default as asesmen_52_anxious } from "../assets/images/asesmen/asesmen-52-anxious.png";
 export { default as asesmen_53_rational } from "../assets/images/asesmen/asesmen-53-rational.png";
+// img_101_learningstyle
+export { default as img_ls_opening } from "../assets/images/quiz/img_101_learningstyle/img_ls_opening";
+export { default as img_ls_result } from "../assets/images/quiz/img_101_learningstyle/img_ls_result";
+export { default as img_ls_visual } from "../assets/images/quiz/img_101_learningstyle/img_ls_visual";
+export { default as img_ls_auditory } from "../assets/images/quiz/img_101_learningstyle/img_ls_auditory";
+export { default as img_ls_kinesthetic } from "../assets/images/quiz/img_101_learningstyle/img_ls_kinesthetic";
+// img_102_riasec
+export { default as img_riasec_realistic } from "../assets/images/quiz/img_102_riasec/riasec_realistic.png";
+export { default as img_riasec_artistic } from "../assets/images/quiz/img_102_riasec/riasec_artistic.png";
+export { default as img_riasec_conventional } from "../assets/images/quiz/img_102_riasec/riasec_conventional.png";
+export { default as img_riasec_enterprising } from "../assets/images/quiz/img_102_riasec/riasec_enterprising.png";
+export { default as img_riasec_investigative } from "../assets/images/quiz/img_102_riasec/riasec_investigative.png";
+export { default as img_riasec_social } from "../assets/images/quiz/img_102_riasec/riasec_social.png";
+export { default as img_riasec_opening } from "../assets/images/quiz/img_102_riasec/riasec_opening.jpg";
+// img_103_multipleintelligence
+export { default as img_mi_opening } from "../assets/images/quiz/img_103_multipleintelligence/mi_opening.jpg";
+export { default as img_mi_result } from "../assets/images/quiz/img_103_multipleintelligence/mi_all.jpg";
+export { default as img_mi_spasial } from "../assets/images/quiz/img_103_multipleintelligence/mi_spatial.jpg";
+export { default as img_mi_interpersonal } from "../assets/images/quiz/img_103_multipleintelligence/mi_interpersonal.jpg";
+export { default as img_mi_intrapersonal } from "../assets/images/quiz/img_103_multipleintelligence/mi_intrapersonal.jpg";
+export { default as img_mi_kinestetik } from "../assets/images/quiz/img_103_multipleintelligence/mi_kinesthetic.jpg";
+export { default as img_mi_linguistik } from "../assets/images/quiz/img_103_multipleintelligence/mi_linguistic.jpg";
+export { default as img_mi_logika } from "../assets/images/quiz/img_103_multipleintelligence/mi_logics.jpg";
+export { default as img_mi_musikal } from "../assets/images/quiz/img_103_multipleintelligence/mi_musical.jpg";
+export { default as img_mi_naturalis } from "../assets/images/quiz/img_103_multipleintelligence/mi_naturalist.jpg";
+// img_200_bigfive
+export { default as img_bigfive_opening } from "../assets/images/quiz/img_200_bigfive/bigfive-opening.jpg";
+export { default as img_bigfive_ext } from "../assets/images/quiz/img_200_bigfive/bigfive-extraversion.jpg";
+export { default as img_bigfive_agr } from "../assets/images/quiz/img_200_bigfive/bigfive-agreeableness.jpg";
+export { default as img_bigfive_est } from "../assets/images/quiz/img_200_bigfive/bigfive-emotionalstability.jpg";
+export { default as img_bigfive_csn } from "../assets/images/quiz/img_200_bigfive/bigfive-conscientiousness.jpg";
+export { default as img_bigfive_opn } from "../assets/images/quiz/img_200_bigfive/bigfive-openness.jpg";
 
-export { default as img_riasec_realistic } from "../assets/images/quiz/riasec_realistic.png";
-export { default as img_riasec_artistic } from "../assets/images/quiz/riasec_artistic.png";
-export { default as img_riasec_conventional } from "../assets/images/quiz/riasec_conventional.png";
-export { default as img_riasec_enterprising } from "../assets/images/quiz/riasec_enterprising.png";
-export { default as img_riasec_investigative } from "../assets/images/quiz/riasec_investigative.png";
-export { default as img_riasec_social } from "../assets/images/quiz/riasec_social.png";
-export { default as img_riasec_opening } from "../assets/images/quiz/riasec_opening.jpg";
-
-export { default as img_ls_opening } from "../assets/images/quiz/mi_opening.jpg";
-
-export { default as img_mi_opening } from "../assets/images/quiz/mi_opening.jpg";
-export { default as img_mi_result } from "../assets/images/quiz/mi_all.jpg";
-export { default as img_mi_spasial } from "../assets/images/quiz/mi_spatial.jpg";
-export { default as img_mi_interpersonal } from "../assets/images/quiz/mi_interpersonal.jpg";
-export { default as img_mi_intrapersonal } from "../assets/images/quiz/mi_intrapersonal.jpg";
-export { default as img_mi_kinestetik } from "../assets/images/quiz/mi_kinesthetic.jpg";
-export { default as img_mi_linguistik } from "../assets/images/quiz/mi_linguistic.jpg";
-export { default as img_mi_logika } from "../assets/images/quiz/mi_logics.jpg";
-export { default as img_mi_musikal } from "../assets/images/quiz/mi_musical.jpg";
-export { default as img_mi_naturalis } from "../assets/images/quiz/mi_naturalist.jpg";
-export { default as img_bigfive_opening } from "../assets/images/quiz/bigfive-opening.jpg";
-export { default as img_bigfive_ext } from "../assets/images/quiz/bigfive-extraversion.jpg";
-export { default as img_bigfive_agr } from "../assets/images/quiz/bigfive-agreeableness.jpg";
-export { default as img_bigfive_est } from "../assets/images/quiz/bigfive-emotionalstability.jpg";
-export { default as img_bigfive_csn } from "../assets/images/quiz/bigfive-conscientiousness.jpg";
-export { default as img_bigfive_opn } from "../assets/images/quiz/bigfive-openness.jpg";
+// img_201_16pf
+// img_202_personalityelement
+// img_203_eneagram
+// img_204_hogwarts
+// img_205_introekstraversion
+// img_301_emotionalquotient
+// img_302_assertive
+// img_303_anxious
+// img_304_rational
+// img_305_penundanunda
+// img_306_sikapatasuang
+// img_307_ketangguhan
+// img_308_dismorfiktubuh
 
 
 export { default as email_kami } from "../assets/images/email-kami-titianbakat.jpg";
-
-
 
 export { default as doctorthumb02 } from "../assets/images/doctors/doctor-thumb-02.jpg";
 export { default as coming_soon } from "../assets/images/coming-soon.png";

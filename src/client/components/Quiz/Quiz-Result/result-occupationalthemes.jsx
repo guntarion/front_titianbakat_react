@@ -1,7 +1,7 @@
 // src/client/components/Quiz/quiz-result-occupationalthemes.jsx
 import React from "react";
 import PropTypes from "prop-types";
-import ChartOccupationalThemes from './Chart_OccupationalThemes'; // Import the chart component
+import ChartOccupationalThemes from '../Quiz-Chart/chart_occupationalthemes'; // Import the chart component
 
 import {
   img_riasec_realistic,
@@ -10,7 +10,7 @@ import {
   img_riasec_enterprising,
   img_riasec_investigative,
   img_riasec_social,
-} from "../imagepath";
+} from "../../imagepath";
 
 const karakteristik = {
   type_realistic: {

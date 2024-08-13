@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ChartBigFivePersonality from './Chart_BigFivePersonality';
+import ChartBigFivePersonality from '../Quiz-Chart/chart_bigfivepersonality';
 
 import {
   img_bigfive_ext,
@@ -8,7 +8,7 @@ import {
   img_bigfive_est,
   img_bigfive_csn,
   img_bigfive_opn,
-} from "../imagepath";
+} from "../../imagepath";
 
 const karakteristik = {
   Extroversion_EXT: {

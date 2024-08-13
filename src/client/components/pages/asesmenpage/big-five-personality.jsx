@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../../header";
 import Footer from "../../footer";
 import QuizTypeOne from "../../Quiz/quiz-type-one";
-import QuizResult_BigFivePersonality from "../../Quiz/quiz-result-bigfivepersonality";
+import QuizResult_BigFivePersonality from "../../Quiz/Quiz-Result/result-bigfivepersonality";
 import axios from "axios";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../../../../AuthContext"; 
