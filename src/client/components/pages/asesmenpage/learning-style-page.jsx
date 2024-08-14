@@ -21,11 +21,15 @@ const LearningStyleAssessment = (props) => {
   const [mongoUserId, setMongoUserId] = useState("");
   const [showLatestResult, setShowLatestResult] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [quizInfo, setQuizInfo] = useState(null);
+  const [latestQuizResponse, setLatestQuizResponse] = useState(null);
 
   const scoreTypes = ["visual", "auditory", "kinesthetic"];
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchData = async () => {
+      if (!user) return;
+
       const db = getFirestore();
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
@@ -33,39 +37,63 @@ const LearningStyleAssessment = (props) => {
       if (docSnap.exists()) {
         const data = docSnap.data();
         setMongoUserId(data.mongoUserId || "");
-        console.log("📋 data.mongoUserId:", data.mongoUserId);
 
         if (data.mongoUserId) {
           try {
-            const response = await axios.get(`${config.API_URL}/quiz-responses/${data.mongoUserId}/quiz_101_learningstyle`);
-            console.log("📋 response.data:", response.data);
-            console.log("📋 response.data.status:", response.data.status);
-            console.log("📋 response.data.total_scores:", response.data.total_scores);
-            if (response.data && response.data.status === "finished") {
-                setTotalScores(response.data.total_scores);
-                setHasQuizResult(true);            
-            } else {
+            // Fetch quiz info
+            const quizInfoResponse = await axios.get(`${config.API_URL}/quizzes/quiz_101_learningstyle`);
+            setQuizInfo(quizInfoResponse.data);
+
+            // Fetch latest in-progress quiz response
+            try {
+              const latestInProgressResponse = await axios.get(`${config.API_URL}/quiz-responses/${data.mongoUserId}/quiz_101_learningstyle/latest-in-progress`);
+              setLatestQuizResponse(latestInProgressResponse.data);
+            } catch (error) {
+              if (error.response && error.response.status !== 404) {
+                console.error("Error fetching in-progress quiz response:", error);
+              }
+            }
+
+            // Fetch latest finished quiz response
+            try {
+              const latestFinishedResponse = await axios.get(`${config.API_URL}/quiz-responses/${data.mongoUserId}/quiz_101_learningstyle/latest-finished`);
+              setTotalScores(latestFinishedResponse.data.total_scores);
+              setHasQuizResult(true);
+            } catch (error) {
+              if (error.response && error.response.status !== 404) {
+                console.error("Error fetching finished quiz response:", error);
+              }
               setHasQuizResult(false);
             }
-            
           } catch (error) {
-            if (error.response && error.response.status === 404) {
-              console.log("Quiz response not found. Sorry for that.");
-              setHasQuizResult(false);
-            } else {
-              console.error("Error fetching quiz response:", error);
-            }
+            console.error("Error fetching data:", error);
           }
         }
-        console.log("totalScores:", totalScores);
-        console.log("hasQuizResult:", hasQuizResult);
       }
     };
 
-    if (user) {
-      fetchUserData();
-    }
+    fetchData();
   }, [user]);
+
+const renderQuizStatusMessage = () => {
+  if (!quizInfo) return null;
+
+  if (latestQuizResponse && latestQuizResponse.status === "in progress") {
+    const progress = Math.round((latestQuizResponse.last_question_index / quizInfo.statement_count) * 100);
+    return (
+      <p>
+        You have an unfinished quiz (progress: {progress}%). 
+        Click the &quot;Continue Quiz&quot; button to resume where you left off.
+      </p>
+    );
+  }
+
+  if (hasQuizResult) {
+    return <p>You have completed this quiz. You can start a new attempt or view your latest result.</p>;
+  }
+
+  return <p>Start a new quiz to assess your learning style.</p>;
+};
 
   const handleQuizComplete = (scores) => {
     setTotalScores(scores);
@@ -76,9 +104,6 @@ const LearningStyleAssessment = (props) => {
 
   const startQuiz = async () => {
     try {
-      console.log("🔰 ==== Starting Quiz ====");
-      console.log("User ID:", mongoUserId);
-
       if (!mongoUserId) {
         console.error("❌ No mongoUserId available");
         return;
@@ -92,19 +117,33 @@ const LearningStyleAssessment = (props) => {
         const response = await axios.get(url);
         console.log("📊 Latest quiz response:", response.data);
 
-        if (response.data && response.data.status !== "finished") {
-          console.log("🔄 Resuming existing quiz to index =", response.data.last_question_index);
-          setCurrentQuestionIndex(response.data.last_question_index);
-          setTotalScores(response.data.total_scores);
-          setShowQuiz(true);
-          setShowLatestResult(false);
+        if (latestQuizResponse && latestQuizResponse.status === "in progress") {
+          console.log("🔄 Resuming existing quiz to index =", latestQuizResponse.last_question_index);
+          setCurrentQuestionIndex(latestQuizResponse.last_question_index);
+          setTotalScores(latestQuizResponse.total_scores);
         } else {
           console.log("🆕 Starting new quiz");
           setCurrentQuestionIndex(0);
           setTotalScores({});
-          setShowQuiz(true);
-          setShowLatestResult(false);
         }
+
+        setShowQuiz(true);
+        setShowLatestResult(false);
+
+
+        // if (response.data && response.data.status !== "finished") {
+        //   console.log("🔄 Resuming existing quiz to index =", response.data.last_question_index);
+        //   setCurrentQuestionIndex(response.data.last_question_index);
+        //   setTotalScores(response.data.total_scores);
+        //   setShowQuiz(true);
+        //   setShowLatestResult(false);
+        // } else {
+        //   console.log("🆕 Starting new quiz");
+        //   setCurrentQuestionIndex(0);
+        //   setTotalScores({});
+        //   setShowQuiz(true);
+        //   setShowLatestResult(false);
+        // }
       } catch (error) {
         console.error("❌ Error in API call:", error.message);
         if (error.response) {
@@ -162,31 +201,36 @@ const LearningStyleAssessment = (props) => {
       <div className="content">
               <div className="container-fluid">
                 <div className="row">
-                  <div className="col-12">
-                    {showLatestResult ? (
-                      <QuizResult totalScores={totalScores} onBackToIntro={handleBackToIntro} />
-                    ) : (
-                      <div>
-                        {!showQuiz && (
-                          <>
-                            <img src={img_ls_opening} alt="" className="img-fluidme" />
-                            <h3>Learning Style Assessment</h3>
-                            <p>
-                              This assessment will help you identify your preferred learning style.
-                              Understanding your learning style can help you choose more effective study methods and improve your learning experience.
-                            </p>
-                            <button onClick={startQuiz} className="btn btn-primary mr-2">
-                              Start Quiz
+                <div className="col-12">
+                  {showLatestResult ? (
+                    <QuizResult totalScores={totalScores} onBackToIntro={handleBackToIntro} />
+                  ) : (
+                    <div>
+                      {!showQuiz && (
+                        <>
+                          <img src={img_ls_opening} alt="" className="img-fluidme" />
+                          <h3>Learning Style Assessment</h3>
+                          <p>
+                            This assessment will help you identify your preferred learning style.
+                            Understanding your learning style can help you choose more effective study methods and improve your learning experience.
+                          </p>
+                          {renderQuizStatusMessage()}
+                          <button 
+                            onClick={startQuiz} 
+                            className="btn btn-primary"
+                            style={{ marginRight: '20px' }}
+                          >
+                            {latestQuizResponse && latestQuizResponse.status === "in progress" ? "Continue Quiz" : "Start Quiz"}
+                          </button>
+                          {hasQuizResult && (
+                            <button onClick={showResult} className="btn btn-secondary">
+                              See Latest Result
                             </button>
-                            {hasQuizResult && (
-                              <button onClick={showResult} className="btn btn-secondary">
-                                See Latest Result
-                              </button>
-                            )}
-                          </>
-                        )}
-                      </div>
-                    )}
+                          )}
+                        </>
+                      )}
+                    </div>
+                  )}
                     {showQuiz && (
                       <QuizTypeA
                         quizId="quiz_101_learningstyle"
