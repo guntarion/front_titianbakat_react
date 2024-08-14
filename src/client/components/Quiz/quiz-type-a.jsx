@@ -8,9 +8,9 @@ import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { useAuth } from "../../../AuthContext";
 import config from '../../../config';
 
-const QuizTypeA = ({ quizId, scoreTypes, onQuizComplete }) => {
+const QuizTypeA = ({ quizId, scoreTypes, onQuizComplete, initialQuestionIndex = 0 }) => {
+const [currentQuestionIndex, setCurrentQuestionIndex] = useState(initialQuestionIndex);
 const { user } = useAuth();
-const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 const [noteText, setNoteText] = useState("");
 const [quizData, setQuizData] = useState(null);
 const [mongoUserId, setMongoUserId] = useState("");
@@ -37,31 +37,44 @@ useEffect(() => {
         const data = docSnap.data();
         console.log("📋 User data:", data);
 
+        let userMongoId;
+
         if (data.mongoUserId) {
-          setMongoUserId(data.mongoUserId);
+          userMongoId = data.mongoUserId;
+          setMongoUserId(userMongoId);
         } else {
           console.log("⚠️ No MongoDB User ID found, creating one");
-          const mongoUserId = await checkCreateUser(user);
-          await setDoc(docRef, { mongoUserId }, { merge: true });
-          setMongoUserId(mongoUserId);
+          userMongoId = await checkCreateUser(user);
+          await setDoc(docRef, { mongoUserId: userMongoId }, { merge: true });
+          setMongoUserId(userMongoId);
         }
 
         // Proceed with fetching quiz responses
         try {
-          const url = `${config.API_URL}/quiz-responses/${mongoUserId}/${quizId}`;
+          console.log("🔍🔍🔍 userMongoId:", userMongoId);
+          const url = `${config.API_URL}/quiz-responses/${userMongoId}/${quizId}`;
           console.log("🔍 Fetching quiz response - URL:", url);
           const response = await axios.get(url);
           console.log("📊 Quiz response data:", response.data);
 
           if (response.data) {
-            setResponses(response.data.responses || {});
-            setNotes(response.data.notes || {});
-            setCurrentQuestionIndex(response.data.last_question_index || 0);
+            if (response.data.status === "finished") {
+              console.log("🔄 Existing finished quiz found. Creating a new one.");
+              setResponses({});
+              setNotes({});
+              setCurrentQuestionIndex(0);
+              await createNewQuizResponse(userMongoId, quizId);
+            } else {
+              setResponses(response.data.responses || {});
+              setNotes(response.data.notes || {});
+              setCurrentQuestionIndex(response.data.last_question_index || initialQuestionIndex);
+            }
           }
         } catch (error) {
           if (error.response && error.response.status === 404) {
             console.log("🆕 Quiz response not found, creating a new one.");
-            await createNewQuizResponse(mongoUserId, quizId);
+            await createNewQuizResponse(userMongoId, quizId);
+            setCurrentQuestionIndex(initialQuestionIndex);
           } else {
             console.error("❌ Error fetching quiz response:", error);
           }
@@ -75,56 +88,73 @@ useEffect(() => {
   };
 
   fetchUserData();
-}, [user, quizId]);
+}, [user, quizId, initialQuestionIndex]);
 
-    const checkCreateUser = async (user) => {
-    try {
-        const response = await axios.post(`${config.API_URL}/users/check-create`, {
-        alamatEmail: user.email,
-        role: "user",
-        namaLengkap: user.displayName || "",
-        userPhoto: user.photoURL || "",
-        });
-        return response.data.id;
-    } catch (error) {
-        console.error("Error checking/creating user:", error);
-        throw error;
-    }
-    };   
+const checkCreateUser = async (user) => {
+try {
+    const response = await axios.post(`${config.API_URL}/users/check-create`, {
+    alamatEmail: user.email,
+    role: "user",
+    namaLengkap: user.displayName || "",
+    userPhoto: user.photoURL || "",
+    });
+    return response.data.id;
+} catch (error) {
+    console.error("Error checking/creating user:", error);
+    throw error;
+}
+};   
 
-  const createNewQuizResponse = async (userId, quizId) => {
+const createNewQuizResponse = async (userId, quizId) => {
     const initialScores = scoreTypes.reduce((acc, type) => {
-      acc[type] = 0;
-      return acc;
+        acc[type] = 0;
+        return acc;
     }, {});
-
-    const requestBody = {
-      user_id: userId,
-      quiz_id: quizId,
-      responses: {},
-      notes: {},
-      status: "in progress",
-      last_question_index: 0,
-      total_scores: initialScores,
-      started_at: new Date(),
-      finished_at: null,
+    
+    const quizResponseBody = {
+        user_id: userId,
+        quiz_id: quizId,
+        responses: {},
+        notes: {},
+        status: "in progress",
+        last_question_index: 0,
+        total_scores: initialScores,
+        started_at: new Date(),
+        finished_at: null,
     };
-
-    console.log("Creating new quiz response - Request body:", JSON.stringify(requestBody, null, 2));
-
+    
+    console.log("Creating new quiz response - Request body:", JSON.stringify(quizResponseBody, null, 2));
+    
     try {
-      const url = `${config.API_URL}/quiz-responses`;
-      console.log("Creating new quiz response - URL:", url);
-      const response = await axios.post(url, requestBody);
-      console.log("New quiz response created:", response.data);
+        // Create quiz response
+        const quizResponseUrl = `${config.API_URL}/quiz-responses`;
+        console.log("Creating new quiz response - URL:", quizResponseUrl);
+        const quizResponse = await axios.post(quizResponseUrl, quizResponseBody);
+        console.log("New quiz response created:", quizResponse.data);
+    
+        // Create quiz taken entry
+        const quizTakenBody = {
+        user_id: userId,
+        quiz_id: quizId,
+        response_id: quizResponse.data.id, // Assuming the API returns the created response's ID
+        taken_at: new Date().toISOString(),
+        };
+    
+        const quizTakenUrl = `${config.API_URL}/quiz-taken`;
+        console.log("Creating new quiz taken entry - URL:", quizTakenUrl);
+        const quizTakenResponse = await axios.post(quizTakenUrl, quizTakenBody);
+        console.log("New quiz taken entry created:", quizTakenResponse.data);
+    
+        return quizResponse.data.id; // Return the response ID for future use if needed
     } catch (error) {
-      console.error("Error creating new quiz response:", error);
-      if (error.response) {
+        console.error("Error creating new quiz response or quiz taken entry:", error);
+        if (error.response) {
         console.error("Error response data:", error.response.data);
         console.error("Error response status:", error.response.status);
-      }
+        }
+        throw error; // Re-throw the error to be handled by the caller
     }
-  };
+    };
 
   useEffect(() => {
     const fetchQuizData = async () => {
@@ -178,6 +208,7 @@ useEffect(() => {
         last_question_index: lastQuestionIndex,
         total_scores: totalScores,
         started_at: new Date(),
+        lastaccessed_at: new Date(),
         finished_at: status === "finished" ? new Date() : null,
       };
       console.log("📤 Save progress request body:", JSON.stringify(requestBody, null, 2));
@@ -252,6 +283,7 @@ QuizTypeA.propTypes = {
   quizId: PropTypes.string.isRequired,
   scoreTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
   onQuizComplete: PropTypes.func.isRequired,
+  initialQuestionIndex: PropTypes.number,
 };
 
 export default QuizTypeA;

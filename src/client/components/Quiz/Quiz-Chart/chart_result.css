@@ -1,0 +1,13 @@
+/* src/client/components/Quiz/OccupationalThemesChart.css */
+.chart-container {
+    width: 50vw; /* Adjust the width as needed */
+    height: 600px; /* Adjust the height as needed */
+    margin: 0 auto; /* Center align the chart */
+  }
+  
+  .chart-container img {
+    display: block;
+    margin: 0 auto 20px; /* Center align the image and add margin below */
+    width: 100px; /* Adjust the width of the image as needed */
+  }
+  

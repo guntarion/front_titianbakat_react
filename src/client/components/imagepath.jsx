@@ -14,11 +14,11 @@ export { default as asesmen_51_assertive } from "../assets/images/asesmen/asesme
 export { default as asesmen_52_anxious } from "../assets/images/asesmen/asesmen-52-anxious.png";
 export { default as asesmen_53_rational } from "../assets/images/asesmen/asesmen-53-rational.png";
 // img_101_learningstyle
-export { default as img_ls_opening } from "../assets/images/quiz/img_101_learningstyle/img_ls_opening";
-export { default as img_ls_result } from "../assets/images/quiz/img_101_learningstyle/img_ls_result";
-export { default as img_ls_visual } from "../assets/images/quiz/img_101_learningstyle/img_ls_visual";
-export { default as img_ls_auditory } from "../assets/images/quiz/img_101_learningstyle/img_ls_auditory";
-export { default as img_ls_kinesthetic } from "../assets/images/quiz/img_101_learningstyle/img_ls_kinesthetic";
+export { default as img_ls_opening } from "../assets/images/quiz/img_101_learningstyle/img_ls_opening.jpg";
+export { default as img_ls_result } from "../assets/images/quiz/img_101_learningstyle/img_ls_result.jpg";
+export { default as img_ls_visual } from "../assets/images/quiz/img_101_learningstyle/img_ls_visual.jpg";
+export { default as img_ls_auditory } from "../assets/images/quiz/img_101_learningstyle/img_ls_auditory.jpg";
+export { default as img_ls_kinesthetic } from "../assets/images/quiz/img_101_learningstyle/img_ls_kinesthetic.jpg";
 // img_102_riasec
 export { default as img_riasec_realistic } from "../assets/images/quiz/img_102_riasec/riasec_realistic.png";
 export { default as img_riasec_artistic } from "../assets/images/quiz/img_102_riasec/riasec_artistic.png";
