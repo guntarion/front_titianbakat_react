@@ -78,21 +78,31 @@ const LearningStyleAssessment = (props) => {
 const renderQuizStatusMessage = () => {
   if (!quizInfo) return null;
 
+  let alertClass = "alert alert-info";
+  let message = "";
+
   if (latestQuizResponse && latestQuizResponse.status === "in progress") {
     const progress = Math.round((latestQuizResponse.last_question_index / quizInfo.statement_count) * 100);
-    return (
-      <p>
+    alertClass = "alert alert-warning";
+    message = (
+      <>
         You have an unfinished quiz (progress: {progress}%). 
         Click the &quot;Continue Quiz&quot; button to resume where you left off.
-      </p>
+      </>
     );
+  } else if (hasQuizResult) {
+    alertClass = "alert alert-success";
+    message = "You have completed this quiz. You can start a new attempt or view your latest result.";
+  } else {
+    message = "Start a new quiz to assess your learning style.";
   }
 
-  if (hasQuizResult) {
-    return <p>You have completed this quiz. You can start a new attempt or view your latest result.</p>;
-  }
-
-  return <p>Start a new quiz to assess your learning style.</p>;
+  return (
+    <div className={alertClass} role="alert">
+      <i className="fas fa-info-circle me-2"></i>
+      {message}
+    </div>
+  );
 };
 
   const handleQuizComplete = (scores) => {
@@ -129,21 +139,7 @@ const renderQuizStatusMessage = () => {
 
         setShowQuiz(true);
         setShowLatestResult(false);
-
-
-        // if (response.data && response.data.status !== "finished") {
-        //   console.log("🔄 Resuming existing quiz to index =", response.data.last_question_index);
-        //   setCurrentQuestionIndex(response.data.last_question_index);
-        //   setTotalScores(response.data.total_scores);
-        //   setShowQuiz(true);
-        //   setShowLatestResult(false);
-        // } else {
-        //   console.log("🆕 Starting new quiz");
-        //   setCurrentQuestionIndex(0);
-        //   setTotalScores({});
-        //   setShowQuiz(true);
-        //   setShowLatestResult(false);
-        // }
+  
       } catch (error) {
         console.error("❌ Error in API call:", error.message);
         if (error.response) {

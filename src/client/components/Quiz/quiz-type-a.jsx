@@ -270,6 +270,7 @@ try {
           {progress.toFixed(0)}%
         </div>
       </div>
+      <p>Anda dapat mengerjakan quiz ini dalam beberapa sesi. Jika Anda meninggalkan halaman ini, maka saat Anda kembali lagi, Anda dapat langsung melanjutkan tanpa memulai dari awal.</p>
       <div className="question-container">
         <h3>{quizData.quiz_statements[currentQuestionIndex].statement_id}</h3>
         <div className="options">
