@@ -1,9 +1,9 @@
-// src/client/components/pages/asesmenpage/learning-style-page.jsx
+// src/client/components/pages/asesmenpage/page_204_hogwarts.jsx
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Header from '../../header';
 import QuizTypeA from '../../Quiz/quiz-type-a';
-import QuizResult from '../../Quiz/Quiz-Result/result-learningstyle';
+import QuizResult from '../../Quiz/Quiz-Result/result_204_hogwarts';
 import axios from 'axios';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../../../../AuthContext";
@@ -12,7 +12,7 @@ import config from '../../../../config';
 
 import { img_ls_opening } from "../../imagepath";
 
-const LearningStyleAssessment = (props) => {
+const Asesment204Hogwarts = (props) => {
   const { user } = useAuth();
   const history = useHistory();
   const [showQuiz, setShowQuiz] = useState(false);
@@ -24,7 +24,7 @@ const LearningStyleAssessment = (props) => {
   const [quizInfo, setQuizInfo] = useState(null);
   const [latestQuizResponse, setLatestQuizResponse] = useState(null);
 
-  const scoreTypes = ["visual", "auditory", "kinesthetic"];
+  const scoreTypes = ["Gryffindor", "Ravenclaw", "Hufflepuff", "Slytherin"];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,12 +41,12 @@ const LearningStyleAssessment = (props) => {
         if (data.mongoUserId) {
           try {
             // Fetch quiz info
-            const quizInfoResponse = await axios.get(`${config.API_URL}/quizzes/quiz_101_learningstyle`);
+            const quizInfoResponse = await axios.get(`${config.API_URL}/quizzes/quiz_204_hogwarts`);
             setQuizInfo(quizInfoResponse.data);
 
             // Fetch latest in-progress quiz response
             try {
-              const latestInProgressResponse = await axios.get(`${config.API_URL}/quiz-responses/${data.mongoUserId}/quiz_101_learningstyle/latest-in-progress`);
+              const latestInProgressResponse = await axios.get(`${config.API_URL}/quiz-responses/${data.mongoUserId}/quiz_204_hogwarts/latest-in-progress`);
               setLatestQuizResponse(latestInProgressResponse.data);
             } catch (error) {
               if (error.response && error.response.status !== 404) {
@@ -56,7 +56,7 @@ const LearningStyleAssessment = (props) => {
 
             // Fetch latest finished quiz response
             try {
-              const latestFinishedResponse = await axios.get(`${config.API_URL}/quiz-responses/${data.mongoUserId}/quiz_101_learningstyle/latest-finished`);
+              const latestFinishedResponse = await axios.get(`${config.API_URL}/quiz-responses/${data.mongoUserId}/quiz_204_hogwarts/latest-finished`);
               setTotalScores(latestFinishedResponse.data.total_scores);
               setHasQuizResult(true);
             } catch (error) {
@@ -120,7 +120,7 @@ const renderQuizStatusMessage = () => {
       }
 
       console.log("📞 Attempting to fetch latest quiz response...");
-      const url = `${config.API_URL}/quiz-responses/${mongoUserId}/quiz_101_learningstyle/latest`;
+      const url = `${config.API_URL}/quiz-responses/${mongoUserId}/quiz_204_hogwarts/latest`;
       console.log("🔗 API URL:", url);
 
       try {
@@ -229,7 +229,7 @@ const renderQuizStatusMessage = () => {
                   )}
                     {showQuiz && (
                       <QuizTypeA
-                        quizId="quiz_101_learningstyle"
+                        quizId="quiz_204_hogwarts"
                         onQuizComplete={handleQuizComplete}
                         scoreTypes={scoreTypes}
                         initialQuestionIndex={currentQuestionIndex}
@@ -244,4 +244,4 @@ const renderQuizStatusMessage = () => {
         );
       };
 
-export default LearningStyleAssessment;
+export default Asesment204Hogwarts;

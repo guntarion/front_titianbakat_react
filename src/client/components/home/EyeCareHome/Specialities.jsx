@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   eye_icon,
   eye_icon_01,
@@ -13,11 +13,11 @@ import {
   asesmen_50_emotionalquotient,
   asesmen_51_assertive,
   asesmen_52_anxious,
-  asesmen_53_rational
-} from "../../imagepath";
-import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
+  asesmen_53_rational,
+} from '../../imagepath';
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 // import { Link } from "react-router-dom";
 import ProtectedLink from '../../ProtectedLink';
 
@@ -29,10 +29,10 @@ function SpecialtiesHome6() {
     dots: true,
 
     autoplay: false,
-    infinite: "true",
+    infinite: 'true',
 
     slidestoscroll: 1,
-    rtl: "true",
+    rtl: 'true',
     rows: 1,
     responsive: {
       0: {
@@ -56,15 +56,15 @@ function SpecialtiesHome6() {
     },
   };
   return (
-    <section className="special-section">
-      <div className="ban-bg">
-        <img src={eye_icon_01} alt="eye-icon" className="img-fluid bg-04 " />
+    <section className='special-section'>
+      <div className='ban-bg'>
+        <img src={eye_icon_01} alt='eye-icon' className='img-fluid bg-04 ' />
       </div>
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12 aos" data-aos="fade-up">
-            <div className="section-heading sec-heading-eye text-center">
-              <img src={eye_icon} alt="" className="img-fluid" />
+      <div className='container'>
+        <div className='row'>
+          <div className='col-md-12 aos' data-aos='fade-up'>
+            <div className='section-heading sec-heading-eye text-center'>
+              <img src={eye_icon} alt='' className='img-fluid' />
               <h2>
                 Eksplorasi Bakat dan Tendensi Anda secara <span>GRATIS!</span>
               </h2>
@@ -73,206 +73,253 @@ function SpecialtiesHome6() {
           </div>
         </div>
 
-        <div className="special owl-them aos" data-aos="fade-up">
-          <div className="item">
-            <div className="special-item">
+        <div className='special owl-them aos' data-aos='fade-up'>
+          <div className='item'>
+            <div className='special-item'>
               <OwlCarousel {...doctersettings}>
+                <div className='item'>
+                  <div className='special-item'>
+                    <div className='special-img'>
+                      <ProtectedLink to='/asesmen/learningstyle'>
+                        <img
+                          src={asesmen_01_learning}
+                          alt=''
+                          className='img-fluid'
+                        />
+                      </ProtectedLink>
+                    </div>
+                    <div className='special-icon'>
+                      <ProtectedLink to='/asesmen/learningstyle'>
+                        <i className='fa-solid fa-circle-chevron-right' />
+                      </ProtectedLink>
+                    </div>
+                    <h6>
+                      <ProtectedLink to='/asesmen/learningstyle'>
+                        Learning Styles
+                      </ProtectedLink>
+                    </h6>
+                  </div>
+                </div>
+
+                <div className='item'>
+                  <div className='special-item'>
+                    <div className='special-img'>
+                      <ProtectedLink to='/asesmen/multiple-intelligences'>
+                        <img
+                          // src="assets/img/clinic/clinic-03.png"
+                          src={asesmen_03_multipleintelligence}
+                          alt=''
+                          className='img-fluid'
+                        />
+                      </ProtectedLink>
+                    </div>
+                    <div className='special-icon'>
+                      <ProtectedLink to='/asesmen/multipleintelligence'>
+                        <i className='fa-solid fa-circle-chevron-right' />
+                      </ProtectedLink>
+                    </div>
+                    <h6>
+                      <ProtectedLink to='/asesmen/multipleintelligence'>
+                        Multiple Intelligences
+                      </ProtectedLink>
+                    </h6>
+                  </div>
+                </div>
+
+                <div className='item'>
+                  <div className='special-item'>
+                    <div className='special-img'>
+                      <ProtectedLink to='/asesmen/bigfive'>
+                        <img
+                          src={asesmen_20_bigfive}
+                          alt=''
+                          className='img-fluid'
+                        />
+                      </ProtectedLink>
+                    </div>
+                    <div className='special-icon'>
+                      <ProtectedLink to='/asesmen/bigfive'>
+                        <i className='fa-solid fa-circle-chevron-right' />
+                      </ProtectedLink>
+                    </div>
+                    <h6>
+                      <ProtectedLink to='/asesmen/bigfive'>
+                        Big Five Personality
+                      </ProtectedLink>
+                    </h6>
+                  </div>
+                </div>
+
+                <div className='item'>
+                  <div className='special-item'>
+                    <div className='special-img'>
+                      {/* <ProtectedLink to='/asesmen/16pf'> */}
+                      <ProtectedLink to='/index-6'>
+                        <img
+                          src={asesmen_21_16pf}
+                          alt=''
+                          className='img-fluid'
+                        />
+                      </ProtectedLink>
+                    </div>
+                    <div className='special-icon'>
+                      <ProtectedLink to='/index-6'>
+                        <i className='fa-solid fa-circle-chevron-right' />
+                      </ProtectedLink>
+                    </div>
+                    <h6>
+                      <ProtectedLink to='/index-6'>
+                        16 Personality Factors <br /> <span>[LOCKED]</span>
+                      </ProtectedLink>
+                    </h6>
+                  </div>
+                </div>
+
+                <div className='item'>
+                  <div className='special-item'>
+                    <div className='special-img'>
+                      {/* <ProtectedLink to='/asesmen/eneagram'> */}
+                      <ProtectedLink to='/index-6'>
+                        <img
+                          src={asesmen_23_eneagram}
+                          alt=''
+                          className='img-fluid'
+                        />
+                      </ProtectedLink>
+                    </div>
+                    <div className='special-icon'>
+                      <ProtectedLink to='/index-6'>
+                        <i className='fa-solid fa-circle-chevron-right' />
+                      </ProtectedLink>
+                    </div>
+                    <h6>
+                      <ProtectedLink to='/index-6'>
+                        Eneagram <br /> <span>[LOCKED]</span>
+                      </ProtectedLink>
+                    </h6>
+                  </div>
+                </div>
+
+                <div className='item'>
+                  <div className='special-item'>
+                    <div className='special-img'>
+                      {/* <ProtectedLink to='/asesmen/hogwarts'> */}
+                      <ProtectedLink to='/index-6'>
+                        <img
+                          src={asesmen_24_hogwarts}
+                          alt=''
+                          className='img-fluid'
+                        />
+                      </ProtectedLink>
+                    </div>
+                    <div className='special-icon'>
+                      <ProtectedLink to='/index-6'>
+                        <i className='fa-solid fa-circle-chevron-right' />
+                      </ProtectedLink>
+                    </div>
+                    <h6>
+                      <ProtectedLink to='/index-6'>
+                        Hogwarts House Affiliation <br /> <span>[LOCKED]</span>
+                      </ProtectedLink>
+                    </h6>
+                  </div>
+                </div>
+
+                <div className='item'>
+                  <div className='special-item'>
+                    <div className='special-img'>
+                      {/* <ProtectedLink to='/asesmen/emotionalquotient'> */}
+                      <ProtectedLink to='/index-6'>
+                        <img
+                          src={asesmen_50_emotionalquotient}
+                          alt=''
+                          className='img-fluid'
+                        />
+                      </ProtectedLink>
+                    </div>
+                    <div className='special-icon'>
+                      <ProtectedLink to='/index-6'>
+                        <i className='fa-solid fa-circle-chevron-right' />
+                      </ProtectedLink>
+                    </div>
+                    <h6>
+                      <ProtectedLink to='/index-6'>
+                        Emotional Quotient <br /> <span>[LOCKED]</span>
+                      </ProtectedLink>
+                    </h6>
+                  </div>
+                </div>
+
+                <div className='item'>
+                  <div className='special-item'>
+                    <div className='special-img'>
+                      {/* <ProtectedLink to='/asesmen/rational'> */}
+                      <ProtectedLink to='/index-6'>
+                        <img
+                          src={asesmen_53_rational}
+                          alt=''
+                          className='img-fluid'
+                        />
+                      </ProtectedLink>
+                    </div>
+                    <div className='special-icon'>
+                      <ProtectedLink to='/index-6'>
+                        <i className='fa-solid fa-circle-chevron-right' />
+                      </ProtectedLink>
+                    </div>
+                    <h6>
+                      <ProtectedLink to='/index-6'>
+                        Tingkat Rasionalitas <br /> <span>[LOCKED]</span>
+                      </ProtectedLink>
+                    </h6>
+                  </div>
+                </div>
+
+                {/* 
+
+                <div className='item'>
+                  <div className='special-item'>
+                    <div className='special-img'>
+                      <ProtectedLink to='/index-6'>
+                        <img
+                          // src="assets/img/clinic/clinic-05.png"
+                          src={asesmen_22_personalityelement}
+                          alt=''
+                          className='img-fluid'
+                        />
+                      </ProtectedLink>
+                    </div>
+                    <div className='special-icon'>
+                      <ProtectedLink to='/index-6'>
+                        <i className='fa-solid fa-circle-chevron-right' />
+                      </ProtectedLink>
+                    </div>
+                    <h6>
+                      <ProtectedLink to='/index-6'>
+                        Personality Elements
+                      </ProtectedLink>
+                    </h6>
+                  </div>
+                </div>
                 <div className="item">
                   <div className="special-item">
                     <div className="special-img">
-                      {/* <ProtectedLink to="/asesmen/occupational-themes"> */}
-                      <ProtectedLink to="/index-6">
+                      <ProtectedLink to="/asesmen/occupational-themes">
                         <img src={asesmen_02_holland} alt="" className="img-fluid" />
                       </ProtectedLink>
                     </div>
                     <div className="special-icon">
-                      {/* <ProtectedLink to="/asesmen/occupational-themes"> */}
-                      <ProtectedLink to="/index-6">
+                      <ProtectedLink to="/asesmen/occupational-themes">
                         <i className="fa-solid fa-circle-chevron-right" />
                       </ProtectedLink>
                     </div>
                     <h6>
-                      {/* <ProtectedLink to="/asesmen/occupational-themes">Occupational Themes </ProtectedLink> */}
-                      <ProtectedLink to="/index-6">Occupational Themes <br /> <span>[LOCKED]</span></ProtectedLink>
-                    </h6>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="special-item">
-                    <div className="special-img">
-                      <ProtectedLink to="/asesmen/big-five-personality">
-                        <img
-                          src={asesmen_20_bigfive}
-                          alt=""
-                          className="img-fluid"
-                        />
-                      </ProtectedLink>
-                    </div>
-                    <div className="special-icon">
-                      <ProtectedLink to="/asesmen/big-five-personality">
-                        <i className="fa-solid fa-circle-chevron-right" />
-                      </ProtectedLink>
-                    </div>
-                    <h6>
-                      <ProtectedLink to="/asesmen/big-five-personality">Big Five Personality <br /> <span>[LOCKED]</span></ProtectedLink>
-                    </h6>
-                  </div>
-                </div>
-
-                <div className="item">
-                  <div className="special-item">
-                    <div className="special-img">
-                      <ProtectedLink to="/asesmen/multiple-intelligences">
-                        <img
-                          // src="assets/img/clinic/clinic-03.png"
-                          src={asesmen_23_eneagram}
-                          alt=""
-                          className="img-fluid"
-                        />
-                      </ProtectedLink>
-                    </div>
-                    <div className="special-icon">
-                      <ProtectedLink to="/asesmen/multiple-intelligences">
-                        <i className="fa-solid fa-circle-chevron-right" />
-                      </ProtectedLink>
-                    </div>
-                    <h6>
-                      <ProtectedLink to="/asesmen/multiple-intelligences">Eneagram  <br /> <span>[OPEN]</span></ProtectedLink>
-                    </h6>
-                  </div>
-                </div>
-
-              <div className="item">
-                <div className="special-item">
-                  <div className="special-img">
-                    <ProtectedLink to="/asesmen/learning-style">
-                      <img
-                        src={asesmen_01_learning}
-                        alt=""
-                        className="img-fluid"
-                      />
-                    </ProtectedLink>
-                  </div>
-                  <div className="special-icon">
-                    <ProtectedLink to="/asesmen/learning-style">
-                      <i className="fa-solid fa-circle-chevron-right" />
-                    </ProtectedLink>
-                  </div>
-                  <h6>
-                    <ProtectedLink to="/asesmen/learning-style">Learning Styles <br /> <span>[LOCKED]</span></ProtectedLink>
-                  </h6>
-                </div>
-              </div>
-
-                <div className="item">
-                  <div className="special-item">
-                    <div className="special-img">
-                      <ProtectedLink to="/asesmen/multiple-intelligences">
-                        <img
-                          // src="assets/img/clinic/clinic-03.png"
-                          src={asesmen_03_multipleintelligence}
-                          alt=""
-                          className="img-fluid"
-                        />
-                      </ProtectedLink>
-                    </div>
-                    <div className="special-icon">
-                      <ProtectedLink to="/asesmen/multiple-intelligences">
-                        <i className="fa-solid fa-circle-chevron-right" />
-                      </ProtectedLink>
-                    </div>
-                    <h6>
-                      <ProtectedLink to="/asesmen/multiple-intelligences">Multiple Intelligences  <br /> <span>[OPEN]</span></ProtectedLink>
+                      <ProtectedLink to="/asesmen/occupational-themes">Occupational Themes </ProtectedLink>
+                      <ProtectedLink to="/index-6">Occupational Themes</ProtectedLink>
                     </h6>
                   </div>
                 </div>
                 
-                <div className="item">
-                  <div className="special-item">
-                    <div className="special-img">
-                      <ProtectedLink to="/index-6">
-                        <img
-                          // src="assets/img/clinic/clinic-05.png"
-                          src={asesmen_22_personalityelement}
-                          alt=""
-                          className="img-fluid"
-                        />
-                      </ProtectedLink>
-                    </div>
-                    <div className="special-icon">
-                      <ProtectedLink to="/index-6">
-                        <i className="fa-solid fa-circle-chevron-right" />
-                      </ProtectedLink>
-                    </div>
-                    <h6>
-                      <ProtectedLink to="/index-6">Personality Elements <br /> <span>[LOCKED]</span></ProtectedLink>
-                    </h6>
-                  </div>
-                </div>
-                
-                <div className="item">
-                  <div className="special-item">
-                    <div className="special-img">
-                      <ProtectedLink to="/index-6">
-                        <img
-                          src={asesmen_50_emotionalquotient}
-                          alt=""
-                          className="img-fluid"
-                        />
-                      </ProtectedLink>
-                    </div>
-                    <div className="special-icon">
-                      <ProtectedLink to="/index-6">
-                        <i className="fa-solid fa-circle-chevron-right" />
-                      </ProtectedLink>
-                    </div>
-                    <h6>
-                      <ProtectedLink to="/index-6">Emotional Quotient <br /> <span>[LOCKED]</span></ProtectedLink>
-                    </h6>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="special-item">
-                    <div className="special-img">
-                      <ProtectedLink to="/index-6">
-                        <img
-                          src={asesmen_24_hogwarts}
-                          alt=""
-                          className="img-fluid"
-                        />
-                      </ProtectedLink>
-                    </div>
-                    <div className="special-icon">
-                      <ProtectedLink to="/index-6">
-                        <i className="fa-solid fa-circle-chevron-right" />
-                      </ProtectedLink>
-                    </div>
-                    <h6>
-                      <ProtectedLink to="/index-6">Hogwarts House Affiliation <br /> <span>[LOCKED]</span></ProtectedLink>
-                    </h6>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="special-item">
-                    <div className="special-img">
-                      <ProtectedLink to="/index-6">
-                        <img
-                          src={asesmen_53_rational}
-                          alt=""
-                          className="img-fluid"
-                        />
-                      </ProtectedLink>
-                    </div>
-                    <div className="special-icon">
-                      <ProtectedLink to="/index-6">
-                        <i className="fa-solid fa-circle-chevron-right" />
-                      </ProtectedLink>
-                    </div>
-                    <h6>
-                      <ProtectedLink to="/index-6">Tingkat Rasionalitas <br /> <span>[LOCKED]</span></ProtectedLink>
-                    </h6>
-                  </div>
-                </div>
                 <div className="item">
                   <div className="special-item">
                     <div className="special-img">
@@ -290,31 +337,11 @@ function SpecialtiesHome6() {
                       </ProtectedLink>
                     </div>
                     <h6>
-                      <ProtectedLink to="/index-6">Tingkat Kecemasan <br /> <span>[LOCKED]</span></ProtectedLink>
+                      <ProtectedLink to="/index-6">Tingkat Kecemasan</ProtectedLink>
                     </h6>
                   </div>
                 </div>
-                <div className="item">
-                  <div className="special-item">
-                    <div className="special-img">
-                      <ProtectedLink to="/index-6">
-                        <img
-                          src={asesmen_21_16pf}
-                          alt=""
-                          className="img-fluid"
-                        />
-                      </ProtectedLink>
-                    </div>
-                    <div className="special-icon">
-                      <ProtectedLink to="/index-6">
-                        <i className="fa-solid fa-circle-chevron-right" />
-                      </ProtectedLink>
-                    </div>
-                    <h6>
-                      <ProtectedLink to="/index-6">16 Personality Factors <br /> <span>[LOCKED]</span></ProtectedLink>
-                    </h6>
-                  </div>
-                </div>
+                
                 <div className="item">
                   <div className="special-item">
                     <div className="special-img">
@@ -332,10 +359,10 @@ function SpecialtiesHome6() {
                       </ProtectedLink>
                     </div>
                     <h6>
-                      <ProtectedLink to="/index-6">Tingkat Asertivitas <br /> <span>[LOCKED]</span></ProtectedLink>
+                      <ProtectedLink to="/index-6">Tingkat Asertivitas</ProtectedLink>
                     </h6>
                   </div>
-                </div>
+                </div> */}
               </OwlCarousel>
             </div>
           </div>

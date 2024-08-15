@@ -1,8 +1,8 @@
-// src/client/components/Quiz/quiz-result-learningstyles.jsx
+// src/client/components/Quiz/result_101_learningstyle.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import ChartLearningStyles from "../Quiz-Chart/chart_learningStyles";
+import ChartLearningStyles from "../Quiz-Chart/chart_304_rational";
 
 import {
   img_ls_result,
@@ -32,7 +32,7 @@ const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-const QuizResult_LearningStyles = ({ totalScores, onBackToIntro   }) => {
+const QuizResult304Rational = ({ totalScores, onBackToIntro   }) => {
   console.log("Result totalScores = ", totalScores);
   
   // Ensure totalScores is an object and has entries
@@ -88,7 +88,7 @@ const QuizResult_LearningStyles = ({ totalScores, onBackToIntro   }) => {
   );
 };
 
-QuizResult_LearningStyles.propTypes = {
+QuizResult304Rational.propTypes = {
   onBackToIntro: PropTypes.func.isRequired,
   totalScores: PropTypes.shape({
     visual: PropTypes.number,
@@ -97,4 +97,4 @@ QuizResult_LearningStyles.propTypes = {
   })
 };
 
-export default QuizResult_LearningStyles;
+export default QuizResult304Rational;
