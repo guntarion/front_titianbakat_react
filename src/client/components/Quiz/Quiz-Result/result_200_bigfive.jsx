@@ -15,23 +15,29 @@ import {
 const karakteristik = {
   Extroversion: {
     img: img_bigfive_ext,
-    text: 'Extroversion menggambarkan tingkat keterlibatan seseorang dengan dunia luar. Orang yang ekstrovert cenderung energik, antusias, dan berorientasi pada aksi. Mereka menikmati interaksi sosial dan cenderung bersemangat.',
+    text: `<p>Ekstroversi biasanya dicirikan oleh kecenderungan seseorang untuk mencari interaksi sosial dan stimulasi, serta tingkat antusiasme dan keberanian mereka dalam situasi sosial. Individu yang memiliki skor tinggi pada dimensi ini cenderung ramah, suka bergaul, dan mudah berbicara dengan orang lain. Mereka menikmati berada di tengah orang banyak dan mencari situasi sosial. Mereka sering digambarkan sebagai orang yang penuh energi, antusias, dan berani. Selain itu, mereka mungkin lebih cenderung terlibat dalam perilaku yang menantang, seperti berpesta, minum, atau mencari kesenangan lain.</p>
+    <p>Sebaliknya, individu yang memiliki skor rendah pada ekstroversi lebih introvert dan pendiam. Mereka mungkin lebih suka menghabiskan waktu sendiri atau bersama kelompok kecil, dan merasa tidak nyaman dalam pertemuan sosial yang besar. Mereka juga cenderung lebih hati-hati dan kurang tegas dalam berinteraksi dengan orang lain.</p>`,
   },
   Agreeableness: {
     img: img_bigfive_agr,
-    text: 'Agreeableness mencerminkan cara seseorang berinteraksi dengan orang lain. Orang yang skornya tinggi dalam trait ini cenderung penuh perhatian, ramah, murah hati, suka menolong, dan mau berkompromi dengan orang lain.',
+
+    text: `<p>Orang yang memiliki skor tinggi pada kesesuaian biasanya digambarkan sebagai orang yang hangat, ramah, dan perhatian. Mereka cenderung bekerja sama dengan orang lain dan termotivasi untuk menjaga hubungan sosial yang harmonis. Mereka mungkin juga memiliki rasa empati yang kuat dan kepedulian terhadap kesejahteraan orang lain.</p>
+    <p>Sebaliknya, orang yang memiliki skor rendah pada kesesuaian cenderung lebih kompetitif dan skeptis. Mereka mungkin kurang termotivasi untuk menjaga keharmonisan sosial dan lebih cenderung menyatakan pendapat mereka dengan tegas, meskipun mungkin bertentangan dengan orang lain.</p>`,
   },
   EmotionalStability: {
     img: img_bigfive_est,
-    text: 'Emotional Stability (atau kebalikannya, Neuroticism) mengacu pada kemampuan seseorang mengelola emosi. Orang dengan skor tinggi cenderung tenang, percaya diri, dan aman. Mereka jarang merasa cemas atau tertekan.',
+    text: `<p>Orang yang memiliki skor tinggi pada stabilitas emosional cenderung lebih tangguh secara emosional, tenang, dan tidak mudah terpengaruh oleh situasi. Mereka jarang mengalami emosi negatif dan lebih mampu mengatasi stres serta tantangan hidup. Selain itu, mereka juga lebih mungkin merasakan emosi positif, seperti kebahagiaan, kepuasan, dan antusiasme.</p>
+    <p>Sebaliknya, orang yang memiliki skor rendah pada stabilitas emosional lebih rentan terhadap emosi negatif, seperti kecemasan, depresi, dan kemarahan. Mereka mungkin lebih reaktif terhadap stres dan kesulitan dalam menghadapi situasi yang menantang. Mereka juga cenderung menunjukkan perilaku maladaptif, seperti penyalahgunaan zat atau melukai diri sendiri.</p>`,
   },
   Conscientiousness: {
     img: img_bigfive_csn,
-    text: 'Conscientiousness menggambarkan tingkat organisasi dan ketekunan seseorang. Individu yang conscientious cenderung disiplin, efisien, terorganisir, dan berorientasi pada pencapaian tujuan.',
+    text: `<p>Orang yang memiliki skor tinggi pada ketelitian biasanya digambarkan sebagai individu yang dapat diandalkan, pekerja keras, dan efisien. Mereka cenderung terorganisir dengan baik, bertanggung jawab, dan termotivasi untuk mencapai tujuan mereka. Mereka juga mungkin menunjukkan disiplin diri yang kuat dan ketekunan dalam menghadapi tantangan.</p>
+    <p>Sebaliknya, orang yang memiliki skor rendah pada ketelitian cenderung lebih impulsif dan kurang terorganisir. Mereka mungkin kesulitan menetapkan dan mencapai tujuan, serta lebih mungkin terlibat dalam perilaku yang kurang menguntungkan bagi diri mereka.</p>`,
   },
   OpennessToExperience: {
     img: img_bigfive_opn,
-    text: 'Openness to Experience mencerminkan tingkat keingintahuan intelektual, kreativitas, dan preferensi untuk variasi. Orang yang terbuka terhadap pengalaman cenderung imajinatif, berwawasan luas, dan mudah beradaptasi dengan ide-ide baru.',
+    text: `<p>Orang yang memiliki skor tinggi pada keterbukaan terhadap pengalaman biasanya digambarkan sebagai individu yang imajinatif, penuh rasa ingin tahu, dan terbuka terhadap ide-ide serta pengalaman baru. Mereka cenderung tertarik secara intelektual dan menikmati eksplorasi konsep serta gagasan baru. Mereka juga mungkin menunjukkan preferensi terhadap kreativitas dan estetika.</p>
+    <p>Sebaliknya, orang yang memiliki skor rendah pada keterbukaan terhadap pengalaman cenderung lebih tradisional dan konservatif. Mereka mungkin lebih menyukai pengalaman yang familiar dan dapat diprediksi, serta kurang tertarik untuk mencari pengalaman baru.</p>`,
   },
 };
 
@@ -58,7 +64,7 @@ const QuizResult200BigFive = ({ totalScores, onBackToIntro }) => {
 
   return (
     <div className='quiz-result-container'>
-      <h2>Hasil Identifikasi Nurtured Talents - Big Five Personality</h2>
+      <h2>Hasil Identifikasi Nurtured Personality - Big Five Personality</h2>
 
       <div className='row'>
         <div className='col-md-6'>
@@ -95,7 +101,9 @@ const QuizResult200BigFive = ({ totalScores, onBackToIntro }) => {
                 <p>
                   <strong>Skor:</strong> {interpolateScore(score)}
                 </p>
-                <p>{karakteristik[type].text}</p>
+                <div
+                  dangerouslySetInnerHTML={{ __html: karakteristik[type].text }}
+                />
               </div>
             </div>
           </div>

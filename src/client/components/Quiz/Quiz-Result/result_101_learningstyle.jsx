@@ -1,4 +1,4 @@
-// src/client/components/Quiz/result_101_learningstyle.jsx
+// src/client/components/Quiz/Quiz-Result/result_101_learningstyle.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import ChartLearningStyles from '../Quiz-Chart/chart_101_learningstyle';
@@ -13,28 +13,23 @@ import {
 const karakteristik = {
   Visual: {
     img: img_ls_visual,
-    text: "Anda memiliki gaya belajar visual yang kuat. Ini berarti Anda belajar paling efektif melalui pengamatan dan informasi visual. Anda cenderung memahami dan mengingat informasi dengan lebih baik ketika disajikan dalam bentuk gambar, diagram, grafik, atau video. Kemampuan ini memungkinkan Anda untuk dengan cepat memahami konsep kompleks ketika disajikan secara visual, dan Anda sering kali dapat 'melihat' solusi dalam pikiran Anda sebelum mengartikulasikannya.",
+    text: 'Orang dengan preferensi modalitas visual cenderung memahami dan mengingat informasi lebih baik ketika disajikan dalam bentuk gambar, diagram, grafik, atau bentuk visual lainnya. Mereka mungkin merasa lebih mudah untuk belajar dari materi yang mencakup ilustrasi, peta konsep, atau presentasi yang kaya akan elemen visual. Mengingat dan memahami informasi melalui penglihatan membantu mereka mengasosiasikan ide-ide dan konsep dengan representasi visual yang kuat.',
   },
   Auditory: {
     img: img_ls_auditory,
-    text: 'Anda memiliki gaya belajar auditori yang dominan. Ini berarti Anda belajar paling baik melalui mendengarkan dan diskusi verbal. Anda cenderung mengingat informasi dengan lebih baik ketika disampaikan melalui ceramah, diskusi kelompok, atau bahkan ketika Anda menjelaskannya kepada orang lain. Kemampuan ini membuat Anda menjadi pendengar yang baik dan sering kali mampu memahami nuansa dalam komunikasi verbal yang mungkin terlewatkan oleh orang lain.',
+    text: 'Orang dengan preferensi modalitas auditory lebih efektif dalam memahami dan mengingat informasi ketika mendengarkannya. Mereka cenderung belajar lebih baik melalui diskusi, ceramah, atau mendengarkan rekaman audio. Mendengarkan penjelasan dan instruksi secara verbal membantu mereka menangkap dan menyimpan informasi dengan lebih baik. Mereka mungkin lebih mudah mengingat detail dari percakapan atau penjelasan yang mereka dengar daripada dari bacaan atau gambar.',
   },
   Kinesthetic: {
     img: img_ls_kinesthetic,
-    text: "Anda memiliki gaya belajar kinestetik yang kuat. Ini berarti Anda belajar paling efektif melalui pengalaman langsung dan aktivitas fisik. Anda cenderung memahami dan mengingat informasi dengan lebih baik ketika Anda dapat melakukan, menyentuh, atau memanipulasi objek secara fisik. Gaya belajar ini memberi Anda keunggulan dalam situasi yang memerlukan koordinasi fisik dan keterampilan praktis, dan Anda sering kali dapat 'merasakan' solusi secara intuitif.",
+    text: 'Orang dengan preferensi modalitas kinestetik belajar dengan baik melalui pengalaman langsung dan aktivitas fisik. Mereka lebih memahami dan mengingat informasi ketika mereka dapat menyentuh, merasakan, atau berpartisipasi secara fisik dalam proses belajar. Belajar melalui percobaan, praktek, dan gerakan membantu mereka menghubungkan konsep-konsep dengan pengalaman nyata. Mereka sering merasa lebih mudah memahami materi melalui kegiatan yang melibatkan gerakan atau manipulasi objek.',
   },
 };
 
 const interpolateScore = (score) => ((score / 60) * 100).toFixed(2);
 
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
 const QuizResult101LearningStyles = ({ totalScores, onBackToIntro }) => {
   console.log('Result totalScores = ', totalScores);
 
-  // Ensure totalScores is an object and has entries
   if (
     !totalScores ||
     typeof totalScores !== 'object' ||
@@ -43,13 +38,17 @@ const QuizResult101LearningStyles = ({ totalScores, onBackToIntro }) => {
     return <div>No scores available</div>;
   }
 
+  const handleBackToIntro = () => {
+    onBackToIntro(true);
+  };
+
   const sortedScores = Object.entries(totalScores)
-    .sort(([, a], [, b]) => interpolateScore(b) - interpolateScore(a))
+    .sort(([, a], [, b]) => b - a)
     .slice(0, 3);
 
   return (
     <div className='quiz-result-container'>
-      <h2>Hasil Identifikasi Nurtured Talents - Learning Styles</h2>
+      <h2>Hasil Identifikasi Gaya Belajar (Learning Style)</h2>
 
       <div className='row'>
         <div className='col-md-6'>
@@ -60,41 +59,35 @@ const QuizResult101LearningStyles = ({ totalScores, onBackToIntro }) => {
           />
         </div>
         <div className='col-md-6'>
-          <ChartLearningStyles totalScores={totalScores} />
+          <ChartLearningStyles totalscores={totalScores} />
         </div>
       </div>
 
-      {sortedScores.map(([type, score], index) => {
-        const cleanType = type.replace('type_', '');
-        if (!karakteristik[cleanType]) {
-          console.error(`No karakteristik found for type: ${cleanType}`);
-          return null; // Skip this iteration if no matching karakteristik is found
-        }
-        return (
-          <div key={type} className='result-item mt-4'>
-            <div className='row'>
-              <div className='col-md-3'>
-                <img
-                  src={karakteristik[cleanType].img}
-                  className='img-fluid'
-                  alt={cleanType}
-                />
-              </div>
-              <div className='col-md-9'>
-                <h3>
-                  {index + 1}. {capitalizeFirstLetter(cleanType)}
-                </h3>
-                <p>
-                  <strong>Skor:</strong> {interpolateScore(score)}
-                </p>
-                <p>{karakteristik[cleanType].text}</p>
-              </div>
+      {sortedScores.map(([type, score], index) => (
+        <div key={type} className='result-item mt-4'>
+          <div className='row'>
+            <div className='col-md-3'>
+              <img
+                src={karakteristik[type].img}
+                className='img-fluid'
+                alt={type}
+              />
+            </div>
+            <div className='col-md-9'>
+              <h3>
+                {index + 1}. {type}
+              </h3>
+              <p>
+                <strong>Skor:</strong> {interpolateScore(score)}
+              </p>
+              <p>{karakteristik[type].text}</p>
             </div>
           </div>
-        );
-      })}
+        </div>
+      ))}
+
       <div className='mt-4'>
-        <button onClick={onBackToIntro} className='btn btn-primary'>
+        <button onClick={() => onBackToIntro(true)} className='btn btn-primary'>
           Back to Quiz Intro
         </button>
       </div>

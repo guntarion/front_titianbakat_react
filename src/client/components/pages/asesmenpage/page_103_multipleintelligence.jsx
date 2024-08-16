@@ -144,6 +144,24 @@ const Asesment103MultipleIntelligence = (props) => {
     );
   };
 
+  const calculateScores = (responses, statementTypeMap) => {
+    const scores = scoreTypes.reduce((acc, type) => {
+      acc[type] = 0;
+      return acc;
+    }, {});
+
+    Object.entries(responses).forEach(([statementId, score]) => {
+      const statementIdNumber = parseInt(statementId);
+      Object.entries(statementTypeMap).forEach(([type, statementIds]) => {
+        if (statementIds.includes(statementIdNumber)) {
+          scores[type] += score;
+        }
+      });
+    });
+
+    return scores;
+  };
+
   const handleQuizComplete = (scores) => {
     setTotalScores(scores);
     setShowQuiz(false);
@@ -398,6 +416,7 @@ const Asesment103MultipleIntelligence = (props) => {
                   onQuizComplete={handleQuizComplete}
                   scoreTypes={scoreTypes}
                   initialQuestionIndex={currentQuestionIndex}
+                  calculateScores={calculateScores}
                 />
               )}
             </div>

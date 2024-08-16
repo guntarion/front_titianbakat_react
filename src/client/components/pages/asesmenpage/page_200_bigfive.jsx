@@ -1,6 +1,6 @@
 // src/client/components/pages/asesmenpage/page_200_bigfive.jsx
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import Header from '../../header';
 import QuizTypeA from '../../Quiz/quiz-type-a';
 import QuizResult from '../../Quiz/Quiz-Result/result_200_bigfive';
@@ -10,9 +10,9 @@ import { useAuth } from '../../../../AuthContext';
 import FooterHome6 from '../../home/EyeCareHome/FooterHome6';
 import config from '../../../../config';
 
-import { img_ls_opening } from '../../imagepath';
+import { img_bigfive_opening } from '../../imagepath';
 
-const Asesment200BigFive = (props) => {
+const Asesment103MultipleIntelligence = (props) => {
   const { user } = useAuth();
   const history = useHistory();
   const [showQuiz, setShowQuiz] = useState(false);
@@ -23,6 +23,8 @@ const Asesment200BigFive = (props) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [quizInfo, setQuizInfo] = useState(null);
   const [latestQuizResponse, setLatestQuizResponse] = useState(null);
+  const [isFromResult, setIsFromResult] = useState(false);
+  const location = useLocation();
 
   const scoreTypes = [
     'Extroversion',
@@ -39,6 +41,15 @@ const Asesment200BigFive = (props) => {
       const db = getFirestore();
       const docRef = doc(db, 'users', user.uid);
       const docSnap = await getDoc(docRef);
+
+      // Reset state if coming from result page
+      if (location.state && location.state.fromResult) {
+        setIsFromResult(true);
+        setLatestQuizResponse(null);
+        setHasQuizResult(false);
+        setCurrentQuestionIndex(0);
+        setTotalScores({});
+      }
 
       if (docSnap.exists()) {
         const data = docSnap.data();
@@ -88,7 +99,7 @@ const Asesment200BigFive = (props) => {
     };
 
     fetchData();
-  }, [user]);
+  }, [user, location]);
 
   const renderQuizStatusMessage = () => {
     if (!quizInfo) return null;
@@ -96,7 +107,13 @@ const Asesment200BigFive = (props) => {
     let alertClass = 'alert alert-info';
     let message = '';
 
-    if (latestQuizResponse && latestQuizResponse.status === 'in progress') {
+    if (isFromResult) {
+      alertClass = 'alert alert-info';
+      message = 'You can start a new quiz attempt.';
+    } else if (
+      latestQuizResponse &&
+      latestQuizResponse.status === 'in progress'
+    ) {
       const progress = Math.round(
         (latestQuizResponse.last_question_index / quizInfo.statement_count) *
           100
@@ -113,7 +130,7 @@ const Asesment200BigFive = (props) => {
       message =
         'You have completed this quiz. You can start a new attempt or view your latest result.';
     } else {
-      message = 'Start a new quiz to assess your learning style.';
+      message = 'Start a new quiz to assess your multiple intelligence.';
     }
 
     return (
@@ -122,6 +139,24 @@ const Asesment200BigFive = (props) => {
         {message}
       </div>
     );
+  };
+
+  const calculateScores = (responses, statementTypeMap) => {
+    const scores = scoreTypes.reduce((acc, type) => {
+      acc[type] = 0;
+      return acc;
+    }, {});
+
+    Object.entries(responses).forEach(([statementId, score]) => {
+      const statementIdNumber = parseInt(statementId);
+      Object.entries(statementTypeMap).forEach(([type, statementIds]) => {
+        if (statementIds.includes(statementIdNumber)) {
+          scores[type] += score;
+        }
+      });
+    });
+
+    return scores;
   };
 
   const handleQuizComplete = (scores) => {
@@ -186,10 +221,17 @@ const Asesment200BigFive = (props) => {
     setShowLatestResult(true);
   };
 
-  const handleBackToIntro = () => {
+  const handleBackToIntro = (fromResult = false) => {
     setShowLatestResult(false);
     setShowQuiz(false);
-    history.push('/asesmen/learning-style');
+    if (fromResult) {
+      setIsFromResult(true);
+      setLatestQuizResponse(null);
+      setHasQuizResult(false);
+      setCurrentQuestionIndex(0);
+      setTotalScores({});
+    }
+    history.push('/asesmen/bigfive', { fromResult });
   };
 
   return (
@@ -199,14 +241,14 @@ const Asesment200BigFive = (props) => {
         <div className='container'>
           <div className='row align-items-center inner-banner'>
             <div className='col-md-12 col-12 text-center'>
-              <h2 className='breadcrumb-title'>Learning Style Assessment</h2>
+              <h2 className='breadcrumb-title'>Big Five Personality</h2>
               <nav aria-label='breadcrumb' className='page-breadcrumb'>
                 <ol className='breadcrumb'>
                   <li className='breadcrumb-item'>
                     <Link to='/index-6'>Home</Link>
                   </li>
                   <li className='breadcrumb-item' aria-current='page'>
-                    Learning Style Assessment
+                    Big Five Personality
                   </li>
                 </ol>
               </nav>
@@ -229,7 +271,7 @@ const Asesment200BigFive = (props) => {
                   {!showQuiz && (
                     <>
                       <img
-                        src={img_ls_opening}
+                        src={img_bigfive_opening}
                         alt=''
                         className='img-fluidme'
                       />
@@ -407,17 +449,17 @@ const Asesment200BigFive = (props) => {
                         Selamat mengisi, dan semoga Anda menemukan wawasan yang
                         berarti!
                       </p>
-
                       {renderQuizStatusMessage()}
                       <button
                         onClick={startQuiz}
                         className='btn btn-primary'
                         style={{ marginRight: '20px' }}
                       >
-                        {latestQuizResponse &&
-                        latestQuizResponse.status === 'in progress'
-                          ? 'Continue Quiz'
-                          : 'Start Quiz'}
+                        {isFromResult ||
+                        !latestQuizResponse ||
+                        latestQuizResponse.status !== 'in progress'
+                          ? 'Start Quiz'
+                          : 'Continue Quiz'}
                       </button>
                       {hasQuizResult && (
                         <button
@@ -437,6 +479,7 @@ const Asesment200BigFive = (props) => {
                   onQuizComplete={handleQuizComplete}
                   scoreTypes={scoreTypes}
                   initialQuestionIndex={currentQuestionIndex}
+                  calculateScores={calculateScores}
                 />
               )}
             </div>
@@ -448,4 +491,4 @@ const Asesment200BigFive = (props) => {
   );
 };
 
-export default Asesment200BigFive;
+export default Asesment103MultipleIntelligence;

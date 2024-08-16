@@ -12,6 +12,7 @@ const QuizTypeA = ({
   scoreTypes,
   onQuizComplete,
   initialQuestionIndex = 0,
+  calculateScores,
 }) => {
   const { user } = useAuth();
   const [mongoUserId, setMongoUserId] = useState('');
@@ -261,7 +262,10 @@ const QuizTypeA = ({
         'in progress'
       );
     } else {
-      const totalScores = calculateScores(newResponses);
+      const totalScores = calculateScores(
+        newResponses,
+        quizData.statementTypeMap
+      );
       saveProgress(
         newResponses,
         newNotes,
@@ -311,32 +315,32 @@ const QuizTypeA = ({
     }
   };
 
-  // Update the calculateScores function to use the correct data structure
-  const calculateScores = (responses) => {
-    if (!statementTypeMap || Object.keys(statementTypeMap).length === 0) {
-      console.error('Statement type map is not available');
-      return quizData.score_types.reduce((acc, type) => {
-        acc[type] = 0;
-        return acc;
-      }, {});
-    }
+  // // Update the calculateScores function to use the correct data structure
+  // const calculateScores = (responses) => {
+  //   if (!statementTypeMap || Object.keys(statementTypeMap).length === 0) {
+  //     console.error('Statement type map is not available');
+  //     return quizData.score_types.reduce((acc, type) => {
+  //       acc[type] = 0;
+  //       return acc;
+  //     }, {});
+  //   }
 
-    const scores = quizData.score_types.reduce((acc, type) => {
-      acc[type] = 0;
-      return acc;
-    }, {});
+  //   const scores = quizData.score_types.reduce((acc, type) => {
+  //     acc[type] = 0;
+  //     return acc;
+  //   }, {});
 
-    for (const [statementId, score] of Object.entries(responses)) {
-      const statement = quizData.quiz_statements.find(
-        (s) => s.id === parseInt(statementId)
-      );
-      if (statement) {
-        scores[statement.type] += score;
-      }
-    }
+  //   for (const [statementId, score] of Object.entries(responses)) {
+  //     const statement = quizData.quiz_statements.find(
+  //       (s) => s.id === parseInt(statementId)
+  //     );
+  //     if (statement) {
+  //       scores[statement.type] += score;
+  //     }
+  //   }
 
-    return scores;
-  };
+  //   return scores;
+  // };
 
   if (currentQuestionIndex >= quizData.quiz_statements.length) {
     return <div>Error: Invalid question index</div>;
@@ -397,6 +401,7 @@ QuizTypeA.propTypes = {
   scoreTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
   onQuizComplete: PropTypes.func.isRequired,
   initialQuestionIndex: PropTypes.number,
+  calculateScores: PropTypes.func.isRequired,
 };
 
 export default QuizTypeA;

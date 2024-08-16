@@ -75,7 +75,7 @@ const ChartBigFivePersonality = ({ totalScores }) => {
       },
       title: {
         display: true,
-        text: 'Big Five Personality berbasis Kuesioner',
+        text: 'Big Five Personality',
       },
     },
   };

@@ -1,4 +1,4 @@
-// src/client/components/Quiz-Chart/chart_learningStyles.jsx
+// src/client/components/Quiz/Quiz-Chart/chart_101_learningstyle.jsx
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -22,36 +22,20 @@ ChartJS.register(
   Legend
 );
 
-const ChartLearningStyles = ({ totalScores }) => {
-  console.log('Chart totalScores:', totalScores);
-
-  const labels = ['Visual', 'Auditory', 'Kinesthetic'];
-
-  if (!totalScores || typeof totalScores !== 'object') {
-    console.error('Invalid totalScores prop:', totalScores);
-    return <div>No data available for chart</div>;
-  }
-
-  // Function to scale the score
-  const scaleScore = (score) => {
-    // Assuming max possible score is 60, scale it to 100
-    return ((score / 60) * 100).toFixed(2);
-  };
-
+const ChartLearningStyles = ({ totalscores }) => {
+  const labels = Object.keys(totalscores);
   const data = {
     labels: labels,
     datasets: [
       {
         label: 'Learning Styles',
-        data: [
-          scaleScore(totalScores.Visual || 0),
-          scaleScore(totalScores.Auditory || 0),
-          scaleScore(totalScores.Kinesthetic || 0),
-        ],
+        data: labels.map((label) =>
+          ((totalscores[label] / (5 * 12)) * 100).toFixed(2)
+        ),
         backgroundColor: [
-          'rgba(255, 99, 132, 0.5)',
-          'rgba(54, 162, 235, 0.5)',
-          'rgba(75, 192, 192, 0.5)',
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
         ],
       },
     ],
@@ -67,7 +51,7 @@ const ChartLearningStyles = ({ totalScores }) => {
       },
       title: {
         display: true,
-        text: 'Learning Styles berbasis Kuesioner',
+        text: 'Learning Styles Assessment Results',
       },
     },
     scales: {
@@ -86,11 +70,11 @@ const ChartLearningStyles = ({ totalScores }) => {
 };
 
 ChartLearningStyles.propTypes = {
-  totalScores: PropTypes.shape({
+  totalscores: PropTypes.shape({
     Visual: PropTypes.number,
     Auditory: PropTypes.number,
     Kinesthetic: PropTypes.number,
-  }),
+  }).isRequired,
 };
 
 export default ChartLearningStyles;

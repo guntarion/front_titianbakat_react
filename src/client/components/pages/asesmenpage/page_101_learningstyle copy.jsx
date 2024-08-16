@@ -1,6 +1,6 @@
 // src/client/components/pages/asesmenpage/page_101_learningstyle.jsx
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Header from '../../header';
 import QuizTypeA from '../../Quiz/quiz-type-a';
 import QuizResult from '../../Quiz/Quiz-Result/result_101_learningstyle';
@@ -23,8 +23,6 @@ const Asesment101LearningStyle = (props) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [quizInfo, setQuizInfo] = useState(null);
   const [latestQuizResponse, setLatestQuizResponse] = useState(null);
-  const [isFromResult, setIsFromResult] = useState(false);
-  const location = useLocation();
 
   const scoreTypes = ['Visual', 'Auditory', 'Kinesthetic'];
 
@@ -35,15 +33,6 @@ const Asesment101LearningStyle = (props) => {
       const db = getFirestore();
       const docRef = doc(db, 'users', user.uid);
       const docSnap = await getDoc(docRef);
-
-      // Reset state if coming from result page
-      if (location.state && location.state.fromResult) {
-        setIsFromResult(true);
-        setLatestQuizResponse(null);
-        setHasQuizResult(false);
-        setCurrentQuestionIndex(0);
-        setTotalScores({});
-      }
 
       if (docSnap.exists()) {
         const data = docSnap.data();
@@ -93,7 +82,7 @@ const Asesment101LearningStyle = (props) => {
     };
 
     fetchData();
-  }, [user, location]);
+  }, [user]);
 
   const renderQuizStatusMessage = () => {
     if (!quizInfo) return null;
@@ -101,13 +90,7 @@ const Asesment101LearningStyle = (props) => {
     let alertClass = 'alert alert-info';
     let message = '';
 
-    if (isFromResult) {
-      alertClass = 'alert alert-info';
-      message = 'You can start a new quiz attempt.';
-    } else if (
-      latestQuizResponse &&
-      latestQuizResponse.status === 'in progress'
-    ) {
+    if (latestQuizResponse && latestQuizResponse.status === 'in progress') {
       const progress = Math.round(
         (latestQuizResponse.last_question_index / quizInfo.statement_count) *
           100
@@ -124,7 +107,7 @@ const Asesment101LearningStyle = (props) => {
       message =
         'You have completed this quiz. You can start a new attempt or view your latest result.';
     } else {
-      message = 'Start a new quiz to assess your multiple intelligence.';
+      message = 'Start a new quiz to assess your learning style.';
     }
 
     return (
@@ -133,25 +116,6 @@ const Asesment101LearningStyle = (props) => {
         {message}
       </div>
     );
-  };
-
-  const calculateScores = (responses, statementTypeMap) => {
-    const scores = {
-      Visual: 0,
-      Auditory: 0,
-      Kinesthetic: 0,
-    };
-
-    Object.entries(responses).forEach(([statementId, score]) => {
-      const statementIdNumber = parseInt(statementId);
-      Object.entries(statementTypeMap).forEach(([type, statementIds]) => {
-        if (statementIds.includes(statementIdNumber)) {
-          scores[type] += score;
-        }
-      });
-    });
-
-    return scores;
   };
 
   const handleQuizComplete = (scores) => {
@@ -216,17 +180,10 @@ const Asesment101LearningStyle = (props) => {
     setShowLatestResult(true);
   };
 
-  const handleBackToIntro = (fromResult = false) => {
+  const handleBackToIntro = () => {
     setShowLatestResult(false);
     setShowQuiz(false);
-    if (fromResult) {
-      setIsFromResult(true);
-      setLatestQuizResponse(null);
-      setHasQuizResult(false);
-      setCurrentQuestionIndex(0);
-      setTotalScores({});
-    }
-    history.push('/asesmen/learningstyle', { fromResult });
+    history.push('/asesmen/learningstyle');
   };
 
   return (
@@ -468,17 +425,17 @@ const Asesment101LearningStyle = (props) => {
                         inspirasi dan strategi yang efektif untuk belajar lebih
                         baik!
                       </p>
+
                       {renderQuizStatusMessage()}
                       <button
                         onClick={startQuiz}
                         className='btn btn-primary'
                         style={{ marginRight: '20px' }}
                       >
-                        {isFromResult ||
-                        !latestQuizResponse ||
-                        latestQuizResponse.status !== 'in progress'
-                          ? 'Start Quiz'
-                          : 'Continue Quiz'}
+                        {latestQuizResponse &&
+                        latestQuizResponse.status === 'in progress'
+                          ? 'Continue Quiz'
+                          : 'Start Quiz'}
                       </button>
                       {hasQuizResult && (
                         <button
@@ -498,7 +455,7 @@ const Asesment101LearningStyle = (props) => {
                   onQuizComplete={handleQuizComplete}
                   scoreTypes={scoreTypes}
                   initialQuestionIndex={currentQuestionIndex}
-                  calculateScores={calculateScores}
+                  // quizData={quizData}
                 />
               )}
             </div>
