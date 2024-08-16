@@ -1,6 +1,6 @@
 // src/client/components/pages/asesmenpage/page_103_multipleintelligence.jsx
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import Header from '../../header';
 import QuizTypeA from '../../Quiz/quiz-type-a';
 import QuizResult from '../../Quiz/Quiz-Result/result_103_multipleintelligence';
@@ -23,16 +23,18 @@ const Asesment103MultipleIntelligence = (props) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [quizInfo, setQuizInfo] = useState(null);
   const [latestQuizResponse, setLatestQuizResponse] = useState(null);
+  const [isFromResult, setIsFromResult] = useState(false);
+  const location = useLocation();
 
   const scoreTypes = [
+    'Logika',
+    'Linguistik',
     'Spasial',
+    'Musikal',
     'Naturalis',
     'Interpersonal',
     'Intrapersonal',
     'Kinestetik',
-    'Logika',
-    'Linguistik',
-    'Musikal',
   ];
 
   useEffect(() => {
@@ -42,6 +44,15 @@ const Asesment103MultipleIntelligence = (props) => {
       const db = getFirestore();
       const docRef = doc(db, 'users', user.uid);
       const docSnap = await getDoc(docRef);
+
+      // Reset state if coming from result page
+      if (location.state && location.state.fromResult) {
+        setIsFromResult(true);
+        setLatestQuizResponse(null);
+        setHasQuizResult(false);
+        setCurrentQuestionIndex(0);
+        setTotalScores({});
+      }
 
       if (docSnap.exists()) {
         const data = docSnap.data();
@@ -91,7 +102,7 @@ const Asesment103MultipleIntelligence = (props) => {
     };
 
     fetchData();
-  }, [user]);
+  }, [user, location]);
 
   const renderQuizStatusMessage = () => {
     if (!quizInfo) return null;
@@ -99,7 +110,13 @@ const Asesment103MultipleIntelligence = (props) => {
     let alertClass = 'alert alert-info';
     let message = '';
 
-    if (latestQuizResponse && latestQuizResponse.status === 'in progress') {
+    if (isFromResult) {
+      alertClass = 'alert alert-info';
+      message = 'You can start a new quiz attempt.';
+    } else if (
+      latestQuizResponse &&
+      latestQuizResponse.status === 'in progress'
+    ) {
       const progress = Math.round(
         (latestQuizResponse.last_question_index / quizInfo.statement_count) *
           100
@@ -189,10 +206,17 @@ const Asesment103MultipleIntelligence = (props) => {
     setShowLatestResult(true);
   };
 
-  const handleBackToIntro = () => {
+  const handleBackToIntro = (fromResult = false) => {
     setShowLatestResult(false);
     setShowQuiz(false);
-    history.push('/asesmen/multipleintelligence');
+    if (fromResult) {
+      setIsFromResult(true);
+      setLatestQuizResponse(null);
+      setHasQuizResult(false);
+      setCurrentQuestionIndex(0);
+      setTotalScores({});
+    }
+    history.push('/asesmen/multipleintelligence', { fromResult });
   };
 
   return (
@@ -350,10 +374,11 @@ const Asesment103MultipleIntelligence = (props) => {
                         className='btn btn-primary'
                         style={{ marginRight: '20px' }}
                       >
-                        {latestQuizResponse &&
-                        latestQuizResponse.status === 'in progress'
-                          ? 'Continue Quiz'
-                          : 'Start Quiz'}
+                        {isFromResult ||
+                        !latestQuizResponse ||
+                        latestQuizResponse.status !== 'in progress'
+                          ? 'Start Quiz'
+                          : 'Continue Quiz'}
                       </button>
                       {hasQuizResult && (
                         <button

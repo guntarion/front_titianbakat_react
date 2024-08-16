@@ -104,7 +104,7 @@ function SpecialtiesHome6() {
                 <div className='item'>
                   <div className='special-item'>
                     <div className='special-img'>
-                      <ProtectedLink to='/asesmen/multiple-intelligences'>
+                      <ProtectedLink to='/asesmen/multipleintelligence'>
                         <img
                           // src="assets/img/clinic/clinic-03.png"
                           src={asesmen_03_multipleintelligence}

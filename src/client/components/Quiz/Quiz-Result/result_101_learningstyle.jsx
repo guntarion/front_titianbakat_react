@@ -11,15 +11,15 @@ import {
 } from '../../imagepath';
 
 const karakteristik = {
-  visual: {
+  Visual: {
     img: img_ls_visual,
     text: "Anda memiliki gaya belajar visual yang kuat. Ini berarti Anda belajar paling efektif melalui pengamatan dan informasi visual. Anda cenderung memahami dan mengingat informasi dengan lebih baik ketika disajikan dalam bentuk gambar, diagram, grafik, atau video. Kemampuan ini memungkinkan Anda untuk dengan cepat memahami konsep kompleks ketika disajikan secara visual, dan Anda sering kali dapat 'melihat' solusi dalam pikiran Anda sebelum mengartikulasikannya.",
   },
-  auditory: {
+  Auditory: {
     img: img_ls_auditory,
     text: 'Anda memiliki gaya belajar auditori yang dominan. Ini berarti Anda belajar paling baik melalui mendengarkan dan diskusi verbal. Anda cenderung mengingat informasi dengan lebih baik ketika disampaikan melalui ceramah, diskusi kelompok, atau bahkan ketika Anda menjelaskannya kepada orang lain. Kemampuan ini membuat Anda menjadi pendengar yang baik dan sering kali mampu memahami nuansa dalam komunikasi verbal yang mungkin terlewatkan oleh orang lain.',
   },
-  kinesthetic: {
+  Kinesthetic: {
     img: img_ls_kinesthetic,
     text: "Anda memiliki gaya belajar kinestetik yang kuat. Ini berarti Anda belajar paling efektif melalui pengalaman langsung dan aktivitas fisik. Anda cenderung memahami dan mengingat informasi dengan lebih baik ketika Anda dapat melakukan, menyentuh, atau memanipulasi objek secara fisik. Gaya belajar ini memberi Anda keunggulan dalam situasi yang memerlukan koordinasi fisik dan keterampilan praktis, dan Anda sering kali dapat 'merasakan' solusi secara intuitif.",
   },
@@ -105,9 +105,9 @@ const QuizResult101LearningStyles = ({ totalScores, onBackToIntro }) => {
 QuizResult101LearningStyles.propTypes = {
   onBackToIntro: PropTypes.func.isRequired,
   totalScores: PropTypes.shape({
-    visual: PropTypes.number,
-    auditory: PropTypes.number,
-    kinesthetic: PropTypes.number,
+    Visual: PropTypes.number,
+    Auditory: PropTypes.number,
+    Kinesthetic: PropTypes.number,
   }),
 };
 
