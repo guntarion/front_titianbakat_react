@@ -12,6 +12,7 @@ import Home6 from './client/components/home/home6.jsx';
 import LoginEmail from './client/components/pages/authentication/login-titianbakat';
 import TBUserSignup from './client/components/pages/authentication/user-signup.jsx';
 import TermsPrivasiPolicy from './client/components/pages/termsprivacypolicy';
+import Dashboard from './client/components/patients/dashboard';
 // import OccupationalThemeAssessment from "./client/components/pages/asesmenpage/occupational-themes";
 // import MultipleIntelligencesAssessment from "./client/components/pages/asesmenpage/multiple-intelligences";
 // import BigFivePersonalityAssessment from "./client/components/pages/asesmenpage/big-five-personality";
@@ -57,6 +58,7 @@ const AppRouter = () => {
       {/* <Route exact path="/index-6" render={(props) => <AppContainer {...props} />} /> */}
       <Route exact path='/login-titian-bakat' component={LoginEmail} />
       <Route exact path='/user-signup' component={TBUserSignup} />
+      <Route exact path='/user/dashboard' component={Dashboard} />
       <Route
         path='/terms-privacy-policy'
         exact
@@ -134,6 +136,7 @@ const AppRouter = () => {
         path='/asesmen/dismorfiktubuh'
         component={Asesment308DismorfikTubuh}
       />
+
       <Route component={Home6} />
     </Switch>
   );
