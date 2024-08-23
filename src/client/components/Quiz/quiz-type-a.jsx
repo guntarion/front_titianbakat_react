@@ -370,7 +370,6 @@ const QuizTypeA = ({
       </div>
 
       <div className='question-container'>
-        <h3>{quizData.quiz_statements[currentQuestionIndex].statement_id}</h3>
         <div className='options'>
           {['Nggak Banget', 'Nggak', 'Netral', 'Iya', 'Iya Banget'].map(
             (option, index) => (
@@ -380,7 +379,7 @@ const QuizTypeA = ({
             )
           )}
         </div>
-
+        <h3>{quizData.quiz_statements[currentQuestionIndex].statement_id}</h3>
         <input
           type='text'
           value={noteText}

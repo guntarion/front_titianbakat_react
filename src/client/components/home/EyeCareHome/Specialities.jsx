@@ -104,6 +104,30 @@ function SpecialtiesHome6() {
                 <div className='item'>
                   <div className='special-item'>
                     <div className='special-img'>
+                      <ProtectedLink to='/asesmen/occupationalthemes'>
+                        <img
+                          src={asesmen_02_holland}
+                          alt=''
+                          className='img-fluid'
+                        />
+                      </ProtectedLink>
+                    </div>
+                    <div className='special-icon'>
+                      <ProtectedLink to='/asesmen/occupationalthemes'>
+                        <i className='fa-solid fa-circle-chevron-right' />
+                      </ProtectedLink>
+                    </div>
+                    <h6>
+                      <ProtectedLink to='/asesmen/occupationalthemes'>
+                        Occupational Themes{' '}
+                      </ProtectedLink>
+                    </h6>
+                  </div>
+                </div>
+
+                <div className='item'>
+                  <div className='special-item'>
+                    <div className='special-img'>
                       <ProtectedLink to='/asesmen/multipleintelligence'>
                         <img
                           // src="assets/img/clinic/clinic-03.png"
@@ -301,24 +325,7 @@ function SpecialtiesHome6() {
                     </h6>
                   </div>
                 </div>
-                <div className="item">
-                  <div className="special-item">
-                    <div className="special-img">
-                      <ProtectedLink to="/asesmen/occupational-themes">
-                        <img src={asesmen_02_holland} alt="" className="img-fluid" />
-                      </ProtectedLink>
-                    </div>
-                    <div className="special-icon">
-                      <ProtectedLink to="/asesmen/occupational-themes">
-                        <i className="fa-solid fa-circle-chevron-right" />
-                      </ProtectedLink>
-                    </div>
-                    <h6>
-                      <ProtectedLink to="/asesmen/occupational-themes">Occupational Themes </ProtectedLink>
-                      <ProtectedLink to="/index-6">Occupational Themes</ProtectedLink>
-                    </h6>
-                  </div>
-                </div>
+                
                 
                 <div className="item">
                   <div className="special-item">

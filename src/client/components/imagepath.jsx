@@ -20,12 +20,13 @@ export { default as img_ls_visual } from '../assets/images/quiz/img_101_learning
 export { default as img_ls_auditory } from '../assets/images/quiz/img_101_learningstyle/img_ls_auditory.jpg';
 export { default as img_ls_kinesthetic } from '../assets/images/quiz/img_101_learningstyle/img_ls_kinesthetic.jpg';
 // img_102_riasec
-export { default as img_riasec_realistic } from '../assets/images/quiz/img_102_riasec/riasec_realistic.png';
-export { default as img_riasec_artistic } from '../assets/images/quiz/img_102_riasec/riasec_artistic.png';
-export { default as img_riasec_conventional } from '../assets/images/quiz/img_102_riasec/riasec_conventional.png';
-export { default as img_riasec_enterprising } from '../assets/images/quiz/img_102_riasec/riasec_enterprising.png';
-export { default as img_riasec_investigative } from '../assets/images/quiz/img_102_riasec/riasec_investigative.png';
-export { default as img_riasec_social } from '../assets/images/quiz/img_102_riasec/riasec_social.png';
+export { default as img_riasec_realistic } from '../assets/images/quiz/img_102_riasec/hc-Realistic.jpg';
+export { default as img_riasec_investigative } from '../assets/images/quiz/img_102_riasec/hc-Investigative.jpg';
+export { default as img_riasec_artistic } from '../assets/images/quiz/img_102_riasec/hc-Artistic.jpg';
+export { default as img_riasec_social } from '../assets/images/quiz/img_102_riasec/hc-Social.jpg';
+export { default as img_riasec_enterprising } from '../assets/images/quiz/img_102_riasec/hc-Enterprising.jpg';
+export { default as img_riasec_conventional } from '../assets/images/quiz/img_102_riasec/hc-Conventional.jpg';
+export { default as img_riasec_result } from '../assets/images/quiz/img_102_riasec/hc-result.jpg';
 export { default as img_riasec_opening } from '../assets/images/quiz/img_102_riasec/riasec_opening.jpg';
 // img_103_multipleintelligence
 export { default as img_mi_opening } from '../assets/images/quiz/img_103_multipleintelligence/mi_opening.jpg';
