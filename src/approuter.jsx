@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import config from "config"
 import AuthContext from "./AuthContext"
 // import AppContainer from "./appcontainer.jsx";
+
+import PharmacyadminApp from "./pharmacyadmin/app-universal"
+
 import RoutesForAdmin from "./hooks/routes-for-admin.jsx"
 import RoutesForKonselor from "./hooks/routes-for-konselor.jsx"
 import RoutesForUser from "./hooks/routes-for-user.jsx"
@@ -66,11 +69,13 @@ const AppRouter = () => {
             <ProtectedRoute path="/admin" component={RoutesForAdmin} role="admin" />
             <ProtectedRoute path="/konselor" component={RoutesForKonselor} role="konselor" />
             <ProtectedRoute path="/user" component={RoutesForUser} role="user" />
+            <Route path="/pharmacyadmin" component={PharmacyadminApp} />
             {/* <Route path="/blog/blog-details" exact component={BlogDetails} /> */}
             <Route path="/blog/:id" component={BlogDetails} />
             {/* 
       <ProtectedRoute path="/asesmen/multiple-intelligences" component={MultipleIntelligencesAssessment} />
       <ProtectedRoute path="/asesmen/big-five-personality" component={BigFivePersonalityAssessment} /> */}
+
             <ProtectedRoute path="/asesmen/occupationalthemes" component={Asesment102Riasec} />
             <ProtectedRoute path="/asesmen/learningstyle" component={Asesment101LearningStyle} />
             <ProtectedRoute path="/asesmen/riasec" component={Asesment102Riasec} />

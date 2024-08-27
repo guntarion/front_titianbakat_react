@@ -1,0 +1,22 @@
+/* src/pharmacyadmin/components/blog/viewblogpost.css */
+
+.blog-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.blog-content li {
+    position: relative;
+    padding-left: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.blog-content li:before {
+    content: "\f058";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    color: #007bff;
+}
