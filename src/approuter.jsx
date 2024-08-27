@@ -13,6 +13,7 @@ import LoginEmail from "./client/components/pages/authentication/login-titianbak
 import TBUserSignup from "./client/components/pages/authentication/user-signup.jsx"
 import TermsPrivasiPolicy from "./client/components/pages/termsprivacypolicy"
 import Dashboard from "./client/components/patients/dashboard"
+import BlogDetails from "./client/components/blog/blogdetails"
 // import MultipleIntelligencesAssessment from "./client/components/pages/asesmenpage/multiple-intelligences";
 // import BigFivePersonalityAssessment from "./client/components/pages/asesmenpage/big-five-personality";
 
@@ -65,6 +66,8 @@ const AppRouter = () => {
             <ProtectedRoute path="/admin" component={RoutesForAdmin} role="admin" />
             <ProtectedRoute path="/konselor" component={RoutesForKonselor} role="konselor" />
             <ProtectedRoute path="/user" component={RoutesForUser} role="user" />
+            {/* <Route path="/blog/blog-details" exact component={BlogDetails} /> */}
+            <Route path="/blog/:id" component={BlogDetails} />
             {/* 
       <ProtectedRoute path="/asesmen/multiple-intelligences" component={MultipleIntelligencesAssessment} />
       <ProtectedRoute path="/asesmen/big-five-personality" component={BigFivePersonalityAssessment} /> */}

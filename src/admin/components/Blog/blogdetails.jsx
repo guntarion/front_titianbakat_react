@@ -27,7 +27,7 @@ const BlogDetails = () => {
                                             <img alt="" src={blog01} className="img-fluid" />
                                         </Link>
                                     </div>
-                                    <h3 className="blog-title">What are the benefits of Online Doctor Booking?</h3>
+                                    <h3 className="blog-title">Tes What are the benefits of Online Doctor Booking?</h3>
                                     <div className="blog-info">
                                         <div className="post-list">
                                             <ul>
@@ -315,13 +315,6 @@ const BlogDetails = () => {
                                                 <Link to="#">
                                                     <i>
                                                         <FeatherIcon icon="instagram" />
-                                                    </i>
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link to="#">
-                                                    <i>
-                                                        <FeatherIcon icon="youtube" />
                                                     </i>
                                                 </Link>
                                             </li>
