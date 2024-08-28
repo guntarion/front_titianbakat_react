@@ -15,6 +15,10 @@ const AddBlogPost = () => {
     const [tags, setTags] = useState("")
     const [image, setImage] = useState(null)
     const [error, setError] = useState("")
+    const [seriesName, setSeriesName] = useState("")
+    const [seriesNumber, setSeriesNumber] = useState("")
+    const [postWeight, setPostWeight] = useState("")
+    const [postType, setPostType] = useState("")
 
     const categoryOptions = [
         { label: "Category", value: "" },
@@ -45,6 +49,10 @@ const AddBlogPost = () => {
         formData.append("category", category.value)
         formData.append("tags", tags)
         formData.append("slug", createSlug(title))
+        formData.append("series_name", seriesName)
+        formData.append("series_number", seriesNumber)
+        formData.append("post_weight", postWeight)
+        formData.append("post_type", postType)
         if (image) {
             formData.append("image", image)
         }
@@ -108,6 +116,22 @@ const AddBlogPost = () => {
                                                 onChange={selectedOption => setCategory(selectedOption)}
                                                 placeholder="Select Category"
                                             />
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Series Name</label>
+                                            <input type="text" className="form-control" value={seriesName} onChange={e => setSeriesName(e.target.value)} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Series Number</label>
+                                            <input type="number" className="form-control" value={seriesNumber} onChange={e => setSeriesNumber(e.target.value)} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Post Weight</label>
+                                            <input type="number" className="form-control" value={postWeight} onChange={e => setPostWeight(e.target.value)} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Post Type</label>
+                                            <input type="text" className="form-control" value={postType} onChange={e => setPostType(e.target.value)} />
                                         </div>
                                         <div className="form-group">
                                             <label>

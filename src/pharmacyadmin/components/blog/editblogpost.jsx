@@ -17,6 +17,10 @@ const EditBlogPost = () => {
     const [currentImage, setCurrentImage] = useState("")
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(true)
+    const [seriesName, setSeriesName] = useState("")
+    const [seriesNumber, setSeriesNumber] = useState("")
+    const [postWeight, setPostWeight] = useState("")
+    const [postType, setPostType] = useState("")
 
     useEffect(() => {
         fetchBlogPost()
@@ -32,6 +36,10 @@ const EditBlogPost = () => {
             setTags(post.tags.join(", "))
             setStatus(post.status)
             setCurrentImage(post.image_url)
+            setSeriesName(post.series_name || "")
+            setSeriesNumber(post.series_number || "")
+            setPostWeight(post.post_weight || "")
+            setPostType(post.post_type || "")
             setLoading(false)
         } catch (error) {
             console.error("Error fetching blog post:", error)
@@ -54,6 +62,10 @@ const EditBlogPost = () => {
         formData.append("category", category)
         formData.append("tags", tags)
         formData.append("status", status)
+        formData.append("series_name", seriesName)
+        formData.append("series_number", seriesNumber)
+        formData.append("post_weight", postWeight)
+        formData.append("post_type", postType)
         if (image) {
             formData.append("image", image)
         }
@@ -113,6 +125,23 @@ const EditBlogPost = () => {
                                             </label>
                                             <input type="text" className="form-control" value={category} onChange={e => setCategory(e.target.value)} required />
                                         </div>
+                                        <div className="form-group">
+                                            <label>Series Name</label>
+                                            <input type="text" className="form-control" value={seriesName} onChange={e => setSeriesName(e.target.value)} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Series Number</label>
+                                            <input type="number" className="form-control" value={seriesNumber} onChange={e => setSeriesNumber(e.target.value)} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Post Weight</label>
+                                            <input type="number" className="form-control" value={postWeight} onChange={e => setPostWeight(e.target.value)} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Post Type</label>
+                                            <input type="text" className="form-control" value={postType} onChange={e => setPostType(e.target.value)} />
+                                        </div>
+
                                         <div className="form-group">
                                             <label>
                                                 Blog Content <span className="text-danger">*</span>

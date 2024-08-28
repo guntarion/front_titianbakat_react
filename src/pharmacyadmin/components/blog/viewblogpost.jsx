@@ -42,7 +42,7 @@ const ViewBlogPost = () => {
                     <div className="page-header">
                         <div className="row">
                             <div className="col-sm-12">
-                                <h3 className="page-title">View Blog Post</h3>
+                                <h3 className="page-title">Lets View Blog Post</h3>
                                 <ul className="breadcrumb">
                                     <li className="breadcrumb-item">
                                         <Link to="/pharmacyadmin">Dashboard</Link>
@@ -62,6 +62,11 @@ const ViewBlogPost = () => {
                                 <div className="card-body">
                                     <div className="blog-view">
                                         <h2>{blog.title}</h2>
+                                        {blog.image_url && (
+                                            <div className="blog-image">
+                                                <img src={blog.image_url} alt={blog.title} className="img-fluid mb-3" />
+                                            </div>
+                                        )}
                                         <div className="blog-info">
                                             <span>
                                                 <i className="fa fa-calendar"></i> {new Date(blog.created_at).toLocaleDateString()}
@@ -73,11 +78,6 @@ const ViewBlogPost = () => {
                                                 <i className="fa fa-tag"></i> {blog.category}
                                             </span>
                                         </div>
-                                        {blog.image && (
-                                            <div className="blog-image">
-                                                <img src={blog.image} alt={blog.title} className="img-fluid" />
-                                            </div>
-                                        )}
                                         <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.content }}></div>
                                         <div className="blog-tags">
                                             {blog.tags.map((tag, index) => (
@@ -85,6 +85,23 @@ const ViewBlogPost = () => {
                                                     {tag}
                                                 </span>
                                             ))}
+                                        </div>
+                                        <div className="blog-series mt-3">
+                                            {blog.series_name && (
+                                                <p>
+                                                    <strong>Series:</strong> {blog.series_name} {blog.series_number && `(Part ${blog.series_number})`}
+                                                </p>
+                                            )}
+                                            {blog.post_type && (
+                                                <p>
+                                                    <strong>Type:</strong> {blog.post_type}
+                                                </p>
+                                            )}
+                                            {blog.post_weight && (
+                                                <p>
+                                                    <strong>Weight:</strong> {blog.post_weight}
+                                                </p>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
