@@ -62,11 +62,6 @@ const ViewBlogPost = () => {
                                 <div className="card-body">
                                     <div className="blog-view">
                                         <h2>{blog.title}</h2>
-                                        {blog.image_url && (
-                                            <div className="blog-image">
-                                                <img src={blog.image_url} alt={blog.title} className="img-fluid mb-3" />
-                                            </div>
-                                        )}
                                         <div className="blog-info">
                                             <span>
                                                 <i className="fa fa-calendar"></i> {new Date(blog.created_at).toLocaleDateString()}
@@ -78,6 +73,12 @@ const ViewBlogPost = () => {
                                                 <i className="fa fa-tag"></i> {blog.category}
                                             </span>
                                         </div>
+                                        {blog.image_url && (
+                                            <div className="blog-image">
+                                                <img src={blog.image_url} alt={blog.title} className="img-fluid mb-3" />
+                                            </div>
+                                        )}
+                                        <br></br>
                                         <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.content }}></div>
                                         <div className="blog-tags">
                                             {blog.tags.map((tag, index) => (

@@ -8,10 +8,8 @@ import { IMG01, IMG04, IMG05, IMG06, IMG07 } from "./img.jsx"
 //components
 import BlogPost from "../blogpost"
 import { getPostById } from "../../../data/blogData"
-import BlogListSearch from "../search/search.jsx"
 import LastestBlog from "../lastestblog"
 import CategoryWidget from "../categoryWidget"
-import TagsWidget from "../tagswidget"
 import Header from "../../header.jsx"
 import Footer from "../../footer.jsx"
 
@@ -75,148 +73,12 @@ const BlogDetails = props => {
                                         </ul>
                                     </div>
                                 </div>
-
-                                <div className="card blog-comments clearfix">
-                                    <div className="card-header">
-                                        <h4 className="card-title">Comments (12)</h4>
-                                    </div>
-                                    <div className="card-body pb-0">
-                                        <ul className="comments-list">
-                                            <li>
-                                                <div className="comment">
-                                                    <div className="comment-author">
-                                                        <img className="avatar" alt="" src={IMG04} />
-                                                    </div>
-                                                    <div className="comment-block">
-                                                        <span className="comment-by">
-                                                            <span className="blog-author-name">Michelle Fairfax</span>
-                                                        </span>
-                                                        <p>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius
-                                                            vitae, gravida pellentesque urna varius vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                        </p>
-                                                        <p className="blog-date">Dec 6, 2017</p>
-                                                        <Link to="#0" className="comment-btn">
-                                                            <i className="fas fa-reply"></i> Reply
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                                <ul className="comments-list reply">
-                                                    <li>
-                                                        <div className="comment">
-                                                            <div className="comment-author">
-                                                                <img className="avatar" alt="" src={IMG05} />
-                                                            </div>
-                                                            <div className="comment-block">
-                                                                <span className="comment-by">
-                                                                    <span className="blog-author-name">Gina Moore</span>
-                                                                </span>
-                                                                <p>
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna
-                                                                    varius vitae, gravida pellentesque urna varius vitae.
-                                                                </p>
-                                                                <p className="blog-date">Dec 6, 2017</p>
-                                                                <Link to="#0" className="comment-btn">
-                                                                    <i className="fas fa-reply"></i> Reply
-                                                                </Link>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div className="comment">
-                                                            <div className="comment-author">
-                                                                <img className="avatar" alt="" src={IMG06} />
-                                                            </div>
-                                                            <div className="comment-block">
-                                                                <span className="comment-by">
-                                                                    <span className="blog-author-name">Carl Kelly</span>
-                                                                </span>
-                                                                <p>
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna
-                                                                    varius vitae, gravida pellentesque urna varius vitae.
-                                                                </p>
-                                                                <p className="blog-date">December 7, 2017</p>
-                                                                <Link to="#0" className="comment-btn">
-                                                                    <i className="fas fa-reply"></i> Reply
-                                                                </Link>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <div className="comment">
-                                                    <div className="comment-author">
-                                                        <img className="avatar" alt="" src={IMG06} />
-                                                    </div>
-                                                    <div className="comment-block">
-                                                        <span className="comment-by">
-                                                            <span className="blog-author-name">Elsie Gilley</span>
-                                                        </span>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                        <p className="blog-date">December 11, 2017</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div className="comment">
-                                                    <div className="comment-author">
-                                                        <img className="avatar" alt="" src={IMG07} />
-                                                    </div>
-                                                    <div className="comment-block">
-                                                        <span className="comment-by">
-                                                            <span className="blog-author-name">Joan Gardner</span>
-                                                        </span>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                        <p className="blog-date">December 13, 2017</p>
-                                                        <Link to="#0" className="comment-btn">
-                                                            <i className="fas fa-reply"></i> Reply
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div className="card new-comment clearfix">
-                                    <div className="card-header">
-                                        <h4 className="card-title">Leave Comment</h4>
-                                    </div>
-                                    <div className="card-body">
-                                        <form>
-                                            <div className="form-group">
-                                                <label>
-                                                    Name <span className="text-danger">*</span>
-                                                </label>
-                                                <input type="text" className="form-control" />
-                                            </div>
-                                            <div className="form-group">
-                                                <label>
-                                                    Your Email Address <span className="text-danger">*</span>
-                                                </label>
-                                                <input type="email" className="form-control" />
-                                            </div>
-                                            <div className="form-group">
-                                                <label>Comments</label>
-                                                <textarea rows="4" className="form-control"></textarea>
-                                            </div>
-                                            <div className="submit-section">
-                                                <button className="btn btn-primary submit-btn" type="submit">
-                                                    Submit
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-12">
                             <StickyBox offsetTop={20} offsetBottom={20}>
-                                <BlogListSearch />
                                 <LastestBlog />
                                 <CategoryWidget />
-                                <TagsWidget />
                             </StickyBox>
                         </div>
                     </div>

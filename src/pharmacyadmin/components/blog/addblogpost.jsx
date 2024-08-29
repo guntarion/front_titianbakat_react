@@ -22,9 +22,9 @@ const AddBlogPost = () => {
 
     const categoryOptions = [
         { label: "Category", value: "" },
-        { label: "Health", value: "Health" },
-        { label: "Lifestyle", value: "Lifestyle" },
-        { label: "Medical", value: "Medical" },
+        { label: "Karir", value: "Karir" },
+        { label: "Pembelajaran", value: "Pembelajaran" },
+        { label: "Produktivitas", value: "Produktivitas" },
         // Add more categories as needed
     ]
 

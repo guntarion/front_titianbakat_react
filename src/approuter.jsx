@@ -42,6 +42,10 @@ import Asesment308DismorfikTubuh from "./client/components/pages/asesmenpage/pag
 import ForgotPasswordSendEmail from "./client/components/pages/authentication/forgot-password-send-email.jsx"
 import Contactus from "./client/components/pages/contactus/contactus"
 
+import BlogList from "./client/components/blog/bloglist"
+// src/client/components/blog/bloglist/index.jsx
+// src/approuter.jsx
+
 const AppRouter = () => {
     const { user, role } = useContext(AuthContext)
     // const history = useHistory();
@@ -72,6 +76,7 @@ const AppRouter = () => {
             <Route path="/pharmacyadmin" component={PharmacyadminApp} />
             {/* <Route path="/blog/blog-details" exact component={BlogDetails} /> */}
             <Route path="/blog/:id" component={BlogDetails} />
+            <Route path="/blog-list" component={BlogList} />
             {/* 
       <ProtectedRoute path="/asesmen/multiple-intelligences" component={MultipleIntelligencesAssessment} />
       <ProtectedRoute path="/asesmen/big-five-personality" component={BigFivePersonalityAssessment} /> */}

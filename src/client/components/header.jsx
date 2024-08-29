@@ -280,27 +280,35 @@ const Header = () => {
                                             )}
                                         </li>
                                     )}
-                                    {/* <li className={`has-submenu ${pathnames.includes("/blog") ? "active" : ""}`}>
-                    <Link to="#" className={isSideMenu === "blog" ? "subdrop" : ""} onClick={() => toggleSidebar(isSideMenu === "blog" ? "" : "blog")}>
-                      Blog <i className="fas fa-chevron-down" />
-                    </Link>
-                    {isSideMenu === "blog" && (
-                      <ul className="submenu">
-                        <li className={pathnames.includes("blog-list") ? "active" : ""}>
-                          <Link to="/blog/blog-list" onClick={() => onhandleCloseMenu()}>Blog List</Link>
-                        </li>
-                        <li className={pathnames.includes("blog-grid") ? "active" : ""}>
-                          <Link to="/blog/blog-grid" onClick={() => onhandleCloseMenu()}>Blog Grid</Link>
-                        </li>
-                        <li className={pathnames.includes("blog-details") ? "active" : ""}>
-                          <Link to="/blog/blog-details" onClick={() => onhandleCloseMenu()}>Blog Details</Link>
-                        </li>
-                        <li className={pathnames.includes("login-titian-bakat") ? "active" : ""}>
-                          <Link to="/login-titian-bakat" onClick={() => onhandleCloseMenu()}>Login</Link>
-                        </li>
-                      </ul>
-                    )}
-                  </li> */}
+                                    <li className={`has-submenu ${pathnames.includes("/blog") ? "active" : ""}`}>
+                                        <Link to="#" className={isSideMenu === "blog" ? "subdrop" : ""} onClick={() => toggleSidebar(isSideMenu === "blog" ? "" : "blog")}>
+                                            Blog <i className="fas fa-chevron-down" />
+                                        </Link>
+                                        {isSideMenu === "blog" && (
+                                            <ul className="submenu">
+                                                <li className={pathnames.includes("blog-list") ? "active" : ""}>
+                                                    <Link to="/blog-list" onClick={() => onhandleCloseMenu()}>
+                                                        Blog List
+                                                    </Link>
+                                                </li>
+                                                <li className={pathnames.includes("blog-grid") ? "active" : ""}>
+                                                    <Link to="/blog/blog-grid" onClick={() => onhandleCloseMenu()}>
+                                                        Blog Grid
+                                                    </Link>
+                                                </li>
+                                                <li className={pathnames.includes("blog-details") ? "active" : ""}>
+                                                    <Link to="/blog/blog-details" onClick={() => onhandleCloseMenu()}>
+                                                        Blog Details
+                                                    </Link>
+                                                </li>
+                                                <li className={pathnames.includes("login-titian-bakat") ? "active" : ""}>
+                                                    <Link to="/login-titian-bakat" onClick={() => onhandleCloseMenu()}>
+                                                        Login
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        )}
+                                    </li>
                                 </ul>
                             </div>
                             {user ? (
