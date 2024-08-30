@@ -38,7 +38,7 @@ const Home6 = props => {
                             <div className="banner-header">
                                 <p>For a Brighter Today and Tomorrow</p>
                                 <h1>Orchestrating Natural and Nurtured Talents</h1>
-                                <Link to="/blog/blog-details" className="btn btn-light-blue">
+                                <Link to="/http://localhost:3000/asesmen/occupationalthemes" className="btn btn-light-blue">
                                     Temukan Potensi Karirmu
                                 </Link>
                             </div>
@@ -87,7 +87,7 @@ const Home6 = props => {
             {/* <StoreSectionHome6 /> */}
             {/* <UserOffer /> */}
             {/* <FacilitiesSectionHome6 /> */}
-            {/* <BlogSectionHome6 /> */}
+            <BlogSectionHome6 />
             {/* <TestimonialsHome6 /> */}
             {/* <AppointmentHome6 /> */}
             {/* <FaqHome6 /> */}

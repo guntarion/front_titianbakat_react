@@ -16,7 +16,6 @@ import LoginEmail from "./client/components/pages/authentication/login-titianbak
 import TBUserSignup from "./client/components/pages/authentication/user-signup.jsx"
 import TermsPrivasiPolicy from "./client/components/pages/termsprivacypolicy"
 import Dashboard from "./client/components/patients/dashboard"
-import BlogDetails from "./client/components/blog/blogdetails"
 // import MultipleIntelligencesAssessment from "./client/components/pages/asesmenpage/multiple-intelligences";
 // import BigFivePersonalityAssessment from "./client/components/pages/asesmenpage/big-five-personality";
 
@@ -42,9 +41,8 @@ import Asesment308DismorfikTubuh from "./client/components/pages/asesmenpage/pag
 import ForgotPasswordSendEmail from "./client/components/pages/authentication/forgot-password-send-email.jsx"
 import Contactus from "./client/components/pages/contactus/contactus"
 
-import BlogList from "./client/components/blog/bloglist"
-// src/client/components/blog/bloglist/index.jsx
-// src/approuter.jsx
+import BlogList from "./client/components/blog/bloglist/index.jsx"
+import BlogDetails from "./client/components/blog/blogdetails/index.jsx"
 
 const AppRouter = () => {
     const { user, role } = useContext(AuthContext)
@@ -76,7 +74,7 @@ const AppRouter = () => {
             <Route path="/pharmacyadmin" component={PharmacyadminApp} />
             {/* <Route path="/blog/blog-details" exact component={BlogDetails} /> */}
             <Route path="/blog/:id" component={BlogDetails} />
-            <Route path="/blog-list" component={BlogList} />
+            <Route path="/blog" component={BlogList} />
             {/* 
       <ProtectedRoute path="/asesmen/multiple-intelligences" component={MultipleIntelligencesAssessment} />
       <ProtectedRoute path="/asesmen/big-five-personality" component={BigFivePersonalityAssessment} /> */}

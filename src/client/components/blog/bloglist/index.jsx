@@ -1,28 +1,61 @@
 // src/client/components/blog/bloglist/index.jsx
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-//images
-import { IMG01, IMG02, IMG_th01, IMG_th02, IMG_th03 } from "./img.jsx"
-//components
+import axios from "axios"
+import config from "../../../../config"
 import Header from "../../header.jsx"
 import Footer from "../../home/EyeCareHome/FooterHome6.jsx"
+import blogImage from "../../../assets/images/blog-05.jpg"
+import BlogSeries from "../blogseries"
 
-const BlogList = props => {
+const BlogList = () => {
+    const [blogPosts, setBlogPosts] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(0)
+    const [loading, setLoading] = useState(false)
+    const postsPerPage = 7
+
+    useEffect(() => {
+        fetchBlogPosts()
+    }, [currentPage])
+
+    const fetchBlogPosts = async () => {
+        setLoading(true)
+        try {
+            const response = await axios.get(`${config.API_URL}/blog/blogposts/?skip=${(currentPage - 1) * postsPerPage}&limit=${postsPerPage}`)
+            setBlogPosts(response.data.posts)
+            setTotalPages(Math.ceil(response.data.total / postsPerPage))
+            setLoading(false)
+        } catch (error) {
+            console.error("Error fetching blog posts:", error)
+            alert("Failed to fetch blog posts")
+            setLoading(false)
+        }
+    }
+
+    const handlePageChange = newPage => {
+        setCurrentPage(newPage)
+    }
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
     return (
         <div>
-            <Header {...props} />
+            <Header />
             <div className="breadcrumb-bar-two">
                 <div className="container">
                     <div className="row align-items-center inner-banner">
                         <div className="col-md-12 col-12 text-center">
-                            <h2 className="breadcrumb-title">Blog List</h2>
+                            <h2 className="breadcrumb-title">Artikel</h2>
                             <nav aria-label="breadcrumb" className="page-breadcrumb">
                                 <ol className="breadcrumb">
                                     <li className="breadcrumb-item">
                                         <Link to="/index-6">Home</Link>
                                     </li>
                                     <li className="breadcrumb-item" aria-current="page">
-                                        Blog List
+                                        Artikel
                                     </li>
                                 </ol>
                             </nav>
@@ -34,100 +67,73 @@ const BlogList = props => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8 col-md-12">
-                            <div className="blog">
-                                <div className="blog-image">
-                                    <Link to="blog-details">
-                                        <img className="img-fluid" src={IMG01} alt="Post" />
-                                    </Link>
-                                </div>
-                                <h3 className="blog-title">
-                                    <Link to="blog-details">Doccure – Making your clinic painless visit?</Link>
-                                </h3>
-                                <div className="blog-info clearfix">
-                                    <div className="post-left">
-                                        <ul>
-                                            <li>
-                                                <i className="far fa-clock"></i>4 Dec 2019
-                                            </li>
-                                            <li>
-                                                <i className="fa fa-tags"></i>Health Tips
-                                            </li>
-                                        </ul>
+                            {blogPosts.map(post => (
+                                <div key={post._id} className="blog">
+                                    <div className="blog-image">
+                                        <Link to={`/blog/${post._id}`}>
+                                            {post.image_url ? (
+                                                <img
+                                                    className="img-fluid"
+                                                    src={post.image_url}
+                                                    alt={post.title}
+                                                    onError={e => {
+                                                        e.target.onerror = null
+                                                        e.target.src = blogImage
+                                                    }}
+                                                />
+                                            ) : (
+                                                <img className="img-fluid" src={blogImage} alt="Placeholder" />
+                                            )}
+                                        </Link>
+                                    </div>
+                                    <h3 className="blog-title">
+                                        <Link to={`/blog/${post._id}`}>{post.title}</Link>
+                                    </h3>
+                                    <div className="blog-info clearfix">
+                                        <div className="post-left">
+                                            <ul>
+                                                <li>
+                                                    <i className="far fa-calendar"></i>
+                                                    {new Date(post.created_at).toLocaleDateString()}
+                                                </li>
+                                                <li>
+                                                    <i className="fa fa-tags"></i>
+                                                    {post.category}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className="blog-content">
+                                        {/* <p>{post.content.substring(0, 200)}...</p> */}
+
+                                        <Link to={`/blog/${post._id}`} className="read-more">
+                                            Read More
+                                        </Link>
                                     </div>
                                 </div>
-                                <div className="blog-content">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                        veniam, quis nostrud exercitation ullamco sit laboris ullamco laborisut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <Link to="/blog/blog-details" className="read-more">
-                                        Read More
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="blog">
-                                <div className="blog-image">
-                                    <Link to="/blog/blog-details">
-                                        <img className="img-fluid" src={IMG02} alt="" />
-                                    </Link>
-                                </div>
-                                <h3 className="blog-title">
-                                    <Link to="/blog/blog-details">What are the benefits of Online Doctor Booking?</Link>
-                                </h3>
-                                <div className="blog-info clearfix">
-                                    <div className="post-left">
-                                        <ul>
-                                            <li>
-                                                <i className="far fa-clock"></i>3 Dec 2019
-                                            </li>
-                                            <li>
-                                                <i className="fa fa-tags"></i>Cardiology
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="blog-content">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                        veniam, quis nostrud exercitation ullamco sit laboris ullamco laborisut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <Link to="/blog/blog-details" className="read-more">
-                                        Read More
-                                    </Link>
-                                </div>
-                            </div>
+                            ))}
 
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="blog-pagination">
                                         <nav>
                                             <ul className="pagination justify-content-center">
-                                                <li className="page-item disabled">
-                                                    <Link to="#0" className="page-link" tabIndex="-1">
+                                                <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+                                                    <a className="page-link" href="#" onClick={() => handlePageChange(currentPage - 1)}>
                                                         <i className="fas fa-angle-double-left"></i>
-                                                    </Link>
+                                                    </a>
                                                 </li>
-                                                <li className="page-item">
-                                                    <Link to="#0" className="page-link">
-                                                        1
-                                                    </Link>
-                                                </li>
-                                                <li className="page-item active">
-                                                    <Link className="page-link" to="#0">
-                                                        2 <span className="sr-only">(current)</span>
-                                                    </Link>
-                                                </li>
-                                                <li className="page-item">
-                                                    <Link className="page-link" to="#0">
-                                                        3
-                                                    </Link>
-                                                </li>
-                                                <li className="page-item">
-                                                    <Link to="#0" className="page-link">
+                                                {[...Array(totalPages)].map((_, i) => (
+                                                    <li key={i} className={`page-item ${currentPage === i + 1 ? "active" : ""}`}>
+                                                        <a className="page-link" href="#" onClick={() => handlePageChange(i + 1)}>
+                                                            {i + 1}
+                                                        </a>
+                                                    </li>
+                                                ))}
+                                                <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+                                                    <a className="page-link" href="#" onClick={() => handlePageChange(currentPage + 1)}>
                                                         <i className="fas fa-angle-double-right"></i>
-                                                    </Link>
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -135,12 +141,14 @@ const BlogList = props => {
                                 </div>
                             </div>
                         </div>
-
-                        <div className="col-lg-4 col-md-12 sidebar-right theiaStickySidebar"></div>
+                        <div className="col-lg-4 col-md-12 sidebar-right theiaStickySidebar">
+                            <BlogSeries />
+                            {/* You can add sidebar widgets here if needed */}
+                        </div>
                     </div>
                 </div>
             </div>
-            <Footer {...props} />
+            <Footer />
         </div>
     )
 }

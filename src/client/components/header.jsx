@@ -120,6 +120,7 @@ const Header = () => {
                                     <li>
                                         <Link to="/index-6">Home</Link>
                                     </li>
+
                                     {(role === "konselor" || role === "admin") && (
                                         <li className={`has-submenu ${pathnames.includes("/konselor") ? "active" : ""}`}>
                                             <Link
@@ -155,10 +156,19 @@ const Header = () => {
                                             )}
                                         </li>
                                     )}
+
                                     {(role === "user" || role === "admin") && (
                                         <>
                                             <li>
                                                 <Link to="/user/dashboard">Profil Anda</Link>
+                                            </li>
+                                        </>
+                                    )}
+
+                                    {(role === "user" || role === "admin") && (
+                                        <>
+                                            <li>
+                                                <Link to="/blog">Blog Series</Link>
                                             </li>
                                         </>
                                     )}
@@ -280,7 +290,8 @@ const Header = () => {
                                             )}
                                         </li>
                                     )}
-                                    <li className={`has-submenu ${pathnames.includes("/blog") ? "active" : ""}`}>
+
+                                    {/* <li className={`has-submenu ${pathnames.includes("/blog") ? "active" : ""}`}>
                                         <Link to="#" className={isSideMenu === "blog" ? "subdrop" : ""} onClick={() => toggleSidebar(isSideMenu === "blog" ? "" : "blog")}>
                                             Blog <i className="fas fa-chevron-down" />
                                         </Link>
@@ -308,7 +319,7 @@ const Header = () => {
                                                 </li>
                                             </ul>
                                         )}
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                             {user ? (
